@@ -12,6 +12,10 @@ public class GameManager : MonoBehaviour
     [SerializeField] private int minTotalAmount = 6;
     [SerializeField] private int maxTotalAmount = 8;
 
+    [Header("Lobby UI")]
+    [SerializeField] private Dialogue lobbyDialogue;
+    [SerializeField] private GameObject lobbyMenu;
+
     [NonSerialized] public static IngredientInfo[] ingredients;
     [NonSerialized] public static SeasonInfo[] seasons;
 
@@ -30,6 +34,10 @@ public class GameManager : MonoBehaviour
 
         ingredients = (Resources.Load("Ingredients") as Ingredients).ingredients;
         seasons = (Resources.Load("Seasons") as Seasons).seasons;
+
+        // Initial dialogue
+        lobbyMenu.SetActive(false);
+        DialogueDisplayer.Instance.ShowDialogue(lobbyDialogue, () => lobbyMenu.SetActive(true));
     }
 
     public void StartMission()

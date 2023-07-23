@@ -34,7 +34,7 @@ public class ExteriorDoor : MonoBehaviour, IInteractive
         }
         else
         {
-            print("DIALOGUE: I still have to gather some ingredients.");
+            DialogueDisplayer.Instance.ShowNotice("I haven't gathered all the ingredients I need yet.");
         }
     }
 }
