@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 5664506275877159867}
   - component: {fileID: 976911415017436978}
   - component: {fileID: 2441169981646677110}
-  - component: {fileID: 6948473805138399684}
   - component: {fileID: 8131866117516112031}
   - component: {fileID: 4355013263129713465}
+  - component: {fileID: 9119171133891302835}
   - component: {fileID: 5881650215381666276}
   - component: {fileID: 7831309900709032888}
   m_Layer: 0
@@ -88,20 +88,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &6948473805138399684
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8689837830757438502}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!143 &8131866117516112031
 CharacterController:
   m_ObjectHideFlags: 0
@@ -132,16 +118,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19d97f09450811a49bfcbf5ba2c8fc63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  horizontalMaxSpeed: 5
-  horizontalAccelTime: 0.1
+  horizontalMaxSpeed: 8
+  horizontalAccelTime: 0.2
   horizontalDecelTime: 0.1
   rotationSpeed: 20
-  canPush: 1
-  horizontalInputValue: {x: 0, y: 0}
-  horizontalDirection: {x: 0, y: 0}
-  horizontalSpeed: {x: 0, y: 0}
-  horizontalAccel: {x: 0, y: 0}
-  externalForces: {x: 0, y: 0, z: 0}
+  sprintMultiplier: 2
+--- !u!114 &9119171133891302835
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8689837830757438502}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 090c919a537c5ee4f881ba82f5b3b710, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  exteriorManager: {fileID: 0}
 --- !u!114 &5881650215381666276
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -186,8 +180,8 @@ MonoBehaviour:
     m_ActionName: Player/Move[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d,/Keyboard/upArrow,/Keyboard/downArrow,/Keyboard/leftArrow,/Keyboard/rightArrow]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4355013263129713465}
-        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+      - m_Target: {fileID: 9119171133891302835}
+        m_TargetAssemblyTypeName: PlayerInteraction, Assembly-CSharp
         m_MethodName: OnAction
         m_Mode: 0
         m_Arguments:
@@ -201,7 +195,19 @@ MonoBehaviour:
     m_ActionId: f135cd50-9e0b-47e2-818b-bececd808916
     m_ActionName: Player/Action[/Keyboard/space]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 4355013263129713465}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: OnSprint
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: c4c43a00-7ff4-4eb6-94e0-dab6b7852f8e
     m_ActionName: Player/Sprint[/Keyboard/shift]
   - m_PersistentCalls:

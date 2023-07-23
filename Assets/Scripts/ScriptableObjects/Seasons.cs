@@ -12,6 +12,7 @@ public class SeasonInfo
 {
     public Season seasonName;
     public Color color;
+    public Color softColor;
 }
 
 public enum Season : int

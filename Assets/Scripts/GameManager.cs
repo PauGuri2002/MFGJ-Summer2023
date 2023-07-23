@@ -12,10 +12,11 @@ public class GameManager : MonoBehaviour
     [SerializeField] private int minTotalAmount = 6;
     [SerializeField] private int maxTotalAmount = 8;
 
-    private Ingredient[] ingredients;
+    [NonSerialized] public static IngredientInfo[] ingredients;
+    [NonSerialized] public static SeasonInfo[] seasons;
 
     [NonSerialized] public static GameManager Instance;
-    [HideInInspector] public Dictionary<Ingredient, int> ingredientList = new();
+    [HideInInspector] public Dictionary<IngredientInfo, int> ingredientList = new();
 
     // Start is called before the first frame update
     void Start()
@@ -28,9 +29,10 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
 
         ingredients = (Resources.Load("Ingredients") as Ingredients).ingredients;
+        seasons = (Resources.Load("Seasons") as Seasons).seasons;
     }
 
-    public void StartGame()
+    public void StartMission()
     {
         GenerateRecipe();
         SceneManager.LoadScene("ExteriorScene");
@@ -39,7 +41,7 @@ public class GameManager : MonoBehaviour
     void GenerateRecipe()
     {
         ingredientList.Clear();
-        List<Ingredient> availableIngredients = new(ingredients);
+        List<IngredientInfo> availableIngredients = new(ingredients);
         int uniqueCount = Random.Range(minUniqueCount, maxUniqueCount + 1);
         int totalAmount = Random.Range(minTotalAmount, maxTotalAmount + 1);
 
@@ -60,5 +62,11 @@ public class GameManager : MonoBehaviour
             ingredientList.Add(availableIngredients[ingredientIndex], amountPerIngredient[i]);
             availableIngredients.RemoveAt(ingredientIndex);
         }
+    }
+
+    public void CompleteMission(float missionTime)
+    {
+        SceneManager.LoadScene("InteriorScene");
+        print("TOTAL TIME: " + missionTime + " seconds");
     }
 }

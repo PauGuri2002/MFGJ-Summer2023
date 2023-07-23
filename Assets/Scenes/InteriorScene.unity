@@ -209,7 +209,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1106840692}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: StartGame
+        m_MethodName: StartMission
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1240,10 +1240,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df8edcd97fb36a54b87bc0dbd6a2664e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minUniqueCount: 3
-  maxUniqueCount: 6
+  minUniqueCount: 2
+  maxUniqueCount: 4
   minTotalAmount: 6
-  maxTotalAmount: 8
+  maxTotalAmount: 6
 --- !u!4 &1106840693
 Transform:
   m_ObjectHideFlags: 0

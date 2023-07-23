@@ -4,11 +4,11 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Ingredient List")]
 public class Ingredients : ScriptableObject
 {
-    public Ingredient[] ingredients;
+    public IngredientInfo[] ingredients;
 }
 
 [Serializable]
-public class Ingredient
+public class IngredientInfo
 {
     public string name;
     public Sprite icon;

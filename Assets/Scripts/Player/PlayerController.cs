@@ -4,18 +4,18 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     private CharacterController characterController;
-    public float horizontalMaxSpeed = 5f;
-    public float horizontalAccelTime = 0.1f;
-    public float horizontalDecelTime = 0.1f;
-    public float rotationSpeed = 20f;
+    [SerializeField] private float horizontalMaxSpeed = 5f;
+    [SerializeField] private float horizontalAccelTime = 0.1f;
+    [SerializeField] private float horizontalDecelTime = 0.1f;
+    [SerializeField] private float rotationSpeed = 20f;
+    [SerializeField] private float sprintMultiplier = 1.5f;
 
-    public bool canPush = true;
+    private bool isSprinting = false;
 
-    [HideInInspector] public Vector2 horizontalInputValue;
-    [HideInInspector] public Vector2 horizontalDirection;
-    [HideInInspector] public Vector2 horizontalSpeed = Vector2.zero;
-    [HideInInspector] public Vector2 horizontalAccel;
-    [HideInInspector] public Vector3 externalForces = Vector3.zero;
+    private Vector2 horizontalInputValue;
+    private Vector2 horizontalDirection;
+    private Vector2 horizontalSpeed = Vector2.zero;
+    private Vector2 horizontalAccel;
 
     void Start()
     {
@@ -34,9 +34,16 @@ public class PlayerController : MonoBehaviour
         horizontalInputValue = value.ReadValue<Vector2>();
     }
 
-    public void OnAction(InputAction.CallbackContext value)
+    public void OnSprint(InputAction.CallbackContext value)
     {
-
+        if (value.started)
+        {
+            isSprinting = true;
+        }
+        else if (value.canceled)
+        {
+            isSprinting = false;
+        }
     }
 
     void SetHorizontalSpeed()
@@ -44,7 +51,8 @@ public class PlayerController : MonoBehaviour
         if (horizontalInputValue.magnitude > 0f)
         {
             horizontalDirection = horizontalInputValue;
-            horizontalSpeed = Vector2.SmoothDamp(horizontalSpeed, horizontalDirection * horizontalMaxSpeed, ref horizontalAccel, horizontalAccelTime);
+            float modifiedMaxSpeed = horizontalMaxSpeed * (isSprinting ? sprintMultiplier : 1);
+            horizontalSpeed = Vector2.SmoothDamp(horizontalSpeed, horizontalDirection * modifiedMaxSpeed, ref horizontalAccel, horizontalAccelTime);
         }
         else
         {
