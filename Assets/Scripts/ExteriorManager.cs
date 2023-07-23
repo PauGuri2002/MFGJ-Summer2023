@@ -10,6 +10,8 @@ public class ExteriorManager : MonoBehaviour
 
     [SerializeField] private GameObject ingredientListObject;
     [SerializeField] private GameObject ingredientItemPrefab;
+    [SerializeField] private int minExtraIngredients = 6;
+    [SerializeField] private int maxExtraIngredients = 10;
     public Timer timer;
 
     private Dictionary<IngredientInfo, int> ingredientsToCollect;
@@ -44,28 +46,43 @@ public class ExteriorManager : MonoBehaviour
 
             }
 
-            // Spawn ingredients in world
+            // Spawn required ingredients in world
             for (int i = 0; i < item.Value; i++)
             {
-                Vector3 spawnPosition;
-                do
-                {
-                    spawnPosition = new Vector3(Random.Range(0, spawnerSize.x) - spawnerSize.x / 2, 0.5f, Random.Range(0, spawnerSize.y) - spawnerSize.y / 2);
-                } while (Physics.CheckBox(spawnPosition, new Vector3(5, 0.1f, 5)));
-
-                GameObject instance = Instantiate(item.Key.prefab, spawnPosition, Quaternion.identity);
-                instance.layer = (int)item.Key.season;
-
-                // PROVISIONAL!!!! Fins que cada ingredient tingui el seu model
-                instance.GetComponentInChildren<TextMeshProUGUI>().text = item.Key.name;
-                instance.GetComponent<Ingredient>().ingredientName = item.Key.name;
+                SpawnIngredient(item.Key);
             }
+        }
+
+        // Spawn extra ingredients in world
+        int extraIngredientCount = Random.Range(minExtraIngredients, maxExtraIngredients + 1);
+        for (int i = 0; i < extraIngredientCount; i++)
+        {
+            SpawnIngredient();
         }
 
         // Start timer
         timer.StartTimer();
         currentPhase = GamePhase.Search;
         onPhaseChange?.Invoke(currentPhase);
+    }
+
+    void SpawnIngredient(IngredientInfo ingredient = null)
+    {
+        Vector3 spawnPosition;
+        ingredient ??= GameManager.ingredients[Random.Range(0, GameManager.ingredients.Length)];
+
+        do
+        {
+            spawnPosition = new Vector3(Random.Range(0, spawnerSize.x) - spawnerSize.x / 2, 0.5f, Random.Range(0, spawnerSize.y) - spawnerSize.y / 2);
+        } while (Physics.CheckBox(spawnPosition, new Vector3(5, 0.1f, 5)));
+
+        GameObject instance = Instantiate(ingredient.prefab, spawnPosition, Quaternion.identity);
+        instance.layer = (int)ingredient.season;
+
+        // PROVISIONAL!!!! Fins que cada ingredient tingui el seu model
+        instance.GetComponentInChildren<TextMeshProUGUI>().text = ingredient.name;
+        instance.GetComponentInChildren<TextMeshProUGUI>().gameObject.layer = (int)ingredient.season;
+        instance.GetComponent<Ingredient>().ingredientName = ingredient.name;
     }
 
     public bool TryCollectIngredient(IngredientInfo ingredient)

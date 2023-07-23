@@ -11,6 +11,7 @@ public class Seasons : ScriptableObject
 public class SeasonInfo
 {
     public Season seasonName;
+    public string displayName;
     public Color color;
     public Color softColor;
 }

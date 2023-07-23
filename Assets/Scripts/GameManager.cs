@@ -34,6 +34,7 @@ public class GameManager : MonoBehaviour
 
     public void StartMission()
     {
+        Cursor.lockState = CursorLockMode.Locked;
         GenerateRecipe();
         SceneManager.LoadScene("ExteriorScene");
     }
@@ -66,6 +67,7 @@ public class GameManager : MonoBehaviour
 
     public void CompleteMission(float missionTime)
     {
+        Cursor.lockState = CursorLockMode.None;
         SceneManager.LoadScene("InteriorScene");
         print("TOTAL TIME: " + missionTime + " seconds");
     }

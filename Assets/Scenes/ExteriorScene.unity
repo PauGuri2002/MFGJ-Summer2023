@@ -1878,10 +1878,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70013436916980a478887482880c116a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnerSize: {x: 100, y: 100}
+  spawnerSize: {x: 80, y: 80}
   ingredientListObject: {fileID: 897093264}
   ingredientItemPrefab: {fileID: 2202153061729659480, guid: 6a5ee85a64fb0304dab87cf8fa816a21,
     type: 3}
+  minExtraIngredients: 6
+  maxExtraIngredients: 10
   timer: {fileID: 476084454}
 --- !u!1 &1662641458
 GameObject:
