@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -34,27 +35,28 @@ public class ExteriorManager : MonoBehaviour
         if (GameManager.Instance == null || GameManager.Instance.ingredientList == null) { return; }
 
         ingredientsToCollect = new(GameManager.Instance.ingredientList);
+        List<IngredientInfo> sortedIngredients = ingredientsToCollect.Keys.OrderBy(i => (int)i.season).ToList();
 
-        foreach (var item in GameManager.Instance.ingredientList)
+        foreach (IngredientInfo item in sortedIngredients)
         {
             // Spawn ingredient list items (UI)
             GameObject ingredientItem = Instantiate(ingredientItemPrefab, ingredientListObject.transform);
             if (ingredientItem.TryGetComponent<IngredientItem>(out var ingredientScript))
             {
-                SeasonInfo seasonInfo = Array.Find(GameManager.seasons, s => s.seasonName == item.Key.season);
+                SeasonInfo seasonInfo = Array.Find(GameManager.seasons, s => s.seasonName == item.season);
                 ingredientScript.Customize(
-                item.Key.name,
-                item.Value,
+                item.name,
+                ingredientsToCollect[item],
                 seasonInfo.softColor,
-                    item.Key.icon
+                    item.icon
                 );
-                ingredientItems.Add(item.Key, ingredientScript);
+                ingredientItems.Add(item, ingredientScript);
             }
 
             // Spawn required ingredients in world
-            for (int i = 0; i < item.Value; i++)
+            for (int i = 0; i < ingredientsToCollect[item]; i++)
             {
-                SpawnIngredient(item.Key);
+                SpawnIngredient(item);
             }
         }
 

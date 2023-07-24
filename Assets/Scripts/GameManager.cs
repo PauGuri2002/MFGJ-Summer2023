@@ -36,8 +36,8 @@ public class GameManager : MonoBehaviour
         seasons = (Resources.Load("Seasons") as Seasons).seasons;
 
         // Initial dialogue
-        lobbyMenu.SetActive(false);
-        DialogueDisplayer.Instance.ShowDialogue(lobbyDialogue, () => lobbyMenu.SetActive(true));
+        //lobbyMenu.SetActive(false);
+        //DialogueDisplayer.Instance.ShowDialogue(lobbyDialogue, () => lobbyMenu.SetActive(true));
     }
 
     public void StartMission()
