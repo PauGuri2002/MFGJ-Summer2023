@@ -4,11 +4,11 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     private CharacterController characterController;
-    [SerializeField] private float horizontalMaxSpeed = 5f;
-    [SerializeField] private float horizontalAccelTime = 0.1f;
-    [SerializeField] private float horizontalDecelTime = 0.1f;
-    [SerializeField] private float rotationSpeed = 20f;
-    [SerializeField] private float sprintMultiplier = 1.5f;
+    public float horizontalMaxSpeed = 5f;
+    public float horizontalAccelTime = 0.1f;
+    public float horizontalDecelTime = 0.1f;
+    public float rotationSpeed = 20f;
+    public float sprintMultiplier = 1.5f;
 
     private bool isSprinting = false;
 

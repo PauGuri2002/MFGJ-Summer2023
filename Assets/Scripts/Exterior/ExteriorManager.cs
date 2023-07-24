@@ -7,6 +7,8 @@ using Random = UnityEngine.Random;
 public class ExteriorManager : MonoBehaviour
 {
     [SerializeField] private Vector2 spawnerSize;
+    [SerializeField] private float spawnerHeight = 0.5f;
+    [SerializeField] private float spawnPadding = 5f;
 
     [SerializeField] private GameObject ingredientListObject;
     [SerializeField] private GameObject ingredientItemPrefab;
@@ -71,10 +73,22 @@ public class ExteriorManager : MonoBehaviour
         Vector3 spawnPosition;
         ingredient ??= GameManager.ingredients[Random.Range(0, GameManager.ingredients.Length)];
 
+        bool positionFound;
         do
         {
-            spawnPosition = new Vector3(Random.Range(0, spawnerSize.x) - spawnerSize.x / 2, 0.5f, Random.Range(0, spawnerSize.y) - spawnerSize.y / 2);
-        } while (Physics.CheckBox(spawnPosition, new Vector3(5, 0.1f, 5)));
+            spawnPosition = new Vector3(Random.Range(0, spawnerSize.x) - spawnerSize.x / 2, spawnerHeight, Random.Range(0, spawnerSize.y) - spawnerSize.y / 2);
+            positionFound = true;
+
+            Collider[] colliders = Physics.OverlapSphere(spawnPosition, spawnPadding);
+            foreach (Collider collider in colliders)
+            {
+                if (collider.CompareTag("Impenetrable"))
+                {
+                    positionFound = false;
+                    break;
+                }
+            }
+        } while (!positionFound);
 
         GameObject instance = Instantiate(ingredient.prefab, spawnPosition, Quaternion.identity);
         instance.layer = (int)ingredient.season;

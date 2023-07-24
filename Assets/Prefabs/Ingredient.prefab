@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 5381977772457610151}
   m_Layer: 0
   m_Name: Ingredient
-  m_TagString: Untagged
+  m_TagString: Impenetrable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
