@@ -14,10 +14,13 @@ public class PlayerInteraction : MonoBehaviour
 
             if (interactiveInReach is Ingredient ingredient)
             {
-                if (!exteriorManager.TryCollectIngredient(ingredient.ingredientName))
+                if (exteriorManager.TryCollectIngredient(ingredient.ingredientName))
                 {
-                    return;
+                    interactiveInReach.Interact();
+                    interactiveInReach = null;
                 }
+
+                return;
             }
 
             interactiveInReach.Interact();

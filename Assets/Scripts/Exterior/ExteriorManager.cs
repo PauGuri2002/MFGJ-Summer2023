@@ -17,6 +17,9 @@ public class ExteriorManager : MonoBehaviour
     public Timer timer;
 
     private Dictionary<IngredientInfo, int> ingredientsToCollect;
+    private List<IngredientInfo> collectedIngredients = new();
+
+    private Dictionary<IngredientInfo, IngredientItem> ingredientItems = new();
 
     public static GamePhase currentPhase;
     public static event Action<GamePhase> onPhaseChange;
@@ -30,22 +33,22 @@ public class ExteriorManager : MonoBehaviour
     {
         if (GameManager.Instance == null || GameManager.Instance.ingredientList == null) { return; }
 
-        ingredientsToCollect = GameManager.Instance.ingredientList;
+        ingredientsToCollect = new(GameManager.Instance.ingredientList);
 
         foreach (var item in GameManager.Instance.ingredientList)
         {
-            // Populate ingredient list
+            // Spawn ingredient list items (UI)
             GameObject ingredientItem = Instantiate(ingredientItemPrefab, ingredientListObject.transform);
-            if (ingredientItem.TryGetComponent<IngredientItemCustomizer>(out var customizer))
+            if (ingredientItem.TryGetComponent<IngredientItem>(out var ingredientScript))
             {
                 SeasonInfo seasonInfo = Array.Find(GameManager.seasons, s => s.seasonName == item.Key.season);
-
-                customizer.Customize(
-                    item.Key.name + " x" + item.Value.ToString(),
-                    seasonInfo.softColor,
+                ingredientScript.Customize(
+                item.Key.name,
+                item.Value,
+                seasonInfo.softColor,
                     item.Key.icon
                 );
-
+                ingredientItems.Add(item.Key, ingredientScript);
             }
 
             // Spawn required ingredients in world
@@ -104,12 +107,14 @@ public class ExteriorManager : MonoBehaviour
         if (ingredientsToCollect.ContainsKey(ingredient))
         {
             ingredientsToCollect[ingredient]--;
+            collectedIngredients.Add(ingredient);
             if (ingredientsToCollect[ingredient] <= 0)
             {
                 ingredientsToCollect.Remove(ingredient);
                 CheckCollectedIngredients();
             }
 
+            UpdateIngredientList();
             return true;
         }
         else { return false; }
@@ -118,6 +123,32 @@ public class ExteriorManager : MonoBehaviour
     {
         IngredientInfo ingredient = Array.Find(GameManager.ingredients, i => i.name == ingredientName);
         return TryCollectIngredient(ingredient);
+    }
+
+    public bool RemoveCollectedIngredient(IngredientInfo ingredient = null)
+    {
+        if (ingredient == null)
+        {
+            ingredient = collectedIngredients[Random.Range(0, collectedIngredients.Count)];
+        }
+        else if (!collectedIngredients.Contains(ingredient))
+        {
+            print("Ingredient has not been collected");
+            return false;
+        }
+
+        collectedIngredients.Remove(ingredient);
+        if (ingredientsToCollect.ContainsKey(ingredient))
+        {
+            ingredientsToCollect[ingredient]++;
+        }
+        else
+        {
+            ingredientsToCollect.Add(ingredient, 1);
+        }
+        CheckCollectedIngredients();
+        UpdateIngredientList();
+        return true;
     }
 
     void CheckCollectedIngredients()
@@ -134,6 +165,26 @@ public class ExteriorManager : MonoBehaviour
         {
             currentPhase = GamePhase.Search;
             onPhaseChange?.Invoke(currentPhase);
+        }
+    }
+
+    void UpdateIngredientList()
+    {
+        print("updating. Count: " + GameManager.Instance.ingredientList.Count);
+        // Populate ingredient list
+        foreach (var item in GameManager.Instance.ingredientList)
+        {
+
+            if (ingredientsToCollect.ContainsKey(item.Key))
+            {
+                print("key contained");
+                ingredientItems[item.Key].ChangeAmount(ingredientsToCollect[item.Key]);
+            }
+            else
+            {
+                print("value is 0");
+                ingredientItems[item.Key].ChangeAmount(0);
+            }
         }
     }
 }

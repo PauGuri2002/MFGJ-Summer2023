@@ -15,7 +15,6 @@ GameObject:
   - component: {fileID: 4355013263129713465}
   - component: {fileID: 9119171133891302835}
   - component: {fileID: 5881650215381666276}
-  - component: {fileID: 5945537213072335258}
   - component: {fileID: 7831309900709032888}
   m_Layer: 0
   m_Name: Player
@@ -256,25 +255,6 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!114 &5945537213072335258
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8689837830757438502}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d68430384a3ca2146b5585af1f3d5e9e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 4355013263129713465}
-  frozenTime: 5
-  frozenAccelMultiplier: 8
-  frozenDecelMultiplier: 50
-  frozenSpeedMultiplier: 1.1
-  iceCubePrefab: {fileID: 4095231307041710871, guid: 0c9768015fe7d564e80477a8937b62d1,
-    type: 3}
 --- !u!81 &7831309900709032888
 AudioListener:
   m_ObjectHideFlags: 0
