@@ -13,7 +13,11 @@ public class BeeTrigger : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            mechanic.StartBees();
+            ParticleSystem particles = GetComponentInChildren<ParticleSystem>();
+            if (particles != null)
+            {
+                mechanic.StartBees(particles.transform);
+            }
         }
     }
 }

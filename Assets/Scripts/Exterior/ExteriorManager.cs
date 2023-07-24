@@ -129,6 +129,8 @@ public class ExteriorManager : MonoBehaviour
 
     public bool RemoveCollectedIngredient(IngredientInfo ingredient = null)
     {
+        if (collectedIngredients.Count <= 0) { return false; }
+
         if (ingredient == null)
         {
             ingredient = collectedIngredients[Random.Range(0, collectedIngredients.Count)];

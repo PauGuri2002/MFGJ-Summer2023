@@ -32,7 +32,6 @@ public class FreezeMechanic : MonoBehaviour
 
     IEnumerator FreezePlayer()
     {
-        print("Starting freeze coroutine: " + name);
         if (iceCubeObject == null)
         {
             iceCubeObject = Instantiate(iceCubePrefab, player.transform);
