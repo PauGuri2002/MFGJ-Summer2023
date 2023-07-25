@@ -8,4 +8,13 @@ public class Ingredient : MonoBehaviour, IInteractive
     {
         gameObject.SetActive(false);
     }
+
+    public void ToggleCollision(bool value)
+    {
+        Collider[] colliders = GetComponents<Collider>();
+        foreach (Collider collider in colliders)
+        {
+            collider.enabled = value;
+        }
+    }
 }

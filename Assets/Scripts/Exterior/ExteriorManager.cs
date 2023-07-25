@@ -156,9 +156,9 @@ public class ExteriorManager : MonoBehaviour
         return TryCollectIngredient(ingredient);
     }
 
-    public bool RemoveCollectedIngredient(IngredientInfo ingredient = null)
+    public IngredientInfo RemoveCollectedIngredient(IngredientInfo ingredient = null)
     {
-        if (collectedIngredients.Count <= 0) { return false; }
+        if (collectedIngredients.Count <= 0) { return null; }
 
         if (ingredient == null)
         {
@@ -167,7 +167,7 @@ public class ExteriorManager : MonoBehaviour
         else if (!collectedIngredients.Contains(ingredient))
         {
             print("Ingredient has not been collected");
-            return false;
+            return null;
         }
 
         collectedIngredients.Remove(ingredient);
@@ -181,7 +181,7 @@ public class ExteriorManager : MonoBehaviour
         }
         CheckCollectedIngredients();
         UpdateIngredientList();
-        return true;
+        return ingredient;
     }
 
     void CheckCollectedIngredients()
@@ -203,19 +203,16 @@ public class ExteriorManager : MonoBehaviour
 
     void UpdateIngredientList()
     {
-        print("updating. Count: " + GameManager.Instance.ingredientList.Count);
         // Populate ingredient list
         foreach (var item in GameManager.Instance.ingredientList)
         {
 
             if (ingredientsToCollect.ContainsKey(item.Key))
             {
-                print("key contained");
                 ingredientItems[item.Key].ChangeAmount(ingredientsToCollect[item.Key]);
             }
             else
             {
-                print("value is 0");
                 ingredientItems[item.Key].ChangeAmount(0);
             }
         }

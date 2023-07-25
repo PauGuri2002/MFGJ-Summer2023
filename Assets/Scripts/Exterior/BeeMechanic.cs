@@ -43,7 +43,17 @@ public class BeeMechanic : MonoBehaviour
             yield return 0;
         }
 
-        exteriorManager.RemoveCollectedIngredient();
+        IngredientInfo removedIngredient = exteriorManager.RemoveCollectedIngredient();
+        GameObject ingredientInstance = null;
+        if (removedIngredient != null)
+        {
+            ingredientInstance = Instantiate(removedIngredient.prefab, beeParticles, false);
+            if (ingredientInstance.TryGetComponent<Ingredient>(out var ingredientScript))
+            {
+                ingredientScript.ToggleCollision(false);
+            }
+        }
+
         if (coroutines.Count <= 1)
         {
             player.horizontalMaxSpeed = originalMaxSpeed;
@@ -56,6 +66,11 @@ public class BeeMechanic : MonoBehaviour
             beeParticles.position = Vector3.Lerp(player.transform.position, originalParent.position, progress);
             progress += 1 / beeTravelTime * Time.deltaTime;
             yield return 0;
+        }
+
+        if (ingredientInstance != null)
+        {
+            Destroy(ingredientInstance);
         }
     }
 }
