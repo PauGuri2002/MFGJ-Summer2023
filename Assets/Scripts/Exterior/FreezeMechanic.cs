@@ -5,14 +5,12 @@ public class FreezeMechanic : MonoBehaviour
 {
     [SerializeField] private PlayerController player;
     [SerializeField] private float frozenTime = 5f;
-    [SerializeField] private float frozenAccel = 1.6f;
-    [SerializeField] private float frozenDecel = 5f;
+    [SerializeField] private float frozenAccel = 1.6f, frozenDecel = 5f;
     [SerializeField] private GameObject iceCubePrefab;
     private Coroutine freezeCoroutine;
     private GameObject iceCubeObject;
 
-    private float originalAccel;
-    private float originalDecel;
+    private float originalAccel, originalDecel;
 
     private void Start()
     {

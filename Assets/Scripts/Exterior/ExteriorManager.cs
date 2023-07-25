@@ -7,14 +7,21 @@ using Random = UnityEngine.Random;
 
 public class ExteriorManager : MonoBehaviour
 {
+    [SerializeField] private GameObject[] seasonContainers;
+
+    [Header("Spawner Properties")]
     [SerializeField] private Vector2 spawnerSize;
     [SerializeField] private float spawnerHeight = 0.5f;
     [SerializeField] private float spawnPadding = 5f;
 
+    [Header("Spawned Objects")]
+    [SerializeField] private int minExtraIngredients = 6, maxExtraIngredients = 10;
+    [SerializeField] private int minBeeHives = 10, maxBeeHives = 20;
+    [SerializeField] private GameObject beeHivePrefab;
+
+    [Header("UI")]
     [SerializeField] private GameObject ingredientListObject;
     [SerializeField] private GameObject ingredientItemPrefab;
-    [SerializeField] private int minExtraIngredients = 6;
-    [SerializeField] private int maxExtraIngredients = 10;
     public Timer timer;
 
     private Dictionary<IngredientInfo, int> ingredientsToCollect;
@@ -32,6 +39,14 @@ public class ExteriorManager : MonoBehaviour
 
     public void Start()
     {
+        // Spawn Bee Hives
+        int beeHiveCount = Random.Range(minBeeHives, maxBeeHives + 1);
+        for (int i = 0; i < beeHiveCount; i++)
+        {
+            SpawnObject(beeHivePrefab);
+        }
+
+        // Load ingredient list
         if (GameManager.Instance == null || GameManager.Instance.ingredientList == null) { return; }
 
         ingredientsToCollect = new(GameManager.Instance.ingredientList);
@@ -75,19 +90,32 @@ public class ExteriorManager : MonoBehaviour
 
     void SpawnIngredient(IngredientInfo ingredient = null)
     {
-        Vector3 spawnPosition;
         ingredient ??= GameManager.ingredients[Random.Range(0, GameManager.ingredients.Length)];
 
+        GameObject instance = SpawnObject(ingredient.prefab);
+        instance.layer = (int)ingredient.season;
+
+        // PROVISIONAL!!!! Fins que cada ingredient tingui el seu model
+        instance.GetComponentInChildren<TextMeshProUGUI>().text = ingredient.name;
+        instance.GetComponentInChildren<TextMeshProUGUI>().gameObject.layer = (int)ingredient.season;
+        instance.GetComponent<Ingredient>().ingredientName = ingredient.name;
+    }
+
+    GameObject SpawnObject(GameObject prefab)
+    {
+        Vector3 spawnPosition;
+
         bool positionFound;
+        Collider[] colliders = new Collider[10];
         do
         {
             spawnPosition = new Vector3(Random.Range(0, spawnerSize.x) - spawnerSize.x / 2, spawnerHeight, Random.Range(0, spawnerSize.y) - spawnerSize.y / 2);
             positionFound = true;
 
-            Collider[] colliders = Physics.OverlapSphere(spawnPosition, spawnPadding);
-            foreach (Collider collider in colliders)
+            int colliderCount = Physics.OverlapSphereNonAlloc(spawnPosition, spawnPadding, colliders);
+            for (int i = 0; i < colliderCount; i++)
             {
-                if (collider.CompareTag("Impenetrable"))
+                if (colliders[i].CompareTag("Impenetrable") || colliders[i].CompareTag("Player"))
                 {
                     positionFound = false;
                     break;
@@ -95,13 +123,14 @@ public class ExteriorManager : MonoBehaviour
             }
         } while (!positionFound);
 
-        GameObject instance = Instantiate(ingredient.prefab, spawnPosition, Quaternion.identity);
-        instance.layer = (int)ingredient.season;
+        GameObject instance = Instantiate(prefab, spawnPosition, Quaternion.identity);
+        GameObject seasonParent = Array.Find(seasonContainers, c => c.layer == instance.layer);
+        if (seasonParent != null)
+        {
+            instance.transform.SetParent(seasonParent.transform, true);
+        }
 
-        // PROVISIONAL!!!! Fins que cada ingredient tingui el seu model
-        instance.GetComponentInChildren<TextMeshProUGUI>().text = ingredient.name;
-        instance.GetComponentInChildren<TextMeshProUGUI>().gameObject.layer = (int)ingredient.season;
-        instance.GetComponent<Ingredient>().ingredientName = ingredient.name;
+        return instance;
     }
 
     public bool TryCollectIngredient(IngredientInfo ingredient)
