@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MulticamManager : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class MulticamManager : MonoBehaviour
     private Season[] cameraOrder;
     private Vector2 canvasSize;
     private bool isAnimating = false;
+    private bool isTintAnimating = false;
 
     void Start()
     {
@@ -25,7 +27,7 @@ public class MulticamManager : MonoBehaviour
         canvasSize = new Vector2(parentCanvas.rect.width, parentCanvas.rect.height);
     }
 
-    public void SetFullscreen(Season season, float time = 0f)
+    public void SetFullscreen(Season season, float time = 0f, float delay = 0f, bool alsoFullscreenOthers = false)
     {
         if (isAnimating)
         {
@@ -33,22 +35,36 @@ public class MulticamManager : MonoBehaviour
             return;
         }
 
-        RectTransform cam = cameras[season];
-        cam.SetAsLastSibling();
+        cameras[season].SetAsLastSibling();
+
+        if (!alsoFullscreenOthers)
+        {
+            SetFullscreenSingle(cameras[season], time, delay);
+        }
+        else
+        {
+            foreach (RectTransform cam in cameras.Values)
+            {
+                SetFullscreenSingle(cam, time, delay);
+            }
+        }
+    }
+
+    void SetFullscreenSingle(RectTransform cam, float time = 0f, float delay = 0f)
+    {
         if (time <= 0)
         {
-            print("set fullscreen instantly");
             cam.anchoredPosition = Vector2.zero;
             cam.sizeDelta = canvasSize;
             isAnimating = false;
         }
         else
         {
-            StartCoroutine(Interpolation(cam, new Rect(cam.rect), new Rect(0, 0, canvasSize.x, canvasSize.y), time));
+            StartCoroutine(SpatialInterpolation(cam, cam.anchoredPosition, Vector2.zero, cam.sizeDelta, canvasSize, time, delay));
         }
     }
 
-    public void SetGrid(float time = 0f, Season[] newOrder = null)
+    public void SetGrid(float time = 0f, float delay = 0f, Season[] newOrder = null)
     {
         if (isAnimating)
         {
@@ -65,37 +81,82 @@ public class MulticamManager : MonoBehaviour
         {
             RectTransform cam = cameras[cameraOrder[i]];
 
-            float x = i % 2 * canvasSize.x / 2;
-            float y = i / 2 * canvasSize.y / 2;
+            Vector2 newPosition = new(i % 2 * canvasSize.x / 2, -i / 2 * canvasSize.y / 2);
 
             if (time <= 0)
             {
-                cam.anchoredPosition = new Vector2(x, y);
+                cam.anchoredPosition = newPosition;
                 cam.sizeDelta = canvasSize / 2;
             }
             else
             {
-                StartCoroutine(Interpolation(cam, new Rect(cam.rect), new Rect(x, y, canvasSize.x / 2, canvasSize.y / 2), time));
+                StartCoroutine(SpatialInterpolation(cam, cam.anchoredPosition, newPosition, cam.sizeDelta, canvasSize / 2, time, delay));
             }
         }
     }
 
-    IEnumerator Interpolation(RectTransform target, Rect from, Rect to, float time)
+    IEnumerator SpatialInterpolation(RectTransform target, Vector2 fromPosition, Vector2 toPosition, Vector2 fromSize, Vector2 toSize, float time, float delay)
     {
         isAnimating = true;
+
+        if (delay >= 0)
+        {
+            yield return new WaitForSeconds(delay);
+        }
 
         float progress = 0f;
         do
         {
-            print("interpolating: " + progress);
-            target.anchoredPosition = new Vector2(Mathf.Lerp(from.x, to.x, progress), Mathf.Lerp(from.y, to.y, progress));
-            target.sizeDelta = new Vector2(Mathf.Lerp(from.width, to.width, progress), Mathf.Lerp(from.height, to.height, progress));
+            target.anchoredPosition = Vector2.Lerp(fromPosition, toPosition, progress);
+            target.sizeDelta = Vector2.Lerp(fromSize, toSize, progress);
 
             progress += 1 / time * Time.deltaTime;
             yield return 0;
         } while (progress < 1);
 
+        target.anchoredPosition = toPosition;
+        target.sizeDelta = toSize;
         isAnimating = false;
+    }
+
+    public void SetTintAll(Color from, Color to, float time, float delay)
+    {
+        if (isTintAnimating)
+        {
+            Debug.LogWarning("Opacity already animating");
+            return;
+        }
+
+        foreach (RectTransform cam in cameras.Values)
+        {
+            if (cam.TryGetComponent<RawImage>(out var camImage))
+            {
+                StartCoroutine(TintInterpolation(camImage, from, to, time, delay));
+            }
+        }
+
+    }
+
+    IEnumerator TintInterpolation(RawImage target, Color from, Color to, float time, float delay)
+    {
+        isTintAnimating = true;
+
+        if (delay >= 0)
+        {
+            yield return new WaitForSeconds(delay);
+        }
+
+        float progress = 0f;
+        do
+        {
+            target.color = Color.Lerp(from, to, progress);
+
+            progress += 1 / time * Time.deltaTime;
+            yield return 0;
+        } while (progress < 1);
+
+        target.color = to;
+        isTintAnimating = false;
     }
 
     [Serializable]

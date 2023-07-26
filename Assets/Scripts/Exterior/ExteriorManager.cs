@@ -41,8 +41,9 @@ public class ExteriorManager : MonoBehaviour
     public void Start()
     {
         // Multicam
-        multicamManager.SetFullscreen(Season.Spring);
-        multicamManager.SetGrid(2f);
+        multicamManager.SetFullscreen(Season.Spring, 0, 0, true);
+        multicamManager.SetTintAll(new Color(1, 1, 1, 0.5f), Color.white, 2f, 2f);
+        multicamManager.SetGrid(2f, 2f);
 
         // Spawn Bee Hives
         int beeHiveCount = Random.Range(minBeeHives, maxBeeHives + 1);
