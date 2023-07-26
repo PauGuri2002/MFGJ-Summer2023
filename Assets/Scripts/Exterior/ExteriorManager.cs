@@ -7,6 +7,7 @@ using Random = UnityEngine.Random;
 
 public class ExteriorManager : MonoBehaviour
 {
+    [SerializeField] private MulticamManager multicamManager;
     [SerializeField] private GameObject[] seasonContainers;
 
     [Header("Spawner Properties")]
@@ -39,6 +40,10 @@ public class ExteriorManager : MonoBehaviour
 
     public void Start()
     {
+        // Multicam
+        multicamManager.SetFullscreen(Season.Spring);
+        multicamManager.SetGrid(2f);
+
         // Spawn Bee Hives
         int beeHiveCount = Random.Range(minBeeHives, maxBeeHives + 1);
         for (int i = 0; i < beeHiveCount; i++)

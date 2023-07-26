@@ -35,6 +35,8 @@ public class GameManager : MonoBehaviour
         ingredients = (Resources.Load("Ingredients") as Ingredients).ingredients;
         seasons = (Resources.Load("Seasons") as Seasons).seasons;
 
+        // Load Data
+
         // Initial dialogue
         //lobbyMenu.SetActive(false);
         //DialogueDisplayer.Instance.ShowDialogue(lobbyDialogue, () => lobbyMenu.SetActive(true));

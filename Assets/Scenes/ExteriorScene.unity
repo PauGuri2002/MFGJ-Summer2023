@@ -280,8 +280,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ab73fa7f56c12841b6dab68936dc335, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  identifiedCameras: []
-  parentCanvas: {fileID: 0}
+  identifiedCameras:
+  - camera: {fileID: 236183448}
+    season: 6
+  - camera: {fileID: 1082393752}
+    season: 7
+  - camera: {fileID: 2046702780}
+    season: 8
+  - camera: {fileID: 1635719404}
+    season: 9
+  parentCanvas: {fileID: 76106254}
 --- !u!1 &81286701
 GameObject:
   m_ObjectHideFlags: 0
@@ -3121,6 +3129,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70013436916980a478887482880c116a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  multicamManager: {fileID: 76106257}
   seasonContainers:
   - {fileID: 1931245446}
   - {fileID: 625242009}
