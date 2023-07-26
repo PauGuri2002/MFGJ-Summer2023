@@ -11,9 +11,10 @@ GameObject:
   - component: {fileID: 3807116262834263964}
   - component: {fileID: 3278375282938068738}
   - component: {fileID: 8415323861365718539}
+  - component: {fileID: 6646570890822711524}
   m_Layer: 6
   m_Name: Pomegranate
-  m_TagString: Untagged
+  m_TagString: Impenetrable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -61,6 +62,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ingredientName: Pomegranate
+--- !u!136 &6646570890822711524
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 708112231867902703}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!1001 &5939092770089378182
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -75,18 +90,33 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2443bfa099e45074a9741a16dbb98688,
         type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.72
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 2443bfa099e45074a9741a16dbb98688,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.6548842
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 2443bfa099e45074a9741a16dbb98688,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.72
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 2443bfa099e45074a9741a16dbb98688,
+        type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.096
+      value: -0.165
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2443bfa099e45074a9741a16dbb98688,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.067
+      value: 0.12
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2443bfa099e45074a9741a16dbb98688,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.097
+      value: -0.166
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2443bfa099e45074a9741a16dbb98688,
         type: 3}
@@ -122,6 +152,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 2443bfa099e45074a9741a16dbb98688,
+        type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -7511558181221131132, guid: 2443bfa099e45074a9741a16dbb98688,
         type: 3}

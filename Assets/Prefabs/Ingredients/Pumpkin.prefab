@@ -11,9 +11,10 @@ GameObject:
   - component: {fileID: 1380509690750340827}
   - component: {fileID: 7240517760013848511}
   - component: {fileID: 3780139234577359429}
+  - component: {fileID: 1899833176541300713}
   m_Layer: 9
   m_Name: Pumpkin
-  m_TagString: Untagged
+  m_TagString: Impenetrable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -44,10 +45,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 1
-  m_Height: 3
+  m_Radius: 1.5
+  m_Height: 4
   m_Direction: 1
-  m_Center: {x: 0, y: 1.5, z: 0}
+  m_Center: {x: 0, y: 2, z: 0}
 --- !u!114 &3780139234577359429
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -61,6 +62,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ingredientName: Pumpkin
+--- !u!136 &1899833176541300713
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4422157472623596885}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 1
+  m_Height: 3
+  m_Direction: 1
+  m_Center: {x: 0, y: 1.5, z: 0}
 --- !u!1001 &2909729358672805710
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -75,18 +90,33 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 417e4857c982a0f4b951c7ddc49b2d08,
         type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2.47
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 417e4857c982a0f4b951c7ddc49b2d08,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.9326097
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 417e4857c982a0f4b951c7ddc49b2d08,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2.1172135
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 417e4857c982a0f4b951c7ddc49b2d08,
+        type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.12
+      value: -0.215
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 417e4857c982a0f4b951c7ddc49b2d08,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.083
+      value: 0.179
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 417e4857c982a0f4b951c7ddc49b2d08,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.107
+      value: -0.203
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 417e4857c982a0f4b951c7ddc49b2d08,
         type: 3}
@@ -122,6 +152,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 417e4857c982a0f4b951c7ddc49b2d08,
+        type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -7511558181221131132, guid: 417e4857c982a0f4b951c7ddc49b2d08,
         type: 3}

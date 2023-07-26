@@ -9,11 +9,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1167086214984056356}
-  - component: {fileID: 7352063426888651820}
+  - component: {fileID: 1297658567140473561}
   - component: {fileID: 3095295917786006698}
+  - component: {fileID: 7659741211486158274}
   m_Layer: 8
   m_Name: Watermelon
-  m_TagString: Untagged
+  m_TagString: Impenetrable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -34,7 +35,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!136 &7352063426888651820
+--- !u!136 &1297658567140473561
 CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -44,10 +45,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 1
-  m_Height: 3
+  m_Radius: 1.5
+  m_Height: 4
   m_Direction: 1
-  m_Center: {x: 0, y: 1.5, z: 0}
+  m_Center: {x: 0, y: 2, z: 0}
 --- !u!114 &3095295917786006698
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -61,6 +62,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ingredientName: Watermelon
+--- !u!136 &7659741211486158274
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3234848883757364269}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 1
+  m_Height: 3
+  m_Direction: 1
+  m_Center: {x: 0, y: 1.5, z: 0}
 --- !u!1 &3981775880476098576
 GameObject:
   m_ObjectHideFlags: 0
@@ -253,9 +268,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6611450982273761235}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.129, y: -0.141, z: 0}
-  m_LocalScale: {x: 1.3252711, y: 0.64535135, z: 3.724436}
-  m_ConstrainProportionsScale: 0
+  m_LocalPosition: {x: -0.255, y: -0.288, z: 0}
+  m_LocalScale: {x: 2.7300003, y: 1.3293953, z: 7.672174}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 7725618982360149328}
   - {fileID: 5545891520374096070}

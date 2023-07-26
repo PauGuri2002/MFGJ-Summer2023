@@ -94,9 +94,10 @@ GameObject:
   - component: {fileID: 6750379919744746534}
   - component: {fileID: 1943988977450749073}
   - component: {fileID: 4032522450213767845}
+  - component: {fileID: 4577134354260631995}
   m_Layer: 9
   m_Name: Mushroom
-  m_TagString: Untagged
+  m_TagString: Impenetrable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -144,6 +145,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ingredientName: Mushroom
+--- !u!136 &4577134354260631995
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2039755006916925129}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 0
+  m_Radius: 0.5
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!1 &5171309330145621137
 GameObject:
   m_ObjectHideFlags: 0
@@ -170,9 +185,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5171309330145621137}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.117, z: 0}
-  m_LocalScale: {x: 3.4337716, y: 4.8536787, z: 3.5683239}
-  m_ConstrainProportionsScale: 0
+  m_LocalPosition: {x: 0, y: 0.142, z: 0}
+  m_LocalScale: {x: 4.25, y: 6.0074277, z: 4.4165363}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 3131963517210851827}
   m_Father: {fileID: 6750379919744746534}
