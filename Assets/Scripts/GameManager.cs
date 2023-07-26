@@ -21,9 +21,11 @@ public class GameManager : MonoBehaviour
 
     [NonSerialized] public static GameManager Instance;
     [HideInInspector] public Dictionary<IngredientInfo, int> ingredientList = new();
+    [HideInInspector] public string recipeName;
 
-    // Start is called before the first frame update
-    void Start()
+    public event Action<string, float> OnCompleteMission;
+
+    private void Awake()
     {
         if (Instance != null)
         {
@@ -31,16 +33,19 @@ public class GameManager : MonoBehaviour
         }
         Instance = this;
         DontDestroyOnLoad(gameObject);
+    }
 
+    void Start()
+    {
         ingredients = (Resources.Load("Ingredients") as Ingredients).ingredients;
         seasons = (Resources.Load("Seasons") as Seasons).seasons;
-
-        // Load Data
 
         // Initial dialogue
         //lobbyMenu.SetActive(false);
         //DialogueDisplayer.Instance.ShowDialogue(lobbyDialogue, () => lobbyMenu.SetActive(true));
     }
+
+    /* GAME FLOW */
 
     public void StartMission()
     {
@@ -73,12 +78,22 @@ public class GameManager : MonoBehaviour
             ingredientList.Add(availableIngredients[ingredientIndex], amountPerIngredient[i]);
             availableIngredients.RemoveAt(ingredientIndex);
         }
+
+        //TODO: Actually program name generation
+        recipeName = "Recipe Name";
     }
 
     public void CompleteMission(float missionTime)
     {
         Cursor.lockState = CursorLockMode.None;
         SceneManager.LoadScene("InteriorScene");
-        print("TOTAL TIME: " + missionTime + " seconds");
+
+        //HighScoreDisplayer highScoreDisplayer = FindObjectOfType<HighScoreDisplayer>();
+        //if (highScoreDisplayer != null)
+        //{
+        //    highScoreDisplayer.AddRecipe(recipeName, missionTime);
+        //}
+
+        OnCompleteMission?.Invoke(recipeName, missionTime);
     }
 }
