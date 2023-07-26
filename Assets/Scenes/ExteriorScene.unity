@@ -3136,7 +3136,7 @@ MonoBehaviour:
   - {fileID: 99638472}
   - {fileID: 81286701}
   spawnerSize: {x: 80, y: 80}
-  spawnerHeight: 0.5
+  spawnerHeight: 0
   spawnPadding: 5
   minExtraIngredients: 6
   maxExtraIngredients: 10

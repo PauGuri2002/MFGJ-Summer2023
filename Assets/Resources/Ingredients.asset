@@ -48,7 +48,7 @@ MonoBehaviour:
     season: 8
   - name: Watermelon
     icon: {fileID: 21300000, guid: c90ad48f13b260d4f89351831be06ba7, type: 3}
-    prefab: {fileID: 3401735524991959354, guid: 1ba12645466f66a47952499f7c7ef0f0,
+    prefab: {fileID: 3234848883757364269, guid: cf815c2db827d7346bf777cf9580fbb4,
       type: 3}
     season: 8
   - name: Blueberry
@@ -68,6 +68,6 @@ MonoBehaviour:
     season: 9
   - name: Mushroom
     icon: {fileID: 21300000, guid: c90ad48f13b260d4f89351831be06ba7, type: 3}
-    prefab: {fileID: 3401735524991959354, guid: 1ba12645466f66a47952499f7c7ef0f0,
+    prefab: {fileID: 2039755006916925129, guid: bf5ae4be8c8eea14b8c4ede26a6c2383,
       type: 3}
     season: 9

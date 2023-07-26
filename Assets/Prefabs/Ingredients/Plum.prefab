@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5388648473498697030}
   - component: {fileID: 3448308198549794700}
   - component: {fileID: 1928164506725261199}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Plum
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -142,6 +142,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Pruna
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 4595366887c408645b571d28f1b5dbb2,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4784655795150572064, guid: 4595366887c408645b571d28f1b5dbb2,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5076228693683592339, guid: 4595366887c408645b571d28f1b5dbb2,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4595366887c408645b571d28f1b5dbb2, type: 3}
