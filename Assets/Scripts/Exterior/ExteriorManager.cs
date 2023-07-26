@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using TMPro;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -102,9 +101,9 @@ public class ExteriorManager : MonoBehaviour
         instance.layer = (int)ingredient.season;
 
         // PROVISIONAL!!!! Fins que cada ingredient tingui el seu model
-        instance.GetComponentInChildren<TextMeshProUGUI>().text = ingredient.name;
-        instance.GetComponentInChildren<TextMeshProUGUI>().gameObject.layer = (int)ingredient.season;
-        instance.GetComponent<Ingredient>().ingredientName = ingredient.name;
+        //instance.GetComponentInChildren<TextMeshProUGUI>().text = ingredient.name;
+        //instance.GetComponentInChildren<TextMeshProUGUI>().gameObject.layer = (int)ingredient.season;
+        //instance.GetComponent<Ingredient>().ingredientName = ingredient.name;
     }
 
     GameObject SpawnObject(GameObject prefab)
