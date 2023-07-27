@@ -23,6 +23,7 @@ public class ExteriorManager : MonoBehaviour
     [SerializeField] private GameObject ingredientListObject;
     [SerializeField] private GameObject ingredientItemPrefab;
     public Timer timer;
+    private RectTransform timerRect;
 
     private Dictionary<IngredientInfo, int> ingredientsToCollect;
     private List<IngredientInfo> collectedIngredients = new();
@@ -39,10 +40,22 @@ public class ExteriorManager : MonoBehaviour
 
     public void Start()
     {
+        // Temporally disable UI elements
+        ingredientListObject.LeanScale(Vector3.zero, 0);
+        ingredientListObject.LeanRotateZ(45, 0);
+
+        timer.TryGetComponent(out timerRect);
+        if (timerRect != null)
+        {
+            timerRect.LeanMove(Vector3.up * 100, 0);
+        }
+
         // Multicam
-        multicamManager.SetFullscreen(Season.Spring, 0, 0, true);
-        multicamManager.SetTintAll(new Color(1, 1, 1, 0.5f), Color.white, 2f, 2f);
-        multicamManager.SetGrid(2f, 2f);
+        Color semitransparent = new Color(1, 1, 1, 0.5f);
+        multicamManager.SetFullscreenAll(Season.Spring, 0, 0);
+        multicamManager.SetTintAll(Color.white, semitransparent, 1f, 2f);
+        multicamManager.SetTintAll(semitransparent, Color.white, 2f, 3f);
+        multicamManager.SetGrid(3f, 2f);
 
         // Spawn Bee Hives
         int beeHiveCount = Random.Range(minBeeHives, maxBeeHives + 1);
@@ -87,7 +100,20 @@ public class ExteriorManager : MonoBehaviour
             SpawnIngredient();
         }
 
-        // Start timer
+        Invoke(nameof(StartSearch), 5);
+    }
+
+    void StartSearch()
+    {
+        // animate in UI elements
+        LeanTween.scale(ingredientListObject, Vector3.one, 1f).setEaseInOutCubic();
+        LeanTween.rotateZ(ingredientListObject, 0, 1f).setEaseInOutCubic();
+
+        if (timerRect != null)
+        {
+            LeanTween.move(timerRect, Vector3.zero, 1f).setEaseInOutCubic();
+        }
+
         timer.StartTimer();
         currentPhase = GamePhase.Search;
         onPhaseChange?.Invoke(currentPhase);
@@ -186,6 +212,10 @@ public class ExteriorManager : MonoBehaviour
         }
         CheckCollectedIngredients();
         UpdateIngredientList();
+
+        // spawn the ingredient back again
+        SpawnIngredient(ingredient);
+
         return ingredient;
     }
 

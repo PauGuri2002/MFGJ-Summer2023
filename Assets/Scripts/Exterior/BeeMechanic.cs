@@ -48,6 +48,7 @@ public class BeeMechanic : MonoBehaviour
         if (removedIngredient != null)
         {
             ingredientInstance = Instantiate(removedIngredient.prefab, beeParticles, false);
+            ingredientInstance.layer = LayerMask.NameToLayer("Spring");
             if (ingredientInstance.TryGetComponent<Ingredient>(out var ingredientScript))
             {
                 ingredientScript.ToggleCollision(false);
