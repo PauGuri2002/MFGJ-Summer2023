@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -19,7 +18,11 @@ public class HeatMechanic : MonoBehaviour
     [SerializeField] private float startAmount = 0.005f;
     [SerializeField] private float maxAmount = 0.1f;
 
-    private Coroutine coroutine;
+    enum Status { Idle, Heating, Cooling, Burning }
+    private Status currentStatus = Status.Idle;
+    private float heatPercent = 0;
+
+    //private Coroutine coroutine;
     int amountProperty, speedProperty, sizeProperty;
 
     void Start()
@@ -29,75 +32,57 @@ public class HeatMechanic : MonoBehaviour
         sizeProperty = Shader.PropertyToID("_Distortion_Scale");
         overlay.fillAmount = 0;
 
-        if (coroutine == null)
+        Invoke(nameof(HeatUp), startDelay);
+    }
+
+    private void Update()
+    {
+        if (currentStatus == Status.Heating)
         {
-            coroutine = StartCoroutine(IncreaseHeat());
+            heatPercent += 1 / heatingTime * Time.deltaTime;
+            if (heatPercent >= 1)
+            {
+                heatPercent = 1;
+                currentStatus = Status.Burning;
+            }
         }
+        else if (currentStatus == Status.Cooling)
+        {
+            heatPercent -= 1 / coolingTime * Time.deltaTime;
+            if (heatPercent <= 0)
+            {
+                heatPercent = 0;
+                currentStatus = Status.Idle;
+            }
+        }
+        else if (currentStatus == Status.Burning)
+        {
+            print("I'M ON FIRE");
+        }
+
+        shader.SetFloat(amountProperty, Mathf.Lerp(startAmount, maxAmount, heatPercent));
+        //shader.SetVector(speedProperty, Vector2.Lerp(startSpeed, maxSpeed, timer / heatingTime));
+        shader.SetFloat(sizeProperty, Mathf.Lerp(startSize, maxSize, heatPercent));
+        overlay.fillAmount = heatPercent;
+    }
+
+    public void HeatUp()
+    {
+        currentStatus = Status.Heating;
     }
 
     public void CoolDown()
     {
-        if (coroutine != null)
+        if (currentStatus != Status.Burning)
         {
-            StopCoroutine(coroutine);
+            currentStatus = Status.Cooling;
         }
-
-        StartCoroutine(DecreaseHeat());
-    }
-
-    IEnumerator IncreaseHeat()
-    {
-        yield return new WaitForSeconds(startDelay);
-
-        float timer = 0f;
-        while (timer < heatingTime)
-        {
-            shader.SetFloat(amountProperty, Mathf.Lerp(startAmount, maxAmount, timer / heatingTime));
-            shader.SetVector(speedProperty, Vector2.Lerp(startSpeed, maxSpeed, timer / heatingTime));
-            shader.SetFloat(sizeProperty, Mathf.Lerp(startSize, maxSize, timer / heatingTime));
-            overlay.fillAmount = timer / heatingTime;
-
-            timer += Time.deltaTime;
-            print("Heating: " + timer);
-            yield return 0;
-        }
-
-        overlay.fillAmount = 1;
-        print("OVERHEATING!!!");
-        coroutine = null;
-    }
-
-    IEnumerator DecreaseHeat()
-    {
-        float currentAmount = shader.GetFloat(amountProperty);
-        Vector2 currentSpeed = shader.GetVector(speedProperty);
-        float currentSize = shader.GetFloat(sizeProperty);
-
-        float timer = 0f;
-        while (timer < coolingTime)
-        {
-            shader.SetFloat(amountProperty, Mathf.Lerp(currentAmount, startAmount, timer / coolingTime));
-            shader.SetVector(speedProperty, Vector2.Lerp(currentSpeed, startSpeed, timer / coolingTime));
-            shader.SetFloat(sizeProperty, Mathf.Lerp(currentSize, startSize, timer / coolingTime));
-            overlay.fillAmount = 1 - timer / coolingTime;
-
-            timer += Time.deltaTime;
-            print("Deheating: " + timer);
-            yield return 0;
-        }
-
-        shader.SetFloat(amountProperty, startAmount);
-        shader.SetVector(speedProperty, startSpeed);
-        shader.SetFloat(sizeProperty, startSize);
-        overlay.fillAmount = 0;
-
-        coroutine = StartCoroutine(IncreaseHeat());
     }
 
     private void OnApplicationQuit()
     {
         shader.SetFloat(amountProperty, startAmount);
-        shader.SetVector(speedProperty, startSpeed);
+        //shader.SetVector(speedProperty, startSpeed);
         shader.SetFloat(sizeProperty, startSize);
     }
 }

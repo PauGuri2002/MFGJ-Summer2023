@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class CoolDownTrigger : MonoBehaviour
+public class HeatTrigger : MonoBehaviour
 {
     private HeatMechanic mechanic;
 
@@ -14,6 +14,14 @@ public class CoolDownTrigger : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             mechanic.CoolDown();
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            mechanic.HeatUp();
         }
     }
 }
