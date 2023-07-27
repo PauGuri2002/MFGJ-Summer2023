@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class FreezeMechanic : MonoBehaviour
 {
@@ -7,6 +8,7 @@ public class FreezeMechanic : MonoBehaviour
     [SerializeField] private float frozenTime = 5f;
     [SerializeField] private float frozenAccel = 1.6f, frozenDecel = 5f;
     [SerializeField] private GameObject iceCubePrefab;
+    [SerializeField] private Image overlay;
     private Coroutine freezeCoroutine;
     private GameObject iceCubeObject;
 
@@ -16,6 +18,7 @@ public class FreezeMechanic : MonoBehaviour
     {
         originalAccel = player.horizontalAccelTime;
         originalDecel = player.horizontalDecelTime;
+        overlay.CrossFadeAlpha(0, 0, true);
     }
 
     public void StartFreeze()
@@ -37,6 +40,7 @@ public class FreezeMechanic : MonoBehaviour
 
         player.horizontalAccelTime = frozenAccel;
         player.horizontalDecelTime = frozenDecel;
+        overlay.CrossFadeAlpha(1, 0.1f, false);
 
         yield return new WaitForSeconds(frozenTime);
 
@@ -48,6 +52,7 @@ public class FreezeMechanic : MonoBehaviour
     {
         player.horizontalAccelTime = originalAccel;
         player.horizontalDecelTime = originalDecel;
+        overlay.CrossFadeAlpha(0, 1f, false);
 
         if (iceCubeObject != null)
         {

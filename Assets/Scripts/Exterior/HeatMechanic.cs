@@ -1,11 +1,14 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class HeatMechanic : MonoBehaviour
 {
     [SerializeField] private PlayerController player;
     [SerializeField] private float startDelay = 5f;
     [SerializeField] private float heatingTime = 10;
+    [SerializeField] private float coolingTime = 1;
+    [SerializeField] private Image overlay;
 
     [Header("Shader Parameters")]
     [SerializeField] private Material shader;
@@ -24,6 +27,7 @@ public class HeatMechanic : MonoBehaviour
         amountProperty = Shader.PropertyToID("_Distortion_Amount");
         speedProperty = Shader.PropertyToID("_Distortion_Speed");
         sizeProperty = Shader.PropertyToID("_Distortion_Scale");
+        overlay.fillAmount = 0;
 
         if (coroutine == null)
         {
@@ -51,11 +55,14 @@ public class HeatMechanic : MonoBehaviour
             shader.SetFloat(amountProperty, Mathf.Lerp(startAmount, maxAmount, timer / heatingTime));
             shader.SetVector(speedProperty, Vector2.Lerp(startSpeed, maxSpeed, timer / heatingTime));
             shader.SetFloat(sizeProperty, Mathf.Lerp(startSize, maxSize, timer / heatingTime));
+            overlay.fillAmount = timer / heatingTime;
+
             timer += Time.deltaTime;
             print("Heating: " + timer);
             yield return 0;
         }
 
+        overlay.fillAmount = 1;
         print("OVERHEATING!!!");
         coroutine = null;
     }
@@ -67,11 +74,13 @@ public class HeatMechanic : MonoBehaviour
         float currentSize = shader.GetFloat(sizeProperty);
 
         float timer = 0f;
-        while (timer < 1f)
+        while (timer < coolingTime)
         {
-            shader.SetFloat(amountProperty, Mathf.Lerp(currentAmount, startAmount, timer));
-            shader.SetVector(speedProperty, Vector2.Lerp(currentSpeed, startSpeed, timer));
-            shader.SetFloat(sizeProperty, Mathf.Lerp(currentSize, startSize, timer));
+            shader.SetFloat(amountProperty, Mathf.Lerp(currentAmount, startAmount, timer / coolingTime));
+            shader.SetVector(speedProperty, Vector2.Lerp(currentSpeed, startSpeed, timer / coolingTime));
+            shader.SetFloat(sizeProperty, Mathf.Lerp(currentSize, startSize, timer / coolingTime));
+            overlay.fillAmount = 1 - timer / coolingTime;
+
             timer += Time.deltaTime;
             print("Deheating: " + timer);
             yield return 0;
@@ -80,6 +89,7 @@ public class HeatMechanic : MonoBehaviour
         shader.SetFloat(amountProperty, startAmount);
         shader.SetVector(speedProperty, startSpeed);
         shader.SetFloat(sizeProperty, startSize);
+        overlay.fillAmount = 0;
 
         coroutine = StartCoroutine(IncreaseHeat());
     }

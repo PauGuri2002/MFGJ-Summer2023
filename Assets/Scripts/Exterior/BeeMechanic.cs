@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BeeMechanic : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class BeeMechanic : MonoBehaviour
     [SerializeField] private float beeFollowTime = 3;
     [SerializeField] private float beeTravelTime = 0.5f;
     [SerializeField] private float beesMaxSpeed = 2;
+    [SerializeField] private Image overlay;
 
     private float originalMaxSpeed;
     private static List<Coroutine> coroutines = new();
@@ -16,6 +18,7 @@ public class BeeMechanic : MonoBehaviour
     private void Start()
     {
         originalMaxSpeed = player.horizontalMaxSpeed;
+        overlay.CrossFadeAlpha(0, 0, true);
     }
 
     public void StartBees(Transform beeParticles)
@@ -26,6 +29,7 @@ public class BeeMechanic : MonoBehaviour
     IEnumerator BeesCoroutine(Transform originalParent, Transform beeParticles)
     {
         player.horizontalMaxSpeed = beesMaxSpeed;
+        overlay.CrossFadeAlpha(1, 0.1f, false);
 
         float progress = 0f;
         while (progress < 1)
@@ -58,6 +62,7 @@ public class BeeMechanic : MonoBehaviour
         if (coroutines.Count <= 1)
         {
             player.horizontalMaxSpeed = originalMaxSpeed;
+            overlay.CrossFadeAlpha(0, 1, false);
         }
         coroutines.RemoveAt(coroutines.Count - 1);
 
