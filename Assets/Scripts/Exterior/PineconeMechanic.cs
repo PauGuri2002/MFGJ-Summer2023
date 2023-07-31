@@ -1,18 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PineconeMechanic : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public void RegisterPineconeHit()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        print("OUCH! PINECONEEE");
     }
 }

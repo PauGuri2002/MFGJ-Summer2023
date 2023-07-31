@@ -44,6 +44,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46931abdedea774448c8e6aa16b91a92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pineconePrefab: {fileID: 7398436006010709834, guid: b2f8085ad0b6b5c4b84d7a9d96f63cf1,
+    type: 3}
+  minSpawnTime: 2
+  maxSpawnTime: 6
+  triggerDistance: 10
+  targetErrorArea: {x: 1, y: 1}
 --- !u!1 &5616291295089269491
 GameObject:
   m_ObjectHideFlags: 0
