@@ -52,6 +52,7 @@ public class PlayerController : MonoBehaviour
         {
             horizontalDirection = horizontalInputValue;
             float modifiedMaxSpeed = horizontalMaxSpeed * (isSprinting ? sprintMultiplier : 1);
+            print("Max Speed: " + modifiedMaxSpeed + ", Accel: " + horizontalAccel + ", Target: " + horizontalDirection * modifiedMaxSpeed);
             horizontalSpeed = Vector2.SmoothDamp(horizontalSpeed, horizontalDirection * modifiedMaxSpeed, ref horizontalAccel, horizontalAccelTime);
         }
         else

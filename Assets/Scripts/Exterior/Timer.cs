@@ -6,10 +6,18 @@ public class Timer : MonoBehaviour
     [SerializeField] private TextMeshProUGUI label;
     [HideInInspector] public float elapsedTime = 0;
     private bool isActive = false;
+    private RectTransform timerRect;
 
     void Start()
     {
+        TryGetComponent(out timerRect);
+        if (timerRect != null)
+        {
+            timerRect.LeanMove(Vector3.up * 100, 0);
+        }
         label.text = "00:00";
+
+        ExteriorManager.onPhaseChange += AnimateIn;
     }
 
     // Update is called once per frame
@@ -19,6 +27,16 @@ public class Timer : MonoBehaviour
         {
             elapsedTime += Time.deltaTime;
             UpdateLabel();
+        }
+    }
+
+    void AnimateIn(ExteriorManager.GamePhase phase)
+    {
+        if (timerRect != null && !isActive && phase == ExteriorManager.GamePhase.Search)
+        {
+            LeanTween.move(timerRect, Vector3.zero, 1f).setEaseInOutCubic();
+            StartTimer();
+            ExteriorManager.onPhaseChange -= AnimateIn;
         }
     }
 

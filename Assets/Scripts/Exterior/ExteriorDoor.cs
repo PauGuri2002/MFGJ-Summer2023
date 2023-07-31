@@ -3,6 +3,7 @@ using UnityEngine;
 public class ExteriorDoor : MonoBehaviour, IInteractive
 {
     [SerializeField] private ExteriorManager exteriorManager;
+    [SerializeField] private Timer timer;
     private bool isOpen;
 
     void Start()
@@ -28,8 +29,8 @@ public class ExteriorDoor : MonoBehaviour, IInteractive
     {
         if (isOpen)
         {
-            exteriorManager.timer.StopTimer();
-            float time = exteriorManager.timer.elapsedTime;
+            timer.StopTimer();
+            float time = timer.elapsedTime;
             GameManager.Instance.CompleteMission(time);
         }
         else

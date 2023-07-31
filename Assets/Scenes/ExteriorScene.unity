@@ -3818,6 +3818,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   exteriorManager: {fileID: 1602618435}
+  timer: {fileID: 476084454}
 --- !u!1001 &1564684356
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4115,6 +4116,7 @@ GameObject:
   - component: {fileID: 1602618437}
   - component: {fileID: 1602618436}
   - component: {fileID: 1602618438}
+  - component: {fileID: 1602618439}
   m_Layer: 0
   m_Name: ExteriorManager
   m_TagString: Untagged
@@ -4167,7 +4169,6 @@ MonoBehaviour:
   ingredientListObject: {fileID: 897093264}
   ingredientItemPrefab: {fileID: 2202153061729659480, guid: 6a5ee85a64fb0304dab87cf8fa816a21,
     type: 3}
-  timer: {fileID: 476084454}
 --- !u!114 &1602618436
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4182,7 +4183,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   exteriorManager: {fileID: 1602618435}
   player: {fileID: 379684741806801318}
-  beeFollowTime: 3
+  beeFollowTime: 1.5
   beeTravelTime: 0.5
   beesMaxSpeed: 2
   overlay: {fileID: 337642109}
@@ -4218,7 +4219,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 379684741806801318}
-  startDelay: 7
+  startDelay: 2
   heatingTime: 20
   coolingTime: 1
   overlay: {fileID: 574086557}
@@ -4229,6 +4230,18 @@ MonoBehaviour:
   maxSpeed: {x: 0.2, y: 0.2}
   startAmount: 0.01
   maxAmount: 0.1
+--- !u!114 &1602618439
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1602618432}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac42b5bea8bda594980b25a28165b4b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1635350707
 PrefabInstance:
   m_ObjectHideFlags: 0
