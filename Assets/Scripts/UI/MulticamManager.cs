@@ -1,8 +1,10 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 public class MulticamManager : MonoBehaviour
 {
@@ -12,8 +14,7 @@ public class MulticamManager : MonoBehaviour
     private Dictionary<Season, RectTransform> cameras = new();
     [HideInInspector] public Season[] cameraOrder { get; private set; }
     private Vector2 canvasSize;
-    private bool isAnimating = false;
-    private bool isTintAnimating = false;
+    private bool isShaking = false;
 
     void Start()
     {
@@ -28,12 +29,6 @@ public class MulticamManager : MonoBehaviour
 
     public void SetFullscreenAll(Season firstSeason, float time = 0f, float delay = 0f, LeanTweenType easing = LeanTweenType.easeInOutCubic)
     {
-        if (isAnimating)
-        {
-            Debug.LogWarning("Already animating");
-            return;
-        }
-
         cameras[firstSeason].SetAsLastSibling();
 
         foreach (RectTransform cam in cameras.Values)
@@ -44,6 +39,7 @@ public class MulticamManager : MonoBehaviour
 
     public void SetFullscreen(Season season, float time = 0f, float delay = 0f, LeanTweenType easing = LeanTweenType.easeInOutCubic)
     {
+        cameras[season].SetAsLastSibling();
         SetFullscreenSingle(cameras[season], time, delay, easing);
     }
 
@@ -55,12 +51,6 @@ public class MulticamManager : MonoBehaviour
 
     public void SetGrid(float time = 0f, float delay = 0f, Season[] newOrder = null, LeanTweenType easing = LeanTweenType.easeInOutCubic)
     {
-        if (isAnimating)
-        {
-            Debug.LogWarning("Already animating");
-            return;
-        }
-
         if (newOrder != null)
         {
             cameraOrder = newOrder;
@@ -79,12 +69,6 @@ public class MulticamManager : MonoBehaviour
 
     public void SetTintAll(Color from, Color to, float time = 0f, float delay = 0f, LeanTweenType easing = LeanTweenType.easeInOutCubic)
     {
-        if (isTintAnimating)
-        {
-            Debug.LogWarning("Opacity already animating");
-            return;
-        }
-
         foreach (RectTransform cam in cameras.Values)
         {
             if (cam.TryGetComponent<RawImage>(out var image))
@@ -94,6 +78,53 @@ public class MulticamManager : MonoBehaviour
 
         }
 
+    }
+
+    public void ShakeAll(float duration, float intensity, float frequency = 100f)
+    {
+        if (isShaking)
+        {
+            Debug.LogWarning("Already shaking");
+            return;
+        }
+
+        isShaking = true;
+        foreach (RectTransform cam in cameras.Values)
+        {
+            StartCoroutine(ShakeSingle(cam, duration, intensity, frequency));
+        }
+    }
+
+    public void Shake(Season season, float duration, float intensity, float frequency = 100f)
+    {
+        if (isShaking)
+        {
+            Debug.LogWarning("Already shaking");
+            return;
+        }
+
+        isShaking = true;
+        StartCoroutine(ShakeSingle(cameras[season], duration, intensity, frequency));
+    }
+
+    IEnumerator ShakeSingle(RectTransform cam, float duration, float intensity, float frequency)
+    {
+        float timer = 0;
+        Vector3 originalPosition = cam.localPosition;
+
+        while (timer < duration)
+        {
+            float x = Random.Range(-1f, 1f) * intensity;
+            float y = Random.Range(-1f, 1f) * intensity;
+
+            cam.localPosition = originalPosition + new Vector3(x, y, 0f);
+
+            timer += Time.deltaTime;
+            yield return new WaitForSeconds(1 / frequency);
+        }
+
+        cam.localPosition = originalPosition;
+        isShaking = false;
     }
 
     [Serializable]

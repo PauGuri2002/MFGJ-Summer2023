@@ -8,6 +8,7 @@ public class HeatMechanic : MonoBehaviour
     [SerializeField] private float heatingTime = 10;
     [SerializeField] private float coolingTime = 1;
     [SerializeField] private Image overlay;
+    [SerializeField] private MulticamManager multicamManager;
 
     [Header("Shader Parameters")]
     [SerializeField] private Material shader;
@@ -18,7 +19,7 @@ public class HeatMechanic : MonoBehaviour
     [SerializeField] private float startAmount = 0.005f;
     [SerializeField] private float maxAmount = 0.1f;
 
-    enum Status { Idle, Heating, Cooling, Burning }
+    enum Status { Idle, Heating, Cooling, Burning, Burned }
     private Status currentStatus = Status.Idle;
     private float heatPercent = 0;
 
@@ -66,7 +67,8 @@ public class HeatMechanic : MonoBehaviour
         }
         else if (currentStatus == Status.Burning)
         {
-            print("I'M ON FIRE");
+            Burn();
+
         }
 
         shader.SetFloat(amountProperty, Mathf.Lerp(startAmount, maxAmount, heatPercent));
@@ -84,8 +86,21 @@ public class HeatMechanic : MonoBehaviour
     {
         if (currentStatus != Status.Burning)
         {
+            if (currentStatus == Status.Burned)
+            {
+                multicamManager.SetGrid(1, 0);
+            }
+
             currentStatus = Status.Cooling;
         }
+    }
+
+    void Burn()
+    {
+        currentStatus = Status.Burned;
+        multicamManager.Shake(Season.Summer, 0.1f, 10f);
+        multicamManager.SetFullscreen(Season.Summer, 0.8f, 0.2f);
+        //DialogueDisplayer.Instance.ShowNotice("I need to cool down, QUICKLY!");
     }
 
     private void OnApplicationQuit()

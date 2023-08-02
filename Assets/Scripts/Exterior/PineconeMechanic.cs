@@ -18,6 +18,7 @@ public class PineconeMechanic : MonoBehaviour
 
     public void RegisterPineconeHit()
     {
+        multicamManager.ShakeAll(0.1f, 10f);
         overlay.CrossFadeAlpha(1, 0.1f, false);
         StartCoroutine(SwitchCameras());
     }

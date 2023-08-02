@@ -11,6 +11,7 @@ public class BeeMechanic : MonoBehaviour
     [SerializeField] private float beeTravelTime = 0.5f;
     [SerializeField] private float beesMaxSpeed = 2;
     [SerializeField] private Image overlay;
+    [SerializeField] private MulticamManager multicamManager;
 
     private float originalMaxSpeed;
     private static List<Coroutine> coroutines = new();
@@ -23,6 +24,7 @@ public class BeeMechanic : MonoBehaviour
 
     public void StartBees(Transform beeParticles)
     {
+        multicamManager.Shake(Season.Spring, 0.1f, 10f);
         coroutines.Add(StartCoroutine(BeesCoroutine(beeParticles.parent, beeParticles)));
     }
 

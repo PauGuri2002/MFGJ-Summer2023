@@ -9,6 +9,7 @@ public class FreezeMechanic : MonoBehaviour
     [SerializeField] private float frozenAccel = 1.6f, frozenDecel = 5f;
     [SerializeField] private GameObject iceCubePrefab;
     [SerializeField] private Image overlay;
+    [SerializeField] private MulticamManager multicamManager;
     private Coroutine freezeCoroutine;
     private GameObject iceCubeObject;
 
@@ -23,6 +24,8 @@ public class FreezeMechanic : MonoBehaviour
 
     public void StartFreeze()
     {
+        multicamManager.Shake(Season.Winter, 0.1f, 10f);
+
         if (freezeCoroutine != null)
         {
             StopFreeze();
