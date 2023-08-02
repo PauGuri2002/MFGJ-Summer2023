@@ -45,7 +45,7 @@ public class PineconeTrigger : MonoBehaviour
         transform.position = new Vector3(horizontalPosition.x, transform.position.y + verticalSpeed * Time.deltaTime, horizontalPosition.y);
 
         // safety destruction
-        if (transform.position.y < -10)
+        if (transform.position.y < 0)
         {
             Destroy(gameObject);
         }
@@ -57,12 +57,14 @@ public class PineconeTrigger : MonoBehaviour
 
         if (other.CompareTag("Player"))
         {
-            ParticleSystem particles = GetComponentInChildren<ParticleSystem>();
-            if (particles != null)
-            {
-                mechanic.RegisterPineconeHit();
-            }
+            mechanic.RegisterPineconeHit();
         }
+
+        //ParticleSystem particles = GetComponentInChildren<ParticleSystem>();
+        //if (particles != null)
+        //{
+
+        //}
 
         Destroy(gameObject);
     }

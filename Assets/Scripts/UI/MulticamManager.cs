@@ -10,7 +10,7 @@ public class MulticamManager : MonoBehaviour
     [SerializeField] private RectTransform parentCanvas;
 
     private Dictionary<Season, RectTransform> cameras = new();
-    private Season[] cameraOrder;
+    [HideInInspector] public Season[] cameraOrder { get; private set; }
     private Vector2 canvasSize;
     private bool isAnimating = false;
     private bool isTintAnimating = false;
