@@ -4,12 +4,13 @@ using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
-public class PineconeMechanic : MonoBehaviour
+public class AcornMechanic : MonoBehaviour
 {
     [SerializeField] private MulticamManager multicamManager;
     [SerializeField] private float waitTime = 1f;
     [SerializeField] private float switchTime = 0.8f;
     [SerializeField] private Image overlay;
+    [SerializeField] private HeatMechanic heatMechanic;
 
     private void Start()
     {
@@ -18,6 +19,8 @@ public class PineconeMechanic : MonoBehaviour
 
     public void RegisterPineconeHit()
     {
+        if (heatMechanic.currentStatus == HeatMechanic.Status.Burned) { return; }
+
         multicamManager.ShakeAll(0.1f, 10f);
         overlay.CrossFadeAlpha(1, 0.1f, false);
         StartCoroutine(SwitchCameras());

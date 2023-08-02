@@ -9,7 +9,7 @@ public class HeatTrigger : MonoBehaviour
         mechanic = FindObjectOfType<HeatMechanic>();
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
         if (other.CompareTag("Player"))
         {

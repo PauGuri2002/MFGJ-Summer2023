@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class PineconeSpawner : MonoBehaviour
+public class AcornSpawner : MonoBehaviour
 {
     [SerializeField] private GameObject pineconePrefab;
     [SerializeField] private float minSpawnTime = 1f;
@@ -34,7 +34,7 @@ public class PineconeSpawner : MonoBehaviour
             if (Vector2.Distance(new Vector2(player.position.x, player.position.z), new Vector2(transform.position.x, transform.position.z)) < triggerDistance)
             {
                 GameObject instance = Instantiate(pineconePrefab, transform.position, Quaternion.identity);
-                if (instance.TryGetComponent<PineconeTrigger>(out var pineconeScript))
+                if (instance.TryGetComponent<AcornTrigger>(out var pineconeScript))
                 {
                     pineconeScript.Init(player.position + Vector3.right * Random.Range(-targetErrorArea.x, targetErrorArea.x) + Vector3.forward * Random.Range(-targetErrorArea.y, targetErrorArea.y));
                 }

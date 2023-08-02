@@ -1,10 +1,14 @@
 using UnityEngine;
 
-public class PineconeTrigger : MonoBehaviour
+public class AcornTrigger : MonoBehaviour
 {
-    private PineconeMechanic mechanic;
+    private AcornMechanic mechanic;
     [SerializeField] private float startVerticalSpeed = 10f;
     [SerializeField] private float gravity = 10f;
+    [SerializeField] private Vector3 minRotationSpeed = Vector3.zero;
+    [SerializeField] private Vector3 maxRotationSpeed = Vector3.zero;
+    [SerializeField] private Transform rotationPivot;
+    private Vector3 rotationSpeed;
     private Vector2 horizontalPosition = Vector2.zero;
     private float verticalSpeed = 0f;
     private Vector2 targetHorizontal;
@@ -14,7 +18,7 @@ public class PineconeTrigger : MonoBehaviour
 
     private void Start()
     {
-        mechanic = FindObjectOfType<PineconeMechanic>();
+        mechanic = FindObjectOfType<AcornMechanic>();
     }
 
     public void Init(Vector3 target)
@@ -23,6 +27,7 @@ public class PineconeTrigger : MonoBehaviour
         startHorizontal = new Vector2(transform.position.x, transform.position.z);
         progress = 0;
         verticalSpeed = startVerticalSpeed;
+        rotationSpeed = new Vector3(Random.Range(minRotationSpeed.x, maxRotationSpeed.x), Random.Range(minRotationSpeed.y, maxRotationSpeed.y), Random.Range(minRotationSpeed.z, maxRotationSpeed.z));
     }
 
     private void Update()
@@ -42,6 +47,7 @@ public class PineconeTrigger : MonoBehaviour
             }
         }
 
+        rotationPivot.Rotate(rotationSpeed * Time.deltaTime);
         transform.position = new Vector3(horizontalPosition.x, transform.position.y + verticalSpeed * Time.deltaTime, horizontalPosition.y);
 
         // safety destruction
