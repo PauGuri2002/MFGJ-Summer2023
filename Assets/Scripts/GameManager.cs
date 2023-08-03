@@ -36,10 +36,7 @@ public class GameManager : MonoBehaviour
         seasons = (Resources.Load("Seasons") as Seasons).seasons;
 
         gameSeason = GetCurrentSeason();
-        if (gameSeason == null)
-        {
-            gameSeason = seasons[Random.Range(0, seasons.Length)];
-        }
+        gameSeason ??= seasons[Random.Range(0, seasons.Length)];
 
         print("Today is " + gameSeason.displayName);
     }

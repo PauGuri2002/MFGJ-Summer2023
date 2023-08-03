@@ -74,7 +74,7 @@ public class DialogueDisplayer : MonoBehaviour
 
     IEnumerator WriteText()
     {
-        parsedDialoguePart = (GameManager.Instance != null) ? currentDialogue[partIndex].Replace("%SEASON%", GameManager.Instance.gameSeason.displayName) : currentDialogue[partIndex];
+        parsedDialoguePart = (GameManager.Instance != null) ? currentDialogue[partIndex].Replace("%SEASON%", "<color=#" + ColorUtility.ToHtmlStringRGB(GameManager.Instance.gameSeason.color) + ">" + GameManager.Instance.gameSeason.displayName + "</color>") : currentDialogue[partIndex];
         char[] textArray = parsedDialoguePart.ToCharArray();
         currentTarget.text = "";
 
