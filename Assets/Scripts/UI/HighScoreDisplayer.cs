@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -24,10 +23,10 @@ public class HighScoreDisplayer : MonoBehaviour
     public void DisplayData()
     {
         string text = "";
-        foreach (KeyValuePair<int, int> recipe in saveData.completedRecipeIds)
+        foreach (int recipeKey in saveData.GetSortedKeys())
         {
-            string recipeName = saveData.recipeNames[recipe.Key];
-            float recipeTime = saveData.recipeTimes[recipe.Value];
+            string recipeName = saveData.recipeNames[recipeKey];
+            float recipeTime = saveData.recipeTimes[saveData.completedRecipeIds[recipeKey]];
 
             string minutes = Mathf.Floor(recipeTime / 60).ToString();
             string seconds = Mathf.Floor(recipeTime % 60).ToString();
