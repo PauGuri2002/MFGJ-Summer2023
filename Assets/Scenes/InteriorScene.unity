@@ -2051,7 +2051,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fileName: saveData
-  encryptSaveData: 0
+  encryptSaveData: 1
   textField: {fileID: 1661289266}
 --- !u!1 &242938211
 GameObject:
