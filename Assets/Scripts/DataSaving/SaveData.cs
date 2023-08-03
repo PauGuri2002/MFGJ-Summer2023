@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 [Serializable]
 public class SaveData
@@ -20,5 +21,11 @@ public class SaveData
         recipeNames.Clear();
         recipeTimes.Clear();
         completedRecipeIds.Clear();
+    }
+
+    public List<int> GetSortedKeys()
+    {
+        Dictionary<int, int>.KeyCollection keys = completedRecipeIds.Keys;
+        return keys.OrderBy(k => recipeTimes[completedRecipeIds[k]]).ToList();
     }
 }
