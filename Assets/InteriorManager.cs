@@ -4,9 +4,13 @@ public class InteriorManager : MonoBehaviour
 {
     [SerializeField] private Dialogue[] lobbyDialogues;
     [SerializeField] private RectTransform lobbyMenu;
+    [SerializeField] private Camera cam;
+
+    [Header("Title")]
     [SerializeField] private RectTransform titleBackground;
     [SerializeField] private RectTransform titleText;
-    [SerializeField] private Camera cam;
+    [SerializeField] private float titleAppearDelay = 1f;
+    [SerializeField] private float titleDuration = 8f;
     static int timesLoaded = 0;
 
     void Start()
@@ -29,15 +33,15 @@ public class InteriorManager : MonoBehaviour
             titleBackground.LeanAlpha(0, 0);
 
             LTSeq textSeq = LeanTween.sequence();
-            textSeq.append(2f);
+            textSeq.append(titleAppearDelay);
             textSeq.append(titleText.LeanScale(Vector3.one * 0.9f, 2f).setEaseInOutCubic());
-            textSeq.append(titleText.LeanScale(Vector3.one, 10f).setEaseOutCubic());
+            textSeq.append(titleText.LeanScale(Vector3.one, titleDuration).setEaseOutCubic());
             textSeq.append(titleText.LeanAlpha(0, 1f).setEaseInOutCubic());
 
             LTSeq bgSeq = LeanTween.sequence();
-            bgSeq.append(2f);
+            bgSeq.append(titleAppearDelay);
             bgSeq.append(titleBackground.LeanAlpha(1, 1f).setEaseInOutCubic());
-            bgSeq.append(11f);
+            bgSeq.append(titleDuration + 1);
             bgSeq.append(titleBackground.LeanAlpha(0, 1f).setEaseInOutCubic());
             bgSeq.append(() => { if (titleBackground != null) { titleBackground.gameObject.SetActive(false); } });
 

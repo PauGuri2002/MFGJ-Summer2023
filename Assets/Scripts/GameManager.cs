@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -20,7 +21,7 @@ public class GameManager : MonoBehaviour
     [HideInInspector] public string recipeName;
     [HideInInspector] public SeasonInfo gameSeason;
 
-    public event Action<string, float> OnCompleteMission;
+    public static event Action<string, float> OnCompleteMission;
 
     private void Awake()
     {
@@ -73,7 +74,7 @@ public class GameManager : MonoBehaviour
         }
 
         //TODO: Actually program name generation
-        recipeName = "Recipe Name";
+        recipeName = "Pumpkinized Grapes With Cherry and Pear";
     }
 
     public void CompleteMission(float missionTime)
@@ -81,12 +82,20 @@ public class GameManager : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
         SceneManager.LoadScene("InteriorScene");
 
+        StartCoroutine(SaveHighScore(missionTime));
+
+        OnCompleteMission?.Invoke(recipeName, missionTime);
+    }
+
+    IEnumerator SaveHighScore(float missionTime)
+    {
+        yield return new WaitForSeconds(Time.deltaTime);
+
         HighScoreDisplayer highScoreDisplayer = FindObjectOfType<HighScoreDisplayer>();
         if (highScoreDisplayer != null)
         {
+            Debug.Log("HSD is not null");
             highScoreDisplayer.AddRecipe(recipeName, missionTime);
         }
-
-        OnCompleteMission?.Invoke(recipeName, missionTime);
     }
 }

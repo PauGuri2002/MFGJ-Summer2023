@@ -24,31 +24,27 @@ public class HighScoreDisplayer : MonoBehaviour
     public void DisplayData()
     {
         string text = "";
-        foreach (KeyValuePair<string, float> recipe in saveData.completedRecipes)
+        foreach (KeyValuePair<int, int> recipe in saveData.completedRecipeIds)
         {
-            string minutes = Mathf.Floor(recipe.Value / 60).ToString();
-            string seconds = Mathf.Floor(recipe.Value % 60).ToString();
-            text += recipe.Key + " - " + (minutes.Length == 1 ? "0" : "") + minutes + ":" + (seconds.Length == 1 ? "0" : "") + seconds + "\n";
+            string recipeName = saveData.recipeNames[recipe.Key];
+            float recipeTime = saveData.recipeTimes[recipe.Value];
+
+            string minutes = Mathf.Floor(recipeTime / 60).ToString();
+            string seconds = Mathf.Floor(recipeTime % 60).ToString();
+            text += recipeName + " - <font=\"LilitaOne-Regular SDF\">" + (minutes.Length == 1 ? "0" : "") + minutes + ":" + (seconds.Length == 1 ? "0" : "") + seconds + "</font>\n";
         }
         textField.text = text;
-        print(text);
     }
 
     public void AddRecipe(string name, float time)
     {
-        saveData.completedRecipes.Add(name, time);
-        SaveData();
-    }
-
-    public void RemoveRecipe(string name)
-    {
-        saveData.completedRecipes.Remove(name);
+        saveData.Add(name, time);
         SaveData();
     }
 
     public void ClearData()
     {
-        saveData.completedRecipes.Clear();
+        saveData.Clear();
         SaveData();
     }
 
