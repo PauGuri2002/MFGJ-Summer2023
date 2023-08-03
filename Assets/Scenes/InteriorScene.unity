@@ -17874,6 +17874,8 @@ MonoBehaviour:
     displayName: 
     color: {r: 0, g: 0, b: 0, a: 0}
     softColor: {r: 0, g: 0, b: 0, a: 0}
+    startDate: MM/DD
+    endDate: MM/DD
 --- !u!4 &1106840693
 Transform:
   m_ObjectHideFlags: 0
@@ -19092,7 +19094,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 5c1bc3bebbfb3dd48a92ac44377c0f4f, type: 2}
+  - {fileID: 2100000, guid: ff80a1c51f6917e41b728bd6c7a22734, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

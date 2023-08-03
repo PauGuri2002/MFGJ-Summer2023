@@ -14,8 +14,8 @@ public class SeasonInfo
     public string displayName;
     public Color color;
     public Color softColor;
-    public string startDate = "YYYY/MM/DD";
-    public string endDate = "YYYY/MM/DD";
+    public string startDate = "MM/DD";
+    public string endDate = "MM/DD";
 }
 
 public enum Season : int
