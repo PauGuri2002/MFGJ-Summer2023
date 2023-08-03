@@ -117,6 +117,16 @@ public class HeatMechanic : MonoBehaviour
 
     private void OnApplicationQuit()
     {
+        ResetShader();
+    }
+
+    private void OnDestroy()
+    {
+        ResetShader();
+    }
+
+    void ResetShader()
+    {
         shader.SetFloat(amountProperty, startAmount);
         //shader.SetVector(speedProperty, startSpeed);
         shader.SetFloat(sizeProperty, startSize);

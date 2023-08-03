@@ -35,8 +35,18 @@ public class GameManager : MonoBehaviour
         ingredients = (Resources.Load("Ingredients") as Ingredients).ingredients;
         seasons = (Resources.Load("Seasons") as Seasons).seasons;
 
-        gameSeason = seasons[Random.Range(0, seasons.Length)];
+        gameSeason = GetCurrentSeason();
+        if (gameSeason == null)
+        {
+            gameSeason = seasons[Random.Range(0, seasons.Length)];
+        }
+
         print("Today is " + gameSeason.displayName);
+    }
+
+    SeasonInfo GetCurrentSeason()
+    {
+        return null;
     }
 
     /* GAME FLOW */

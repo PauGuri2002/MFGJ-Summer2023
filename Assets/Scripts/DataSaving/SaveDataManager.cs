@@ -7,7 +7,7 @@ public class SaveDataManager
     private string dataDirPath = "";
     private string dataFileName = "";
     private bool useEncryption = false;
-    private readonly string encryptionCodeWord = "seasoned";
+    private readonly string encryptionCodeWord = "seasonedisthebestgameever";
 
     public SaveDataManager(string dataDirPath, string dataFileName, bool useEncryption)
     {
