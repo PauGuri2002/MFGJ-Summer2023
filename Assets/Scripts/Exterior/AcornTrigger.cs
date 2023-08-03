@@ -59,8 +59,6 @@ public class AcornTrigger : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        print("pinecone collided with: " + other.gameObject.name);
-
         if (other.CompareTag("Player"))
         {
             mechanic.RegisterPineconeHit();

@@ -15,6 +15,7 @@ public class DialogueDisplayer : MonoBehaviour
 
     private int partIndex = 0;
     private string[] currentDialogue;
+    private string parsedDialoguePart;
     private TextMeshProUGUI currentTarget;
     private Coroutine writingCoroutine;
     private string startingActionMap;
@@ -73,10 +74,11 @@ public class DialogueDisplayer : MonoBehaviour
 
     IEnumerator WriteText()
     {
-        char[] textArray = currentDialogue[partIndex].ToCharArray();
+        parsedDialoguePart = currentDialogue[partIndex].Replace("%SEASON%", GameManager.Instance.gameSeason.displayName);
+        char[] textArray = parsedDialoguePart.ToCharArray();
         currentTarget.text = "";
 
-        while (currentTarget.text.Length < currentDialogue[partIndex].Length)
+        while (currentTarget.text.Length < parsedDialoguePart.Length)
         {
             currentTarget.text += textArray[currentTarget.text.Length];
             yield return new WaitForSeconds(typeDelay);
@@ -96,7 +98,7 @@ public class DialogueDisplayer : MonoBehaviour
             {
                 StopCoroutine(writingCoroutine);
                 writingCoroutine = null;
-                currentTarget.text = currentDialogue[partIndex];
+                currentTarget.text = parsedDialoguePart;
                 partIndex++;
             }
             else if (partIndex < currentDialogue.Length)

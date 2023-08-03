@@ -13,8 +13,10 @@ MonoBehaviour:
   m_Name: IntroDialogue
   m_EditorClassIdentifier: 
   parts:
-  - I'm so hungy
-  - Huh this recipe could be rechula
-  - I need ingredients from every season tho :(((
-  - Luckily, I'm no normal person jeje
-  - I'll get ready and head outside
+  - Geez, I'm really hungry...
+  - Oh, I know what I can cook! There's that special recipe I learned once. It's
+    soo tasty...
+  - The issue is, not all of the ingredients are available now, during %SEASON%.
+  - I guess I'll have to use my magical powers to gather everything I need before
+    lunchtime.
+  - I'll get ready and head outside.

@@ -81,11 +81,11 @@ public class GameManager : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
         SceneManager.LoadScene("InteriorScene");
 
-        //HighScoreDisplayer highScoreDisplayer = FindObjectOfType<HighScoreDisplayer>();
-        //if (highScoreDisplayer != null)
-        //{
-        //    highScoreDisplayer.AddRecipe(recipeName, missionTime);
-        //}
+        HighScoreDisplayer highScoreDisplayer = FindObjectOfType<HighScoreDisplayer>();
+        if (highScoreDisplayer != null)
+        {
+            highScoreDisplayer.AddRecipe(recipeName, missionTime);
+        }
 
         OnCompleteMission?.Invoke(recipeName, missionTime);
     }

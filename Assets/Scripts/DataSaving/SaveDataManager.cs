@@ -43,6 +43,7 @@ public class SaveDataManager
 
                 // deserialize the data from Json back into the C# object
                 loadedData = JsonUtility.FromJson<SaveData>(dataToLoad);
+                Debug.LogAssertion("Data succesfully loaded, apparently:\n" + loadedData);
             }
             catch (Exception e)
             {
@@ -64,6 +65,7 @@ public class SaveDataManager
 
             // serialize the C# game data object into Json
             string dataToStore = JsonUtility.ToJson(data, true);
+            Debug.LogAssertion("Saving the following JSON: " + dataToStore);
 
             // optionally encrypt the data
             if (useEncryption)
@@ -79,6 +81,7 @@ public class SaveDataManager
                     writer.Write(dataToStore);
                 }
             }
+            Debug.LogAssertion("Data succesfully saved, apparently");
         }
         catch (Exception e)
         {
