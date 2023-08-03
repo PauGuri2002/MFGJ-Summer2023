@@ -17,15 +17,23 @@ MonoBehaviour:
     displayName: Winter
     color: {r: 0.08962262, g: 0.51072216, b: 1, a: 1}
     softColor: {r: 0.7254902, g: 0.81960785, b: 1, a: 1}
+    startDate: 12/20
+    endDate: 03/19
   - seasonName: 7
     displayName: Spring
     color: {r: 1, g: 0.3443396, b: 0.8337576, a: 1}
     softColor: {r: 0.9716981, g: 0.73794055, b: 0.9621596, a: 1}
+    startDate: 03/20
+    endDate: 06/20
   - seasonName: 8
     displayName: Summer
-    color: {r: 0.7643121, g: 1, b: 0.062745094, a: 1}
-    softColor: {r: 0.8980392, g: 0.8862745, b: 0.5529412, a: 1}
+    color: {r: 0.022116425, g: 0.6698113, b: 0.14794867, a: 1}
+    softColor: {r: 0.71026576, g: 0.9056604, b: 0.41438237, a: 1}
+    startDate: 06/21
+    endDate: 09/22
   - seasonName: 9
     displayName: Autumn
     color: {r: 0.8867924, g: 0.55471677, b: 0, a: 1}
     softColor: {r: 0.972549, g: 0.7921569, b: 0.6313726, a: 1}
+    startDate: 09/23
+    endDate: 12/20
