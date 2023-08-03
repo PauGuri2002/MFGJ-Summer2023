@@ -17864,10 +17864,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df8edcd97fb36a54b87bc0dbd6a2664e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minUniqueCount: 1
-  maxUniqueCount: 1
-  minTotalAmount: 1
-  maxTotalAmount: 1
+  minUniqueCount: 2
+  maxUniqueCount: 4
+  minTotalAmount: 6
+  maxTotalAmount: 6
   recipeName: 
   gameSeason:
     seasonName: 0
