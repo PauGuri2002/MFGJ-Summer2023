@@ -9,12 +9,14 @@ public class IngredientItem : MonoBehaviour
     [SerializeField] private TextMeshProUGUI label;
     [SerializeField] private Image background;
     [SerializeField] private Image icon;
+    [SerializeField] private Sprite[] backgroundSprites;
 
     public void Customize(string name, int _amount, Color backgroundColor, Sprite sprite)
     {
         ingredientName = name;
         amount = _amount;
         background.color = backgroundColor;
+        background.sprite = backgroundSprites[Random.Range(0, backgroundSprites.Length)];
         icon.sprite = sprite;
         UpdateText();
     }

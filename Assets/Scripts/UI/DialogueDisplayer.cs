@@ -30,6 +30,9 @@ public class DialogueDisplayer : MonoBehaviour
             Destroy(gameObject);
         }
         Instance = this;
+
+        dialogueParent.LeanScale(Vector3.zero, 0);
+        noticeParent.LeanScale(Vector3.zero, 0);
     }
 
     public void ShowDialogue(Dialogue dialogue, Action _callback = null)
@@ -45,6 +48,7 @@ public class DialogueDisplayer : MonoBehaviour
         currentTarget = dialogueText;
 
         dialogueParent.SetActive(true);
+        dialogueParent.LeanScale(Vector3.one, 0.5f);
 
         writingCoroutine = StartCoroutine(WriteText());
     }
@@ -62,6 +66,7 @@ public class DialogueDisplayer : MonoBehaviour
         currentTarget = noticeText;
 
         noticeParent.SetActive(true);
+        noticeParent.LeanScale(Vector3.one, 0.5f);
 
         writingCoroutine = StartCoroutine(WriteText());
     }
@@ -100,8 +105,15 @@ public class DialogueDisplayer : MonoBehaviour
             }
             else
             {
-                noticeParent.SetActive(false);
-                dialogueParent.SetActive(false);
+                if (noticeParent.transform.localScale.magnitude > 0)
+                {
+                    noticeParent.LeanScale(Vector3.zero, 0.5f).setEaseInOutCubic().setOnComplete(() => noticeParent.SetActive(false));
+                }
+                if (dialogueParent.transform.localScale.magnitude > 0)
+                {
+                    dialogueParent.LeanScale(Vector3.zero, 0.5f).setEaseInOutCubic().setOnComplete(() => dialogueParent.SetActive(false));
+                }
+
                 currentDialogue = null;
                 playerInput.SwitchCurrentActionMap(startingActionMap);
                 startingActionMap = null;

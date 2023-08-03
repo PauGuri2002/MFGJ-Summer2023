@@ -12,16 +12,13 @@ public class GameManager : MonoBehaviour
     [SerializeField] private int minTotalAmount = 6;
     [SerializeField] private int maxTotalAmount = 8;
 
-    [Header("Lobby UI")]
-    [SerializeField] private Dialogue lobbyDialogue;
-    [SerializeField] private GameObject lobbyMenu;
-
     [NonSerialized] public static IngredientInfo[] ingredients;
     [NonSerialized] public static SeasonInfo[] seasons;
 
     [NonSerialized] public static GameManager Instance;
     [HideInInspector] public Dictionary<IngredientInfo, int> ingredientList = new();
     [HideInInspector] public string recipeName;
+    [HideInInspector] public SeasonInfo gameSeason;
 
     public event Action<string, float> OnCompleteMission;
 
@@ -33,16 +30,12 @@ public class GameManager : MonoBehaviour
         }
         Instance = this;
         DontDestroyOnLoad(gameObject);
-    }
 
-    void Start()
-    {
         ingredients = (Resources.Load("Ingredients") as Ingredients).ingredients;
         seasons = (Resources.Load("Seasons") as Seasons).seasons;
 
-        // Initial dialogue
-        //lobbyMenu.SetActive(false);
-        //DialogueDisplayer.Instance.ShowDialogue(lobbyDialogue, () => lobbyMenu.SetActive(true));
+        gameSeason = seasons[Random.Range(0, seasons.Length)];
+        print("Today is " + gameSeason.displayName);
     }
 
     /* GAME FLOW */

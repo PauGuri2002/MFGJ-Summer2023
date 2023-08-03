@@ -44,7 +44,7 @@ public class ExteriorManager : MonoBehaviour
 
         // Multicam
         Color semitransparent = new Color(1, 1, 1, 0.5f);
-        multicamManager.SetFullscreenAll(Season.Spring, 0, 0);
+        multicamManager.SetFullscreenAll(GameManager.Instance.gameSeason.seasonName, 0, 0);
         multicamManager.SetTintAll(Color.white, semitransparent, 1f, 2f);
         multicamManager.SetTintAll(semitransparent, Color.white, 2f, 3f);
         multicamManager.SetGrid(3f, 2f);
