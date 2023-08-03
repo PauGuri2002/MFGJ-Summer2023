@@ -46,6 +46,21 @@ public class GameManager : MonoBehaviour
 
     SeasonInfo GetCurrentSeason()
     {
+        DateTime currentDate = DateTime.Now;
+        foreach (SeasonInfo seasonInfo in seasons)
+        {
+            DateTime startDate = DateTime.ParseExact(seasonInfo.startDate, "MM/dd", null);
+            DateTime endDate = DateTime.ParseExact(seasonInfo.endDate, "MM/dd", null);
+
+            if (currentDate.Month == startDate.Month && currentDate.Day >= startDate.Day ||
+                    currentDate.Month == endDate.Month && currentDate.Day <= endDate.Day ||
+                    (currentDate.Month > startDate.Month && currentDate.Month < endDate.Month))
+            {
+                return seasonInfo;
+            }
+        }
+
+        Debug.LogWarning("Could not determine current season");
         return null;
     }
 
