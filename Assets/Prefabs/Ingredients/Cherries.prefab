@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 9083835316610060632}
   - component: {fileID: 6324064926478950671}
   m_Layer: 8
-  m_Name: Cherry
+  m_Name: Cherries
   m_TagString: Impenetrable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -61,7 +61,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d4a150e1eeb3784995a16300211fe3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ingredientName: Cherry
+  ingredientName: Cherries
 --- !u!136 &6324064926478950671
 CapsuleCollider:
   m_ObjectHideFlags: 0
