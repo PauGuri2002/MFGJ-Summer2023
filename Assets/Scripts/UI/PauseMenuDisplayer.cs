@@ -39,7 +39,7 @@ public class PauseMenuDisplayer : MonoBehaviour
             audioMixer.SetFloat("MasterVolume", -80f);
             Cursor.lockState = CursorLockMode.None;
             playerInput.SwitchCurrentActionMap("UI");
-            pauseMenuBackground.LeanScale(Vector3.one * 0.9f, 5f).setLoopPingPong().setEaseInOutCubic();
+            pauseMenuBackground.LeanScale(Vector3.one * 0.97f, 5f).setLoopPingPong().setEaseInOutSine().setIgnoreTimeScale(true);
         }
         else
         {
