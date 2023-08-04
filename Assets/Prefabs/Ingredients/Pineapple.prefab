@@ -45,10 +45,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 1
+  m_Radius: 1.8
   m_Height: 3
   m_Direction: 1
-  m_Center: {x: 0, y: 1.5, z: 0}
+  m_Center: {x: 0, y: 1.8, z: 0}
 --- !u!114 &7930029450107681314
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -72,10 +72,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 2
+  m_Radius: 0.8
+  m_Height: 3
   m_Direction: 1
-  m_Center: {x: 0, y: 1, z: 0}
+  m_Center: {x: 0, y: 1.5, z: 0}
 --- !u!1001 &8896781310416648874
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -91,32 +91,32 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 5005fa828167719469945781175d272a,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 1.66
+      value: 2.8054001
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 5005fa828167719469945781175d272a,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 2.506197
+      value: 4.235473
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 5005fa828167719469945781175d272a,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 1.66
+      value: 2.8054001
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 5005fa828167719469945781175d272a,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.171
+      value: -0.28899002
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 5005fa828167719469945781175d272a,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.194
+      value: 0.32786003
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 5005fa828167719469945781175d272a,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.169
+      value: -0.28561002
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 5005fa828167719469945781175d272a,
         type: 3}

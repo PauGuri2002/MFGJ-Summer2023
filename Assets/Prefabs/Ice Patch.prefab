@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 689509552123459078}
   - component: {fileID: 9131537003018592179}
   - component: {fileID: 6387606713182316763}
+  - component: {fileID: 7036752779310523949}
   m_Layer: 6
   m_Name: Ice Patch
   m_TagString: Untagged
@@ -124,3 +125,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7ac32e73b3d13b48ad6d9055c9adb5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &7036752779310523949
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 689509552123459083}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8910c830fd8d1494783a97dc53d42cda, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  axis: {x: 0, y: 1, z: 0}
+  minAngle: 0
+  maxAngle: 360
