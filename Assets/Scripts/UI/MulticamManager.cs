@@ -11,8 +11,9 @@ public class MulticamManager : MonoBehaviour
     [SerializeField] private IdentifiedCamera[] identifiedCameras;
     [SerializeField] private RectTransform parentCanvas;
 
-    private Dictionary<Season, RectTransform> cameras = new();
-    [HideInInspector] public Season[] cameraOrder { get; private set; }
+    private Dictionary<Season, RectTransform> panels = new();
+
+    [HideInInspector] public Season[] CameraOrder { get; private set; }
     private Vector2 canvasSize;
     private bool isShaking = false;
 
@@ -20,64 +21,64 @@ public class MulticamManager : MonoBehaviour
     {
         foreach (IdentifiedCamera cam in identifiedCameras)
         {
-            cameras.Add(cam.season, cam.camera);
+            panels.Add(cam.season, cam.panel);
         }
 
-        cameraOrder = cameras.Keys.ToArray();
+        CameraOrder = panels.Keys.ToArray();
         canvasSize = new Vector2(parentCanvas.rect.width, parentCanvas.rect.height);
     }
 
     public void SetFullscreenAll(Season firstSeason, float time = 0f, float delay = 0f, LeanTweenType easing = LeanTweenType.easeInOutCubic)
     {
-        cameras[firstSeason].SetAsLastSibling();
+        panels[firstSeason].SetAsLastSibling();
+        ResizeRenderTexture(panels[firstSeason], canvasSize);
 
-        foreach (RectTransform cam in cameras.Values)
+        foreach (RectTransform panel in panels.Values)
         {
-            SetFullscreenSingle(cam, time, delay, easing);
+            SetFullscreenSingle(panel, time, delay, easing);
         }
     }
 
     public void SetFullscreen(Season season, float time = 0f, float delay = 0f, LeanTweenType easing = LeanTweenType.easeInOutCubic)
     {
-        cameras[season].SetAsLastSibling();
-        SetFullscreenSingle(cameras[season], time, delay, easing);
+        panels[season].SetAsLastSibling();
+        ResizeRenderTexture(panels[season], canvasSize);
+        SetFullscreenSingle(panels[season], time, delay, easing);
     }
 
-    void SetFullscreenSingle(RectTransform cam, float time = 0f, float delay = 0f, LeanTweenType easing = LeanTweenType.easeInOutCubic)
+    void SetFullscreenSingle(RectTransform panel, float time = 0f, float delay = 0f, LeanTweenType easing = LeanTweenType.easeInOutCubic)
     {
-        LeanTween.move(cam, Vector2.zero, time).setDelay(delay).setEase(easing);
-        LeanTween.size(cam, canvasSize, time).setDelay(delay).setEase(easing);
+        LeanTween.move(panel, Vector2.zero, time).setDelay(delay).setEase(easing);
+        LeanTween.size(panel, canvasSize, time).setDelay(delay).setEase(easing);
     }
 
     public void SetGrid(float time = 0f, float delay = 0f, Season[] newOrder = null, LeanTweenType easing = LeanTweenType.easeInOutCubic)
     {
         if (newOrder != null)
         {
-            cameraOrder = newOrder;
+            CameraOrder = newOrder;
         }
 
-        for (int i = 0; i < cameraOrder.Length; i++)
+        for (int i = 0; i < CameraOrder.Length; i++)
         {
-            RectTransform cam = cameras[cameraOrder[i]];
+            RectTransform panel = panels[CameraOrder[i]];
 
             Vector2 newPosition = new(i % 2 * canvasSize.x / 2, -i / 2 * canvasSize.y / 2);
 
-            LeanTween.move(cam, newPosition, time).setDelay(delay).setEase(easing);
-            LeanTween.size(cam, canvasSize / 2, time).setDelay(delay).setEase(easing);
+            LeanTween.move(panel, newPosition, time).setDelay(delay).setEase(easing);
+            LeanTween.size(panel, canvasSize / 2, time).setDelay(delay).setEase(easing).setOnComplete(() => ResizeRenderTexture(panel, canvasSize / 2));
         }
     }
 
     public void SetTintAll(Color from, Color to, float time = 0f, float delay = 0f, LeanTweenType easing = LeanTweenType.easeInOutCubic)
     {
-        foreach (RectTransform cam in cameras.Values)
+        foreach (RectTransform panel in panels.Values)
         {
-            if (cam.TryGetComponent<RawImage>(out var image))
+            if (panel.TryGetComponent<RawImage>(out var image))
             {
                 LeanTween.value(image.gameObject, (c) => image.color = c, from, to, time).setDelay(delay).setEase(easing);
             }
-
         }
-
     }
 
     public void ShakeAll(float duration, float intensity, float frequency = 100f)
@@ -89,9 +90,9 @@ public class MulticamManager : MonoBehaviour
         }
 
         isShaking = true;
-        foreach (RectTransform cam in cameras.Values)
+        foreach (RectTransform panel in panels.Values)
         {
-            StartCoroutine(ShakeSingle(cam, duration, intensity, frequency));
+            StartCoroutine(ShakeSingle(panel, duration, intensity, frequency));
         }
     }
 
@@ -104,33 +105,47 @@ public class MulticamManager : MonoBehaviour
         }
 
         isShaking = true;
-        StartCoroutine(ShakeSingle(cameras[season], duration, intensity, frequency));
+        StartCoroutine(ShakeSingle(panels[season], duration, intensity, frequency));
     }
 
-    IEnumerator ShakeSingle(RectTransform cam, float duration, float intensity, float frequency)
+    IEnumerator ShakeSingle(RectTransform panel, float duration, float intensity, float frequency)
     {
         float timer = 0;
-        Vector3 originalPosition = cam.localPosition;
+        Vector3 originalPosition = panel.localPosition;
 
         while (timer < duration)
         {
             float x = Random.Range(-1f, 1f) * intensity;
             float y = Random.Range(-1f, 1f) * intensity;
 
-            cam.localPosition = originalPosition + new Vector3(x, y, 0f);
+            panel.localPosition = originalPosition + new Vector3(x, y, 0f);
 
             timer += Time.deltaTime;
             yield return new WaitForSeconds(1 / frequency);
         }
 
-        cam.localPosition = originalPosition;
+        panel.localPosition = originalPosition;
         isShaking = false;
+    }
+
+    void ResizeRenderTexture(RectTransform panel, Vector2 newSize)
+    {
+        if (panel.TryGetComponent<RawImage>(out var image))
+        {
+            if (image.texture is RenderTexture rt)
+            {
+                rt.Release();
+                rt.width = Mathf.RoundToInt(newSize.x);
+                rt.height = Mathf.RoundToInt(newSize.y);
+                rt.Create();
+            }
+        }
     }
 
     [Serializable]
     class IdentifiedCamera
     {
-        public RectTransform camera;
+        public RectTransform panel;
         public Season season;
     }
 }

@@ -508,13 +508,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   identifiedCameras:
-  - camera: {fileID: 236183448}
+  - panel: {fileID: 236183448}
     season: 6
-  - camera: {fileID: 1082393752}
+  - panel: {fileID: 1082393752}
     season: 7
-  - camera: {fileID: 2046702780}
+  - panel: {fileID: 2046702780}
     season: 8
-  - camera: {fileID: 1635719404}
+  - panel: {fileID: 1635719404}
     season: 9
   parentCanvas: {fileID: 76106254}
 --- !u!1 &81286701

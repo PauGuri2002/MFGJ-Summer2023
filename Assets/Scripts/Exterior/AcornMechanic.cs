@@ -36,7 +36,7 @@ public class AcornMechanic : MonoBehaviour
 
     Season[] GetRandomSeasonOrder()
     {
-        Season[] currentSeasons = multicamManager.cameraOrder;
+        Season[] currentSeasons = multicamManager.CameraOrder;
         Season[] newSeasons;
         do
         {
