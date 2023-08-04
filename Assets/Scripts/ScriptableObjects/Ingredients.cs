@@ -14,4 +14,12 @@ public class IngredientInfo
     public Sprite icon;
     public GameObject prefab;
     public Season season;
+    public IngredientNameVariation[] nameVariations;
+}
+
+[Serializable]
+public class IngredientNameVariation
+{
+    public NameVariation variationType;
+    public string name;
 }

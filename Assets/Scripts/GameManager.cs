@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
@@ -20,6 +21,9 @@ public class GameManager : MonoBehaviour
     [HideInInspector] public Dictionary<IngredientInfo, int> ingredientList = new();
     [HideInInspector] public string recipeName;
     [HideInInspector] public SeasonInfo gameSeason;
+
+    [Header("Recipe Name Generator")]
+    [SerializeField] private RecipeNameGenerator nameGenerator;
 
     public static event Action<string, float> OnCompleteMission;
 
@@ -97,7 +101,8 @@ public class GameManager : MonoBehaviour
         }
 
         //TODO: Actually program name generation
-        recipeName = "Pumpkinized Grapes With Cherry and Pear";
+        recipeName = nameGenerator.GenerateName(ingredientList.Keys.ToArray());
+        print("Recipe name: " + recipeName);
     }
 
     public void ReturnToLobby()

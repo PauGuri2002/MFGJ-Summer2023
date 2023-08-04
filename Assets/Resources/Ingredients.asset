@@ -18,56 +18,164 @@ MonoBehaviour:
     prefab: {fileID: 8499718721562400057, guid: b00cfa801f19cef45911d53193217bd8,
       type: 3}
     season: 6
+    nameVariations:
+    - variationType: 0
+      name: Pineapple
+    - variationType: 1
+      name: Pineapple
+    - variationType: 2
+      name: Pineapples
+    - variationType: 3
+      name: Pineappled
   - name: Grapes
     icon: {fileID: 21300000, guid: c90ad48f13b260d4f89351831be06ba7, type: 3}
     prefab: {fileID: 6182399846123893356, guid: 1344d14fd50d9a54d88d6ee8b6b485c3,
       type: 3}
     season: 6
+    nameVariations:
+    - variationType: 0
+      name: Grapes
+    - variationType: 1
+      name: Grape
+    - variationType: 2
+      name: Grapes
+    - variationType: 3
+      name: Graped
   - name: Pomegranate
     icon: {fileID: 21300000, guid: c90ad48f13b260d4f89351831be06ba7, type: 3}
     prefab: {fileID: 708112231867902703, guid: 97a4fa4c88666ba4897aa3e96bf640e9, type: 3}
     season: 6
+    nameVariations:
+    - variationType: 0
+      name: Pomegranate
+    - variationType: 1
+      name: Pomegranate
+    - variationType: 2
+      name: Pomegranates
+    - variationType: 3
+      name: Pomegranated
   - name: Strawberry
     icon: {fileID: 21300000, guid: c90ad48f13b260d4f89351831be06ba7, type: 3}
     prefab: {fileID: 7104728676254249219, guid: 47498c18f0db0a142b1b2ee4a9e5c861,
       type: 3}
     season: 7
+    nameVariations:
+    - variationType: 0
+      name: Strawberries
+    - variationType: 1
+      name: Strawberry
+    - variationType: 2
+      name: Strawberries
+    - variationType: 3
+      name: Strawberried
   - name: Plum
     icon: {fileID: 21300000, guid: c90ad48f13b260d4f89351831be06ba7, type: 3}
     prefab: {fileID: 5617697526324821699, guid: 0251b60386b615c4fbcdeaee11425d5a,
       type: 3}
     season: 7
+    nameVariations:
+    - variationType: 0
+      name: Plums
+    - variationType: 1
+      name: Plum
+    - variationType: 2
+      name: Plums
+    - variationType: 3
+      name: Plummed
   - name: Orange
     icon: {fileID: 21300000, guid: c90ad48f13b260d4f89351831be06ba7, type: 3}
     prefab: {fileID: 757835875675861941, guid: 80502e524c7e61d4f9a2eb7bbbfb6906, type: 3}
     season: 7
-  - name: Cherry
+    nameVariations:
+    - variationType: 0
+      name: Oranges
+    - variationType: 1
+      name: Orange
+    - variationType: 2
+      name: Oranges
+    - variationType: 3
+      name: Oranged
+  - name: Cherries
     icon: {fileID: 21300000, guid: c90ad48f13b260d4f89351831be06ba7, type: 3}
     prefab: {fileID: 8601744221581124492, guid: 1f04c46d17cbd974385f403f786e4a14,
       type: 3}
     season: 8
+    nameVariations:
+    - variationType: 0
+      name: Cherries
+    - variationType: 1
+      name: Cherry
+    - variationType: 2
+      name: Cherries
+    - variationType: 3
+      name: Cherried
   - name: Watermelon
     icon: {fileID: 21300000, guid: c90ad48f13b260d4f89351831be06ba7, type: 3}
     prefab: {fileID: 3234848883757364269, guid: cf815c2db827d7346bf777cf9580fbb4,
       type: 3}
     season: 8
+    nameVariations:
+    - variationType: 0
+      name: Watermelon
+    - variationType: 1
+      name: Watermelon
+    - variationType: 2
+      name: Watermelons
+    - variationType: 3
+      name: Watermelonized
   - name: Blueberry
     icon: {fileID: 21300000, guid: c90ad48f13b260d4f89351831be06ba7, type: 3}
     prefab: {fileID: 1656589118295890248, guid: 559b713cc9c288e45985aeb3a80f87ee,
       type: 3}
     season: 8
+    nameVariations:
+    - variationType: 0
+      name: Blueberries
+    - variationType: 1
+      name: Blueberry
+    - variationType: 2
+      name: Blueberries
+    - variationType: 3
+      name: Blueberried
   - name: Pumpkin
     icon: {fileID: 21300000, guid: c90ad48f13b260d4f89351831be06ba7, type: 3}
     prefab: {fileID: 4422157472623596885, guid: db608fc7851ac9f49b6e7b8344790035,
       type: 3}
     season: 9
+    nameVariations:
+    - variationType: 0
+      name: Pumpkin
+    - variationType: 1
+      name: Pumpkin
+    - variationType: 2
+      name: Pumpkins
+    - variationType: 3
+      name: Pumpkinized
   - name: Pear
     icon: {fileID: 21300000, guid: c90ad48f13b260d4f89351831be06ba7, type: 3}
     prefab: {fileID: 4453709176633592762, guid: 2af81cccd38b6ef4da4c8cb36bca94e2,
       type: 3}
     season: 9
+    nameVariations:
+    - variationType: 0
+      name: Pears
+    - variationType: 1
+      name: 
+    - variationType: 2
+      name: Pears
+    - variationType: 3
+      name: Peared
   - name: Mushroom
     icon: {fileID: 21300000, guid: c90ad48f13b260d4f89351831be06ba7, type: 3}
     prefab: {fileID: 2039755006916925129, guid: bf5ae4be8c8eea14b8c4ede26a6c2383,
       type: 3}
     season: 9
+    nameVariations:
+    - variationType: 0
+      name: Mushrooms
+    - variationType: 1
+      name: Mushroom
+    - variationType: 2
+      name: Mushrooms
+    - variationType: 3
+      name: Mushroomized
