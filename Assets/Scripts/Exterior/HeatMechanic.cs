@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -20,6 +21,12 @@ public class HeatMechanic : MonoBehaviour
     [SerializeField] private Vector2 maxSpeed = new Vector2(0.3f, 0.3f);
     [SerializeField] private float startAmount = 0.005f;
     [SerializeField] private float maxAmount = 0.1f;
+
+    [Header("Sound")]
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip startClip;
+    [SerializeField] private AudioClip loopClip;
+    private Coroutine waitForIntroCoroutine;
 
     public enum Status { Idle, Heating, Cooling, Burning, Burned }
     [NonSerialized] public Status currentStatus = Status.Idle;
@@ -94,6 +101,13 @@ public class HeatMechanic : MonoBehaviour
 
             if (ingredientListObject != null)
             {
+                if (waitForIntroCoroutine != null)
+                {
+                    StopCoroutine(waitForIntroCoroutine);
+                    waitForIntroCoroutine = null;
+                }
+                audioSource.Stop();
+
                 ingredientListObject.LeanScale(Vector3.one, 1f).setEaseInOutCubic();
                 ingredientListObject.LeanRotateZ(0, 1f).setEaseInOutCubic();
             }
@@ -104,6 +118,12 @@ public class HeatMechanic : MonoBehaviour
 
     void Burn()
     {
+        audioSource.Stop();
+        audioSource.clip = startClip;
+        audioSource.loop = false;
+        audioSource.Play();
+        waitForIntroCoroutine = StartCoroutine(WaitForIntroEnd());
+
         currentStatus = Status.Burned;
         multicamManager.Shake(Season.Summer, 0.1f, 10f);
         multicamManager.SetFullscreen(Season.Summer, 0.8f, 0.2f);
@@ -113,6 +133,18 @@ public class HeatMechanic : MonoBehaviour
             ingredientListObject.LeanScale(Vector3.zero, 0).setEaseInOutCubic();
             ingredientListObject.LeanRotateZ(45, 0).setEaseInOutCubic();
         }
+    }
+
+    IEnumerator WaitForIntroEnd()
+    {
+        yield return new WaitWhile(() => audioSource.isPlaying);
+
+        audioSource.Stop();
+        audioSource.clip = loopClip;
+        audioSource.loop = true;
+        audioSource.Play();
+
+        waitForIntroCoroutine = null;
     }
 
     private void OnApplicationQuit()

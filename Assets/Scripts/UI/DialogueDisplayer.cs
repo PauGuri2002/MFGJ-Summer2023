@@ -3,6 +3,7 @@ using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Random = UnityEngine.Random;
 
 public class DialogueDisplayer : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class DialogueDisplayer : MonoBehaviour
     [SerializeField] private TextMeshProUGUI noticeText;
     [SerializeField] private float typeDelay = 0.1f;
     [SerializeField] private PlayerInput playerInput;
+    [SerializeField] private AudioSource audioSource;
 
     private int partIndex = 0;
     private string[] currentDialogue;
@@ -94,6 +96,10 @@ public class DialogueDisplayer : MonoBehaviour
 
         if (context.started)
         {
+            audioSource.Stop();
+            audioSource.pitch = Random.Range(0.8f, 1.2f);
+            audioSource.Play();
+
             if (writingCoroutine != null)
             {
                 StopCoroutine(writingCoroutine);

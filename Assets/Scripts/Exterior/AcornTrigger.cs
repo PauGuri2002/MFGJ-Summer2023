@@ -8,6 +8,12 @@ public class AcornTrigger : MonoBehaviour
     [SerializeField] private Vector3 minRotationSpeed = Vector3.zero;
     [SerializeField] private Vector3 maxRotationSpeed = Vector3.zero;
     [SerializeField] private Transform rotationPivot;
+
+    [Header("Audio")]
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip impactGroundClip;
+    [SerializeField] private AudioClip impactPlayerClip;
+
     private Vector3 rotationSpeed;
     private Vector2 horizontalPosition = Vector2.zero;
     private float verticalSpeed = 0f;
@@ -15,10 +21,12 @@ public class AcornTrigger : MonoBehaviour
     private Vector2 startHorizontal;
     private float progress = 0;
     private bool goingUp = true;
+    private bool hasTriggered = false;
 
     private void Start()
     {
         mechanic = FindObjectOfType<AcornMechanic>();
+        audioSource.pitch = Random.Range(0.8f, 1.2f);
     }
 
     public void Init(Vector3 target)
@@ -51,25 +59,41 @@ public class AcornTrigger : MonoBehaviour
         transform.position = new Vector3(horizontalPosition.x, transform.position.y + verticalSpeed * Time.deltaTime, horizontalPosition.y);
 
         // safety destruction
-        if (transform.position.y < 0)
+        if (transform.position.y < 0 && !hasTriggered)
         {
-            Destroy(gameObject);
+            hasTriggered = true;
+            audioSource.clip = impactGroundClip;
+            audioSource.spatialBlend = 1;
+            audioSource.Play();
+            DestroyAcorn();
         }
     }
 
     private void OnTriggerEnter(Collider other)
     {
+        if (hasTriggered) { return; }
+        hasTriggered = true;
+
         if (other.CompareTag("Player"))
         {
             mechanic.RegisterPineconeHit();
+            audioSource.clip = impactPlayerClip;
+            audioSource.spatialBlend = 0;
+            audioSource.Play();
         }
 
+        DestroyAcorn();
+    }
+
+    void DestroyAcorn()
+    {
         //ParticleSystem particles = GetComponentInChildren<ParticleSystem>();
         //if (particles != null)
         //{
 
         //}
 
-        Destroy(gameObject);
+        rotationPivot.gameObject.SetActive(false);
+        Destroy(gameObject, 2);
     }
 }

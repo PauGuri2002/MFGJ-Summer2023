@@ -10,6 +10,7 @@ public class FreezeMechanic : MonoBehaviour
     [SerializeField] private GameObject iceCubePrefab;
     [SerializeField] private Image overlay;
     [SerializeField] private MulticamManager multicamManager;
+    [SerializeField] private AudioSource audioSource;
     private Coroutine freezeCoroutine;
     private GameObject iceCubeObject;
 
@@ -25,6 +26,12 @@ public class FreezeMechanic : MonoBehaviour
     public void StartFreeze()
     {
         multicamManager.Shake(Season.Winter, 0.1f, 10f);
+
+        if (!audioSource.isPlaying)
+        {
+            audioSource.pitch = Random.Range(0.8f, 1.2f);
+            audioSource.Play();
+        }
 
         if (freezeCoroutine != null)
         {

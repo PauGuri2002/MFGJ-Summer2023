@@ -93,8 +93,8 @@ Material:
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
     - _Distortion: 0.137
-    - _Distortion_Amount: 0.01330674
-    - _Distortion_Scale: 10.734831
+    - _Distortion_Amount: 0.01
+    - _Distortion_Scale: 10
     - _DstBlend: 0
     - _EnvironmentReflections: 1
     - _GlossMapScale: 0

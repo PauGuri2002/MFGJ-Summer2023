@@ -32,10 +32,16 @@ public class BeeMechanic : MonoBehaviour
     {
         player.horizontalMaxSpeed = beesMaxSpeed;
         overlay.CrossFadeAlpha(1, 0.1f, false);
+        AudioSource audio = beeParticles.GetComponent<AudioSource>();
 
         float progress = 0f;
         while (progress < 1)
         {
+            if (audio != null)
+            {
+                audio.spatialBlend = Mathf.Clamp(1 - progress, 0, 1);
+            }
+
             beeParticles.position = Vector3.Lerp(originalParent.position, player.transform.position, progress);
             progress += 1 / beeTravelTime * Time.deltaTime;
             yield return 0;
@@ -71,9 +77,19 @@ public class BeeMechanic : MonoBehaviour
         progress = 0f;
         while (progress < 1)
         {
+            if (audio != null)
+            {
+                audio.spatialBlend = Mathf.Clamp(progress, 0, 1);
+            }
+
             beeParticles.position = Vector3.Lerp(player.transform.position, originalParent.position, progress);
             progress += 1 / beeTravelTime * Time.deltaTime;
             yield return 0;
+        }
+
+        if (audio != null)
+        {
+            audio.spatialBlend = 1;
         }
 
         if (ingredientInstance != null)

@@ -8,6 +8,7 @@ public class AcornSpawner : MonoBehaviour
     [SerializeField] private float maxSpawnTime = 5f;
     [SerializeField] private float triggerDistance = 5f;
     [SerializeField] private Vector2 targetErrorArea = Vector2.one;
+    [SerializeField] private AudioSource audioSource;
     private Transform player;
 
     void Start()
@@ -38,6 +39,8 @@ public class AcornSpawner : MonoBehaviour
                 {
                     pineconeScript.Init(player.position + Vector3.right * Random.Range(-targetErrorArea.x, targetErrorArea.x) + Vector3.forward * Random.Range(-targetErrorArea.y, targetErrorArea.y));
                 }
+                audioSource.pitch = Random.Range(0.8f, 1.2f);
+                audioSource.Play();
             }
         }
     }

@@ -3,6 +3,7 @@ using UnityEngine;
 public class LobbyMenuDisplayer : MonoBehaviour
 {
     [SerializeField] private RectTransform menuParent;
+    [SerializeField] private AudioSource audioSource;
 
     public void Show(float time)
     {
@@ -19,6 +20,7 @@ public class LobbyMenuDisplayer : MonoBehaviour
 
     public void QuitGame()
     {
+        PlayClickSound();
         Application.Quit();
     }
 
@@ -26,7 +28,15 @@ public class LobbyMenuDisplayer : MonoBehaviour
     {
         if (GameManager.Instance != null)
         {
+            PlayClickSound();
             GameManager.Instance.StartMission();
         }
+    }
+
+    void PlayClickSound()
+    {
+        audioSource.Stop();
+        audioSource.pitch = Random.Range(0.8f, 1.2f);
+        audioSource.Play();
     }
 }

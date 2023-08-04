@@ -10,6 +10,7 @@ public class MulticamManager : MonoBehaviour
 {
     [SerializeField] private IdentifiedCamera[] identifiedCameras;
     [SerializeField] private RectTransform parentCanvas;
+    [SerializeField] private AudioSource audioSource;
 
     private Dictionary<Season, RectTransform> panels = new();
 
@@ -48,6 +49,10 @@ public class MulticamManager : MonoBehaviour
 
     void SetFullscreenSingle(RectTransform panel, float time = 0f, float delay = 0f, LeanTweenType easing = LeanTweenType.easeInOutCubic)
     {
+        if (time >= 0.5f)
+        {
+            Invoke(nameof(PlayWhoosh), delay);
+        }
         LeanTween.move(panel, Vector2.zero, time).setDelay(delay).setEase(easing);
         LeanTween.size(panel, canvasSize, time).setDelay(delay).setEase(easing);
     }
@@ -57,6 +62,11 @@ public class MulticamManager : MonoBehaviour
         if (newOrder != null)
         {
             CameraOrder = newOrder;
+        }
+
+        if (time >= 0.5f)
+        {
+            Invoke(nameof(PlayWhoosh), delay);
         }
 
         for (int i = 0; i < CameraOrder.Length; i++)
@@ -139,6 +149,15 @@ public class MulticamManager : MonoBehaviour
                 rt.height = Mathf.RoundToInt(newSize.y);
                 rt.Create();
             }
+        }
+    }
+
+    void PlayWhoosh()
+    {
+        if (!audioSource.isPlaying)
+        {
+            audioSource.pitch = Random.Range(0.9f, 1.1f);
+            audioSource.Play();
         }
     }
 
