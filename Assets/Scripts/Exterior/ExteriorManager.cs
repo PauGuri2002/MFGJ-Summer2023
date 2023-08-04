@@ -92,6 +92,8 @@ public class ExteriorManager : MonoBehaviour
             SpawnIngredient();
         }
 
+        MusicPlayer.Instance.Play("EXTERIOR");
+
         Invoke(nameof(StartSearch), 5);
     }
 

@@ -59,6 +59,7 @@ public class InteriorManager : MonoBehaviour
             }
         }
 
+        MusicPlayer.Instance.Play("INTERIOR");
     }
 
     //private void OnDestroy()
