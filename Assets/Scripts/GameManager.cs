@@ -99,13 +99,16 @@ public class GameManager : MonoBehaviour
         recipeName = "Pumpkinized Grapes With Cherry and Pear";
     }
 
-    public void CompleteMission(float missionTime)
+    public void ReturnToLobby()
     {
         Cursor.lockState = CursorLockMode.None;
         SceneManager.LoadScene("InteriorScene");
+    }
 
+    public void CompleteMission(float missionTime)
+    {
+        ReturnToLobby();
         StartCoroutine(SaveHighScore(missionTime));
-
         OnCompleteMission?.Invoke(recipeName, missionTime);
     }
 
