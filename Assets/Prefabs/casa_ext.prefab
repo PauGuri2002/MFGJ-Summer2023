@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3924522791481994255}
   m_Layer: 0
   m_Name: Inside (1)
-  m_TagString: Untagged
+  m_TagString: Impenetrable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -111,7 +111,7 @@ GameObject:
   - component: {fileID: 4351189231233214883}
   m_Layer: 0
   m_Name: Manec_exterior
-  m_TagString: Untagged
+  m_TagString: Impenetrable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -196,7 +196,7 @@ GameObject:
   - component: {fileID: 5352362187440908969}
   m_Layer: 0
   m_Name: DoorFrame
-  m_TagString: Untagged
+  m_TagString: Impenetrable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -306,7 +306,7 @@ GameObject:
   - component: {fileID: 4848196582943439089}
   m_Layer: 0
   m_Name: DoorPivot
-  m_TagString: Untagged
+  m_TagString: Impenetrable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -362,7 +362,7 @@ GameObject:
   - component: {fileID: 3206925733551727425}
   m_Layer: 0
   m_Name: Inside
-  m_TagString: Untagged
+  m_TagString: Impenetrable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -461,7 +461,7 @@ GameObject:
   - component: {fileID: 155838741126630393}
   m_Layer: 0
   m_Name: terrat_exterior
-  m_TagString: Untagged
+  m_TagString: Impenetrable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -571,7 +571,7 @@ GameObject:
   - component: {fileID: 6358759175453060772}
   m_Layer: 0
   m_Name: Parets
-  m_TagString: Untagged
+  m_TagString: Impenetrable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -665,7 +665,7 @@ GameObject:
   - component: {fileID: 3673567302388776875}
   m_Layer: 0
   m_Name: casa_ext
-  m_TagString: Untagged
+  m_TagString: Impenetrable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -711,7 +711,7 @@ GameObject:
   - component: {fileID: 2691338675404940952}
   m_Layer: 0
   m_Name: finestra_exterior2
-  m_TagString: Untagged
+  m_TagString: Impenetrable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -794,7 +794,7 @@ GameObject:
   - component: {fileID: 635990362801667331}
   m_Layer: 0
   m_Name: finestra_exterior
-  m_TagString: Untagged
+  m_TagString: Impenetrable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -877,7 +877,7 @@ GameObject:
   - component: {fileID: 6077442009654996845}
   m_Layer: 0
   m_Name: Manec_exterior
-  m_TagString: Untagged
+  m_TagString: Impenetrable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -961,7 +961,7 @@ GameObject:
   - component: {fileID: 2245237108633498962}
   m_Layer: 0
   m_Name: LLUM_FINESTRA
-  m_TagString: Untagged
+  m_TagString: Impenetrable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -1059,7 +1059,7 @@ GameObject:
   - component: {fileID: 1078634172807268959}
   m_Layer: 0
   m_Name: LLUM_FINESTRA (1)
-  m_TagString: Untagged
+  m_TagString: Impenetrable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -1156,7 +1156,7 @@ GameObject:
   - component: {fileID: 2882395528833360993}
   m_Layer: 0
   m_Name: Porta_exterior
-  m_TagString: Untagged
+  m_TagString: Impenetrable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1240,7 +1240,7 @@ GameObject:
   - component: {fileID: 7845149849266585200}
   m_Layer: 0
   m_Name: Inside (2)
-  m_TagString: Untagged
+  m_TagString: Impenetrable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1338,7 +1338,7 @@ GameObject:
   - component: {fileID: 4939702241615396038}
   m_Layer: 0
   m_Name: Inside (3)
-  m_TagString: Untagged
+  m_TagString: Impenetrable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1433,7 +1433,7 @@ GameObject:
   - component: {fileID: 7373676882742463611}
   m_Layer: 0
   m_Name: KnobPivot
-  m_TagString: Untagged
+  m_TagString: Impenetrable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
