@@ -271,7 +271,7 @@ MonoBehaviour:
   rotationPivot: {fileID: 8407827079673509309}
   audioSource: {fileID: 6314778115454465982}
   impactGroundClip: {fileID: 8300000, guid: 02caa0ea17256274daf3cb15d9b725c0, type: 3}
-  impactPlayerClip: {fileID: 8300000, guid: 018bffb8ea2037140862bf6e0a0e55ed, type: 3}
+  impactPlayerClip: {fileID: 8300000, guid: 9d539224f95c6a54aa2d168220e96c92, type: 3}
 --- !u!82 &6314778115454465982
 AudioSource:
   m_ObjectHideFlags: 0
