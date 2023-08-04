@@ -5,6 +5,8 @@ public class InteriorManager : MonoBehaviour
     [SerializeField] private Dialogue[] lobbyDialogues;
     [SerializeField] private LobbyMenuDisplayer lobbyMenu;
     [SerializeField] private Camera cam;
+    [SerializeField] private Animator doorAnimator;
+    [SerializeField] private float startMissionDelay = 1f;
 
     [Header("Title")]
     [SerializeField] private RectTransform titleBackground;
@@ -60,6 +62,18 @@ public class InteriorManager : MonoBehaviour
         }
 
         MusicPlayer.Instance.Play("INTERIOR");
+        doorAnimator.SetBool("Open", false);
+    }
+
+    public void StartMission()
+    {
+        doorAnimator.SetBool("Open", true);
+        Invoke(nameof(StartAfterDelay), startMissionDelay);
+    }
+
+    void StartAfterDelay()
+    {
+        GameManager.Instance.StartMission();
     }
 
     //private void OnDestroy()

@@ -4,6 +4,7 @@ public class LobbyMenuDisplayer : MonoBehaviour
 {
     [SerializeField] private RectTransform menuParent;
     [SerializeField] private AudioSource audioSource;
+    [SerializeField] private InteriorManager interiorManager;
 
     public void Show(float time)
     {
@@ -29,7 +30,7 @@ public class LobbyMenuDisplayer : MonoBehaviour
         if (GameManager.Instance != null)
         {
             PlayClickSound();
-            GameManager.Instance.StartMission();
+            interiorManager.StartMission();
         }
     }
 
