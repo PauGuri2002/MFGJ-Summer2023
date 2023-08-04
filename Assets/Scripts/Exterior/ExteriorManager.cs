@@ -81,7 +81,7 @@ public class ExteriorManager : MonoBehaviour
             // Spawn required ingredients in world
             for (int i = 0; i < ingredientsToCollect[item]; i++)
             {
-                SpawnIngredient(item);
+                SpawnIngredient(item, true);
             }
         }
 
@@ -107,17 +107,17 @@ public class ExteriorManager : MonoBehaviour
         onPhaseChange?.Invoke(currentPhase);
     }
 
-    void SpawnIngredient(IngredientInfo ingredient = null)
+    void SpawnIngredient(IngredientInfo ingredient = null, bool enableAnimation = false)
     {
         ingredient ??= GameManager.ingredients[Random.Range(0, GameManager.ingredients.Length)];
 
         GameObject instance = SpawnObject(ingredient.prefab);
         instance.layer = (int)ingredient.season;
 
-        // PROVISIONAL!!!! Fins que cada ingredient tingui el seu model
-        //instance.GetComponentInChildren<TextMeshProUGUI>().text = ingredient.name;
-        //instance.GetComponentInChildren<TextMeshProUGUI>().gameObject.layer = (int)ingredient.season;
-        //instance.GetComponent<Ingredient>().ingredientName = ingredient.name;
+        if (enableAnimation && instance.TryGetComponent<Ingredient>(out var ingredientScript))
+        {
+            ingredientScript.EnableAnimation();
+        }
     }
 
     GameObject SpawnObject(GameObject prefab)
@@ -202,7 +202,7 @@ public class ExteriorManager : MonoBehaviour
         UpdateIngredientList();
 
         // spawn the ingredient back again
-        SpawnIngredient(ingredient);
+        SpawnIngredient(ingredient, true);
 
         return ingredient;
     }
