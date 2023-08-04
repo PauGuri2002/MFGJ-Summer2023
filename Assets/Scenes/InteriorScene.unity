@@ -18184,15 +18184,28 @@ MonoBehaviour:
   - nameVariation: 3
     code: IZED
   nameStructureGroups:
+  - nameStructures: []
   - nameStructures:
-    - Bowl of %NORM%
-  - nameStructures:
-    - '%NORM% with %NORM%'
+    - Fried %NORM% with %NORM%
     - '%SING%-flavored %NORM%'
+    - '%SING% salad with %NORM%'
+    - '%NORM% covered in %NORM%'
+    - '%NORM% filled with %NORM%'
+    - '%SING% mousse with %NORM%'
+    - '%SING% and %SING% ice cream'
   - nameStructures:
     - '%IZED% %NORM% with %NORM%'
+    - '%SING%-flavored %NORM% with %NORM%'
+    - '%SING% covered in %NORM% and %NORM%'
+    - '%NORM% and %NORM in %SING% juice'
+    - '%NORM% filled with %NORM% and %NORM%'
+    - '%SING% and %SING% ice cream sprinkled with %NORM%'
   - nameStructures:
     - '%IZED% %NORM% with %NORM% and %NORM%'
+    - '%SING% salad with %NORM%, %NORM%, and %NORM%'
+    - '%SING%, %SING%, %SING% and %SING% milkshake'
+    - '%NORM% with %IZED% %NORM% and %NORM%'
+    - '%SING%, %SING% and %SING% ice cream with %SING% topping'
 --- !u!1 &1115097309
 GameObject:
   m_ObjectHideFlags: 0
