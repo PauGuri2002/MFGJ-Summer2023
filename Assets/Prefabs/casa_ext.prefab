@@ -572,7 +572,7 @@ GameObject:
   - component: {fileID: 8469961872863622156}
   - component: {fileID: 2238783078583484070}
   - component: {fileID: 5603633552829343749}
-  - component: {fileID: 155838741126630393}
+  - component: {fileID: 920359384481351500}
   m_Layer: 0
   m_Name: terrat_exterior
   m_TagString: Impenetrable
@@ -656,9 +656,9 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2.5933537, y: 4.172707, z: 13.879924}
-  m_Center: {x: 7.492466, y: -4.4112825, z: 0}
---- !u!65 &155838741126630393
+  m_Size: {x: 2.249736, y: 4.1727066, z: 13.879924}
+  m_Center: {x: 7.664276, y: -4.4112825, z: 0}
+--- !u!65 &920359384481351500
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -669,8 +669,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2.5933537, y: 4.172707, z: 13.879924}
-  m_Center: {x: -7.492466, y: -4.4112825, z: 0}
+  m_Size: {x: 2.249736, y: 4.1727066, z: 13.879924}
+  m_Center: {x: -7.664276, y: -4.4112825, z: 0}
 --- !u!1 &4025685173105546532
 GameObject:
   m_ObjectHideFlags: 0
