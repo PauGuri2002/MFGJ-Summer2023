@@ -9303,6 +9303,7 @@ GameObject:
   - component: {fileID: 538147443}
   - component: {fileID: 538147442}
   - component: {fileID: 538147446}
+  - component: {fileID: 538147447}
   m_Layer: 5
   m_Name: Lobby UI
   m_TagString: Untagged
@@ -9413,6 +9414,19 @@ MonoBehaviour:
   noticeText: {fileID: 1082820109}
   typeDelay: 0.02
   playerInput: {fileID: 791859438}
+--- !u!114 &538147447
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 538147441}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d273fc461fdb1144fb0a269168dc6443, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  menuParent: {fileID: 1134117572}
 --- !u!1 &542112398
 GameObject:
   m_ObjectHideFlags: 0
@@ -17297,7 +17311,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lobbyDialogues:
   - {fileID: 11400000, guid: 63a83684b84570544ba23b3bc52a3f7d, type: 2}
-  lobbyMenu: {fileID: 1134117572}
+  lobbyMenu: {fileID: 538147447}
   cam: {fileID: 330585545}
   titleBackground: {fileID: 982221276}
   titleText: {fileID: 1026115911}
@@ -21449,7 +21463,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1592912165}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 538147447}
+        m_TargetAssemblyTypeName: LobbyMenuDisplayer, Assembly-CSharp
+        m_MethodName: QuitGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1592912165
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25006,8 +25032,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1106840692}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+      - m_Target: {fileID: 538147447}
+        m_TargetAssemblyTypeName: LobbyMenuDisplayer, Assembly-CSharp
         m_MethodName: StartMission
         m_Mode: 1
         m_Arguments:

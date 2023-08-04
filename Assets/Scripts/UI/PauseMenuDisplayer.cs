@@ -23,8 +23,12 @@ public class PauseMenuDisplayer : MonoBehaviour
     public void TogglePause()
     {
         isPaused = !isPaused;
+        SetPauseActive(isPaused);
+    }
 
-        if (isPaused)
+    void SetPauseActive(bool value)
+    {
+        if (value)
         {
             pauseMenuParent.SetActive(true);
             Time.timeScale = 0f;
@@ -46,6 +50,9 @@ public class PauseMenuDisplayer : MonoBehaviour
     {
         if (GameManager.Instance != null)
         {
+            isPaused = false;
+            SetPauseActive(false);
+            Time.timeScale = 1f;
             GameManager.Instance.ReturnToLobby();
         }
     }

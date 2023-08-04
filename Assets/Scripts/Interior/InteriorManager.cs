@@ -3,7 +3,7 @@ using UnityEngine;
 public class InteriorManager : MonoBehaviour
 {
     [SerializeField] private Dialogue[] lobbyDialogues;
-    [SerializeField] private RectTransform lobbyMenu;
+    [SerializeField] private LobbyMenuDisplayer lobbyMenu;
     [SerializeField] private Camera cam;
 
     [Header("Title")]
@@ -22,8 +22,8 @@ public class InteriorManager : MonoBehaviour
             // Initial dialogue
             if (lobbyDialogues.Length > 0)
             {
-                lobbyMenu.LeanMove(Vector3.down * 275, 0);
-                DialogueDisplayer.Instance.ShowDialogue(lobbyDialogues[0], () => lobbyMenu.LeanMove(Vector3.zero, 0.5f).setEaseInOutCubic());
+                lobbyMenu.Hide(0);
+                DialogueDisplayer.Instance.ShowDialogue(lobbyDialogues[0], () => lobbyMenu.Show(0.5f));
             }
 
             // Display game title
@@ -54,8 +54,8 @@ public class InteriorManager : MonoBehaviour
             if (lobbyDialogues.Length > timesLoaded)
             {
                 // Show dialogue
-                lobbyMenu.LeanMove(Vector3.down * 275, 0);
-                DialogueDisplayer.Instance.ShowDialogue(lobbyDialogues[timesLoaded], () => lobbyMenu.LeanMove(Vector3.zero, 0.5f).setEaseInOutCubic());
+                lobbyMenu.Hide(0);
+                DialogueDisplayer.Instance.ShowDialogue(lobbyDialogues[timesLoaded], () => lobbyMenu.Show(0.5f));
             }
         }
 
