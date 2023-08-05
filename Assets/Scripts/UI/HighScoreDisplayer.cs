@@ -68,6 +68,7 @@ public class HighScoreDisplayer : MonoBehaviour
         if (!isFocused) { return; }
         isFocused = false;
 
+        highScoreMenu.PlayClickSound();
         highScoreMenu.Hide(0.5f);
         lobbyMenu.Show(0.5f, 2f);
         CMShot.SetActive(false);

@@ -49,6 +49,8 @@ public class InteriorManager : MonoBehaviour
 
     public void HideTitleScreen()
     {
+        titleMenu.PlayClickSound();
+
         //Hide title screen
         if (titleBackground.gameObject.activeSelf)
         {

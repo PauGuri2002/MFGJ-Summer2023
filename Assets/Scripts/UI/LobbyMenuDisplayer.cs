@@ -25,6 +25,7 @@ public class LobbyMenuDisplayer : LowerMenuDisplayer
 
     public void ShowHighScores()
     {
+        PlayClickSound();
         highScoreDisplayer.Focus();
         Hide(0.5f);
     }

@@ -8,11 +8,6 @@ public class LowerMenuDisplayer : MonoBehaviour
     [SerializeField] private AudioSource audioSource;
     private Button[] buttons;
 
-    private void Start()
-    {
-        buttons = menuParent.GetComponentsInChildren<Button>();
-    }
-
     public virtual void Show(float time, float delay = 0f)
     {
         ToggleInteractivity(true);
@@ -30,6 +25,8 @@ public class LowerMenuDisplayer : MonoBehaviour
 
     void ToggleInteractivity(bool value)
     {
+        buttons ??= menuParent.GetComponentsInChildren<Button>();
+
         foreach (Button btn in buttons)
         {
             btn.interactable = value;
