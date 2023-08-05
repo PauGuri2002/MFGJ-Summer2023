@@ -7357,6 +7357,11 @@ PrefabInstance:
       propertyPath: m_Material
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 1475202754702370153, guid: 1b7ecdb1ee1b9ac4a8a9495c19ca63e0,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1781614312841043117, guid: 1b7ecdb1ee1b9ac4a8a9495c19ca63e0,
         type: 3}
       propertyPath: m_Name
@@ -7377,6 +7382,11 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 127
       objectReference: {fileID: 0}
+    - target: {fileID: 4584289000652269824, guid: 1b7ecdb1ee1b9ac4a8a9495c19ca63e0,
+        type: 3}
+      propertyPath: menuParent
+      value: 
+      objectReference: {fileID: 613778851}
     - target: {fileID: 5626928333999154258, guid: 1b7ecdb1ee1b9ac4a8a9495c19ca63e0,
         type: 3}
       propertyPath: m_StaticEditorFlags
@@ -7387,6 +7397,11 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 127
       objectReference: {fileID: 0}
+    - target: {fileID: 8780499011913148852, guid: 1b7ecdb1ee1b9ac4a8a9495c19ca63e0,
+        type: 3}
+      propertyPath: lobbyMenu
+      value: 
+      objectReference: {fileID: 538147447}
     - target: {fileID: 8929721799612495614, guid: 1b7ecdb1ee1b9ac4a8a9495c19ca63e0,
         type: 3}
       propertyPath: m_StaticEditorFlags
