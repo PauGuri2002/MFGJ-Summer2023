@@ -1152,6 +1152,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   exteriorManager: {fileID: 0}
+  animator: {fileID: 7977557617585440920}
 --- !u!114 &5881650215381666276
 MonoBehaviour:
   m_ObjectHideFlags: 0
