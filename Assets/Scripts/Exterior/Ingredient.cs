@@ -10,7 +10,7 @@ public class Ingredient : MonoBehaviour, IInteractive
     private readonly float specialAnimationTime = 1f;
     private bool specialAnimationEnabled;
 
-    private readonly float rotationTime = 3f;
+    private readonly float rotationTime = 6f;
 
     private void Awake()
     {
@@ -19,7 +19,7 @@ public class Ingredient : MonoBehaviour, IInteractive
 
     private void Start()
     {
-        gameObject.LeanRotateY(360, rotationTime).setFrom(0).setRepeat(-1);
+        gameObject.LeanRotateAround(Vector3.up, 360f, rotationTime).setRepeat(-1);
     }
 
     void CheckIfCanPickup(Dictionary<IngredientInfo, int> ingredientsToCollect)
@@ -65,8 +65,8 @@ public class Ingredient : MonoBehaviour, IInteractive
         StopSpecialAnimation();
         LeanTween.cancel(gameObject);
 
-        gameObject.LeanRotateY(360, rotationTime / 3).setLoopClamp();
-        gameObject.LeanScale(Vector3.zero, 1).setEaseInBack().setOnComplete(() =>
+        gameObject.LeanRotateAround(Vector3.up, 360f, 0.5f).setRepeat(-1);
+        gameObject.LeanScale(Vector3.zero, 0.5f).setEaseInBack().setOnComplete(() =>
         {
             gameObject.SetActive(false);
             ExteriorManager.OnIngredientListUpdate -= CheckIfCanPickup;
