@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+[RequireComponent(typeof(CharacterController))]
 public class PlayerController : MonoBehaviour
 {
     private CharacterController characterController;
@@ -9,6 +10,8 @@ public class PlayerController : MonoBehaviour
     public float horizontalDecelTime = 0.1f;
     public float rotationSpeed = 20f;
     public float sprintMultiplier = 1.5f;
+    [SerializeField] private Transform playerRotator;
+    [SerializeField] private Animator animator;
 
     private bool isSprinting = false;
 
@@ -38,10 +41,12 @@ public class PlayerController : MonoBehaviour
     {
         if (value.started)
         {
+            animator.SetBool("Sprinting", true);
             isSprinting = true;
         }
         else if (value.canceled)
         {
+            animator.SetBool("Sprinting", false);
             isSprinting = false;
         }
     }
@@ -50,13 +55,14 @@ public class PlayerController : MonoBehaviour
     {
         if (horizontalInputValue.magnitude > 0f)
         {
+            animator.SetBool("Moving", true);
             horizontalDirection = horizontalInputValue;
             float modifiedMaxSpeed = horizontalMaxSpeed * (isSprinting ? sprintMultiplier : 1);
-            //print("Max Speed: " + modifiedMaxSpeed + ", Accel: " + horizontalAccel + ", Target: " + horizontalDirection * modifiedMaxSpeed);
             horizontalSpeed = Vector2.SmoothDamp(horizontalSpeed, horizontalDirection * modifiedMaxSpeed, ref horizontalAccel, horizontalAccelTime);
         }
         else
         {
+            animator.SetBool("Moving", false);
             horizontalSpeed = Vector2.SmoothDamp(horizontalSpeed, Vector2.zero, ref horizontalAccel, horizontalDecelTime);
             if (horizontalSpeed.magnitude < 0.1f)
             {
@@ -77,7 +83,7 @@ public class PlayerController : MonoBehaviour
         if (direction != Vector2.zero)
         {
             Quaternion facingAngle = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.y));
-            transform.rotation = Quaternion.Lerp(transform.rotation, facingAngle, rotationSpeed * Time.deltaTime);
+            playerRotator.localRotation = Quaternion.Lerp(playerRotator.localRotation, facingAngle, rotationSpeed * Time.deltaTime);
         }
     }
 }
