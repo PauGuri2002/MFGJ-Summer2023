@@ -13,8 +13,12 @@ public class AcornSpawner : MonoBehaviour
 
     void Start()
     {
-        ExteriorManager.OnPhaseChange += TryEnable;
         player = FindObjectOfType<PlayerController>().transform;
+    }
+
+    private void OnEnable()
+    {
+        ExteriorManager.OnPhaseChange += TryEnable;
     }
 
     private void OnDisable()
@@ -27,6 +31,7 @@ public class AcornSpawner : MonoBehaviour
         if (phase == ExteriorManager.GamePhase.Search)
         {
             StartCoroutine(SpawnObjects());
+            ExteriorManager.OnPhaseChange -= TryEnable;
         }
     }
 

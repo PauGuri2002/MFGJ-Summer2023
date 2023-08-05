@@ -41,7 +41,10 @@ public class HeatMechanic : MonoBehaviour
         speedProperty = Shader.PropertyToID("_Distortion_Speed");
         sizeProperty = Shader.PropertyToID("_Distortion_Scale");
         overlay.fillAmount = 0;
+    }
 
+    private void OnEnable()
+    {
         ExteriorManager.OnPhaseChange += TryEnable;
     }
 
