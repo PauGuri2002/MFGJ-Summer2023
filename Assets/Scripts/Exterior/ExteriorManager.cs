@@ -38,6 +38,11 @@ public class ExteriorManager : MonoBehaviour
 
     public void Start()
     {
+        if (MusicPlayer.Instance != null)
+        {
+            MusicPlayer.Instance.Stop();
+        }
+
         // Temporally disable Ingredient List
         ingredientListObject.LeanScale(Vector3.zero, 0);
         ingredientListObject.LeanRotateZ(45, 0);
@@ -91,8 +96,6 @@ public class ExteriorManager : MonoBehaviour
         {
             SpawnIngredient();
         }
-
-        MusicPlayer.Instance.Play("EXTERIOR");
         OnIngredientListUpdate?.Invoke(ingredientsToCollect);
         Invoke(nameof(StartSearch), 5);
     }
@@ -102,6 +105,11 @@ public class ExteriorManager : MonoBehaviour
         // animate in Ingredient List
         LeanTween.scale(ingredientListObject, Vector3.one, 1f).setEaseInOutCubic();
         LeanTween.rotateZ(ingredientListObject, 0, 1f).setEaseInOutCubic();
+
+        if (MusicPlayer.Instance != null)
+        {
+            MusicPlayer.Instance.Play("EXTERIOR");
+        }
 
         currentPhase = GamePhase.Search;
         OnPhaseChange?.Invoke(currentPhase);
