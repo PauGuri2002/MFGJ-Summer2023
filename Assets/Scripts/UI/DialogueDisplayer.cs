@@ -7,18 +7,23 @@ using Random = UnityEngine.Random;
 
 public class DialogueDisplayer : MonoBehaviour
 {
+    [Header("Dialogue")]
     [SerializeField] private GameObject dialogueParent;
     [SerializeField] private TextMeshProUGUI dialogueText;
-    [SerializeField] private GameObject noticeParent;
-    [SerializeField] private TextMeshProUGUI noticeText;
     [SerializeField] private float typeDelay = 0.1f;
     [SerializeField] private PlayerInput playerInput;
     [SerializeField] private AudioSource audioSource;
 
+    [Header("Notice")]
+    [SerializeField] private GameObject noticeParent;
+    [SerializeField] private TextMeshProUGUI noticeText;
+    [SerializeField] private float noticeTimer = 3f;
+    //[SerializeField] private UISizeMatcher backgroundSizeMatcher;
+
     private int partIndex = 0;
+    private bool dialogueShown = false;
     private string[] currentDialogue;
     private string parsedDialoguePart;
-    private TextMeshProUGUI currentTarget;
     private Coroutine writingCoroutine;
     private string startingActionMap;
 
@@ -40,7 +45,8 @@ public class DialogueDisplayer : MonoBehaviour
 
     public void ShowDialogue(Dialogue dialogue, Action _callback = null)
     {
-        if (currentDialogue != null) { return; }
+        if (dialogueShown) { return; }
+        dialogueShown = true;
 
         startingActionMap = playerInput.currentActionMap.name;
         playerInput.SwitchCurrentActionMap("UI");
@@ -48,41 +54,41 @@ public class DialogueDisplayer : MonoBehaviour
         callback = _callback;
         partIndex = 0;
         currentDialogue = dialogue.parts;
-        currentTarget = dialogueText;
 
         dialogueParent.SetActive(true);
-        dialogueParent.LeanScale(Vector3.one, 0.5f);
+        dialogueParent.LeanScale(Vector3.one, 0.5f).setEaseInOutCubic();
 
         writingCoroutine = StartCoroutine(WriteText());
     }
 
     public void ShowNotice(string text, Action _callback = null)
     {
-        if (currentDialogue != null) { return; }
+        if (dialogueShown) { return; }
+        dialogueShown = true;
 
-        startingActionMap = playerInput.currentActionMap.name;
-        playerInput.SwitchCurrentActionMap("UI");
-
-        callback = _callback;
         partIndex = 0;
-        currentDialogue = new string[] { text };
-        currentTarget = noticeText;
+        noticeText.text = text;
 
         noticeParent.SetActive(true);
-        noticeParent.LeanScale(Vector3.one, 0.5f);
+        noticeParent.LeanScale(Vector3.one, 0.5f).setEaseInOutCubic();
+        noticeParent.LeanScale(Vector3.zero, 0.5f).setDelay(noticeTimer).setEaseInOutCubic().setOnComplete(() =>
+        {
+            noticeParent.SetActive(false);
+            dialogueShown = false;
+        });
 
-        writingCoroutine = StartCoroutine(WriteText());
+        //backgroundSizeMatcher.Match();
     }
 
     IEnumerator WriteText()
     {
         parsedDialoguePart = (GameManager.Instance != null) ? currentDialogue[partIndex].Replace("%SEASON%", "<color=#" + ColorUtility.ToHtmlStringRGB(GameManager.Instance.gameSeason.color) + ">" + GameManager.Instance.gameSeason.displayName + "</color>") : currentDialogue[partIndex];
         char[] textArray = parsedDialoguePart.ToCharArray();
-        currentTarget.text = "";
+        dialogueText.text = "";
 
-        while (currentTarget.text.Length < parsedDialoguePart.Length)
+        while (dialogueText.text.Length < parsedDialoguePart.Length)
         {
-            currentTarget.text += textArray[currentTarget.text.Length];
+            dialogueText.text += textArray[dialogueText.text.Length];
             yield return new WaitForSeconds(typeDelay);
         }
 
@@ -104,7 +110,7 @@ public class DialogueDisplayer : MonoBehaviour
             {
                 StopCoroutine(writingCoroutine);
                 writingCoroutine = null;
-                currentTarget.text = parsedDialoguePart;
+                dialogueText.text = parsedDialoguePart;
                 partIndex++;
             }
             else if (partIndex < currentDialogue.Length)
@@ -113,16 +119,13 @@ public class DialogueDisplayer : MonoBehaviour
             }
             else
             {
-                if (noticeParent.transform.localScale.magnitude > 0)
-                {
-                    noticeParent.LeanScale(Vector3.zero, 0.5f).setEaseInOutCubic().setOnComplete(() => noticeParent.SetActive(false));
-                }
                 if (dialogueParent.transform.localScale.magnitude > 0)
                 {
                     dialogueParent.LeanScale(Vector3.zero, 0.5f).setEaseInOutCubic().setOnComplete(() => dialogueParent.SetActive(false));
                 }
 
                 currentDialogue = null;
+                dialogueShown = false;
                 playerInput.SwitchCurrentActionMap(startingActionMap);
                 startingActionMap = null;
                 callback?.Invoke();
