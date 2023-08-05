@@ -13,8 +13,6 @@ public class LobbyMenuDisplayer : LowerMenuDisplayer
 
     public void StartMission()
     {
-        print("STARTING");
-
         if (GameManager.Instance != null)
         {
             PlayClickSound();

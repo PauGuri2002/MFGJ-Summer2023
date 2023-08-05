@@ -13,18 +13,21 @@ public class ExteriorDoor : MonoBehaviour, IInteractive
         ExteriorManager.OnPhaseChange += ToggleDoor;
     }
 
+    private void OnDisable()
+    {
+        ExteriorManager.OnPhaseChange -= ToggleDoor;
+    }
+
     void ToggleDoor(ExteriorManager.GamePhase gamePhase)
     {
         isOpen = gamePhase == ExteriorManager.GamePhase.ReturnHome;
 
         if (isOpen)
         {
-            print("Door opened!");
             doorAnimator.SetBool("Locked", false);
         }
         else
         {
-            print("Door closed!");
             doorAnimator.SetBool("Locked", true);
         }
     }
