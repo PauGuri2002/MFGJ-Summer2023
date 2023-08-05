@@ -32,20 +32,20 @@ public class PaginationController : MonoBehaviour
 
             if (paginatedText.pageToDisplay > 1)
             {
-                nextBtn.gameObject.SetActive(true);
-            }
-            else
-            {
-                nextBtn.gameObject.SetActive(false);
-            }
-
-            if (paginatedText.pageToDisplay < pageCount)
-            {
                 prevBtn.gameObject.SetActive(true);
             }
             else
             {
                 prevBtn.gameObject.SetActive(false);
+            }
+
+            if (paginatedText.pageToDisplay < pageCount)
+            {
+                nextBtn.gameObject.SetActive(true);
+            }
+            else
+            {
+                nextBtn.gameObject.SetActive(false);
             }
         }
     }

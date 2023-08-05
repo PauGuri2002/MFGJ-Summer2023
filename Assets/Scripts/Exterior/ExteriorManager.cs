@@ -8,8 +8,11 @@ public class ExteriorManager : MonoBehaviour
 {
     [SerializeField] private MulticamManager multicamManager;
     [SerializeField] private GameObject[] seasonContainers;
-    [SerializeField] private AudioSource jingleAudioSource;
+
+    [Header("Mirage Animation")]
+    [SerializeField] private AudioSource mirageAudioSource;
     [SerializeField] private float startDelay = 1.5f;
+    private static bool mirageAnimationPlayed = false;
 
     [Header("Spawner Properties")]
     [SerializeField] private Vector2 spawnerSize;
@@ -17,9 +20,9 @@ public class ExteriorManager : MonoBehaviour
     [SerializeField] private float spawnPadding = 5f;
 
     [Header("Spawned Objects")]
-    [SerializeField] private int minExtraIngredients = 6, maxExtraIngredients = 10;
-    [SerializeField] private int minBeeHives = 10, maxBeeHives = 20;
     [SerializeField] private GameObject beeHivePrefab;
+    [SerializeField] private int minBeeHives = 10, maxBeeHives = 20;
+    [SerializeField] private int minExtraIngredients = 6, maxExtraIngredients = 10;
 
     [Header("UI")]
     [SerializeField] private GameObject ingredientListObject;
@@ -48,14 +51,6 @@ public class ExteriorManager : MonoBehaviour
         // Temporally disable Ingredient List
         ingredientListObject.LeanScale(Vector3.zero, 0);
         ingredientListObject.LeanRotateZ(45, 0);
-
-        // Multicam
-        Color semitransparent = new Color(1, 1, 1, 0.5f);
-        multicamManager.SetFullscreenAll((GameManager.Instance != null) ? GameManager.Instance.gameSeason.seasonName : Season.Spring, 0, 0);
-        multicamManager.SetTintAll(Color.white, semitransparent, 1f, startDelay);
-        multicamManager.SetTintAll(semitransparent, Color.white, 2f, startDelay + 1f);
-        multicamManager.SetGrid(3f, startDelay);
-        Invoke(nameof(PlayJingle), startDelay);
 
         // Spawn Bee Hives
         int beeHiveCount = Random.Range(minBeeHives, maxBeeHives + 1);
@@ -100,12 +95,29 @@ public class ExteriorManager : MonoBehaviour
             SpawnIngredient();
         }
         OnIngredientListUpdate?.Invoke(ingredientsToCollect);
-        Invoke(nameof(StartSearch), startDelay + 3f);
+
+        // Mirage animation
+        if (!mirageAnimationPlayed)
+        {
+            Color semitransparent = new Color(1, 1, 1, 0.5f);
+            multicamManager.SetFullscreenAll((GameManager.Instance != null) ? GameManager.Instance.gameSeason.seasonName : Season.Spring, 0, 0);
+            multicamManager.SetTintAll(Color.white, semitransparent, 1f, startDelay);
+            multicamManager.SetTintAll(semitransparent, Color.white, 2f, startDelay + 1f);
+            multicamManager.SetGrid(3f, startDelay);
+            Invoke(nameof(PlayJingle), startDelay);
+            Invoke(nameof(StartSearch), startDelay + 3f);
+        }
+        else
+        {
+            multicamManager.SetGrid();
+            StartSearch();
+        }
     }
 
     void PlayJingle()
     {
-        jingleAudioSource.Play();
+        mirageAnimationPlayed = true;
+        mirageAudioSource.Play();
     }
 
     void StartSearch()

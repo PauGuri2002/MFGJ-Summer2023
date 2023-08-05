@@ -72308,17 +72308,17 @@ MonoBehaviour:
   - {fileID: 625242009}
   - {fileID: 99638472}
   - {fileID: 81286701}
-  jingleAudioSource: {fileID: 1602618442}
+  mirageAudioSource: {fileID: 1602618442}
   startDelay: 1.5
   spawnerSize: {x: 80, y: 80}
   spawnerHeight: 0
   spawnPadding: 5
-  minExtraIngredients: 6
-  maxExtraIngredients: 10
-  minBeeHives: 8
-  maxBeeHives: 12
   beeHivePrefab: {fileID: 7971428809888218314, guid: 332996a08c25d1c45b133ff1da5fb080,
     type: 3}
+  minBeeHives: 6
+  maxBeeHives: 10
+  minExtraIngredients: 6
+  maxExtraIngredients: 10
   ingredientListObject: {fileID: 897093264}
   ingredientItemPrefab: {fileID: 2202153061729659480, guid: 6a5ee85a64fb0304dab87cf8fa816a21,
     type: 3}

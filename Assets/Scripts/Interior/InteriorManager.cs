@@ -15,6 +15,7 @@ public class InteriorManager : MonoBehaviour
     [SerializeField] private float titleDuration = 8f;
     [SerializeField] private LowerMenuDisplayer titleMenu;
     static int timesLoaded = 0;
+    public static bool allowDialogue = true;
 
     void Start()
     {
@@ -75,6 +76,13 @@ public class InteriorManager : MonoBehaviour
 
     void TryShowDialogue()
     {
+        if (!allowDialogue)
+        {
+            lobbyMenu.Show(0);
+            return;
+        }
+        allowDialogue = false;
+
         if (lobbyDialogues.Length > timesLoaded)
         {
             // Show dialogue

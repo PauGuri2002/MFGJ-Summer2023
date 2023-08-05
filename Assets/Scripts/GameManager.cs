@@ -113,6 +113,7 @@ public class GameManager : MonoBehaviour
 
     public void CompleteMission(float missionTime)
     {
+        InteriorManager.allowDialogue = true;
         ReturnToLobby();
         StartCoroutine(SaveHighScore(missionTime));
         OnCompleteMission?.Invoke(recipeName, missionTime);

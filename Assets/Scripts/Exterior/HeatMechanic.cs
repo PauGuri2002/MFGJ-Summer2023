@@ -45,6 +45,11 @@ public class HeatMechanic : MonoBehaviour
         ExteriorManager.OnPhaseChange += TryEnable;
     }
 
+    private void OnDisable()
+    {
+        ExteriorManager.OnPhaseChange -= TryEnable;
+    }
+
     void TryEnable(ExteriorManager.GamePhase phase)
     {
         if (currentStatus == Status.Idle && phase == ExteriorManager.GamePhase.Search)

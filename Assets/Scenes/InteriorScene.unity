@@ -17565,6 +17565,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lobbyDialogues:
   - {fileID: 11400000, guid: 63a83684b84570544ba23b3bc52a3f7d, type: 2}
+  - {fileID: 11400000, guid: 8d2587af6de916043afe93a8f0d8a233, type: 2}
+  - {fileID: 11400000, guid: c08077aab762db741a142ff8faf64c75, type: 2}
   lobbyMenu: {fileID: 538147447}
   cam: {fileID: 330585545}
   doorAnimator: {fileID: 635280763}
@@ -18215,7 +18217,8 @@ MonoBehaviour:
   - nameVariation: 3
     code: IZED
   nameStructureGroups:
-  - nameStructures: []
+  - nameStructures:
+    - '%SING% soup'
   - nameStructures:
     - Fried %NORM% with %NORM%
     - '%SING%-flavored %NORM%'

@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3830991474ac06040b4159c118913cb8, type: 3}
+  m_Name: Mission1Dialogue
+  m_EditorClassIdentifier: 
+  parts:
+  - Now that was a nice meal, if I may say so myself!
+  - I'll have to go out again to gather more ingredients for the next recipe though.
+  - But as I get more used to my powers I'll be able to complete them faster and
+    faster.
+  - Ok, let's get ready and head out.
+  - Oh, and I'm going to write down on the fridge all the recipes I've made so I
+    don't forget them.

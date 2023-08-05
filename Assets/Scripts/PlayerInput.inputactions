@@ -284,6 +284,17 @@
                     "action": "Pause",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "17595455-ff26-4913-8130-f8c642a8e3a9",
+                    "path": "<Gamepad>/start",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Pause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },
@@ -676,6 +687,17 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse;Gamepad;Touch;Joystick;XR",
+                    "action": "Cancel",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "399afbfa-2e50-42b0-b979-78782df43f64",
+                    "path": "<Gamepad>/start",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
                     "action": "Cancel",
                     "isComposite": false,
                     "isPartOfComposite": false
