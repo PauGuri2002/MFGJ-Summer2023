@@ -8,6 +8,8 @@ public class ExteriorManager : MonoBehaviour
 {
     [SerializeField] private MulticamManager multicamManager;
     [SerializeField] private GameObject[] seasonContainers;
+    [SerializeField] private AudioSource jingleAudioSource;
+    [SerializeField] private float startDelay = 1.5f;
 
     [Header("Spawner Properties")]
     [SerializeField] private Vector2 spawnerSize;
@@ -50,9 +52,10 @@ public class ExteriorManager : MonoBehaviour
         // Multicam
         Color semitransparent = new Color(1, 1, 1, 0.5f);
         multicamManager.SetFullscreenAll((GameManager.Instance != null) ? GameManager.Instance.gameSeason.seasonName : Season.Spring, 0, 0);
-        multicamManager.SetTintAll(Color.white, semitransparent, 1f, 2f);
-        multicamManager.SetTintAll(semitransparent, Color.white, 2f, 3f);
-        multicamManager.SetGrid(3f, 2f);
+        multicamManager.SetTintAll(Color.white, semitransparent, 1f, startDelay);
+        multicamManager.SetTintAll(semitransparent, Color.white, 2f, startDelay + 1f);
+        multicamManager.SetGrid(3f, startDelay);
+        Invoke(nameof(PlayJingle), startDelay);
 
         // Spawn Bee Hives
         int beeHiveCount = Random.Range(minBeeHives, maxBeeHives + 1);
@@ -97,7 +100,12 @@ public class ExteriorManager : MonoBehaviour
             SpawnIngredient();
         }
         OnIngredientListUpdate?.Invoke(ingredientsToCollect);
-        Invoke(nameof(StartSearch), 5);
+        Invoke(nameof(StartSearch), startDelay + 3f);
+    }
+
+    void PlayJingle()
+    {
+        jingleAudioSource.Play();
     }
 
     void StartSearch()

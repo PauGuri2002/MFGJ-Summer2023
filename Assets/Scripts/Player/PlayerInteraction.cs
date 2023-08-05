@@ -5,12 +5,15 @@ public class PlayerInteraction : MonoBehaviour
 {
     private IInteractive interactiveInReach;
     [SerializeField] private ExteriorManager exteriorManager;
+    [SerializeField] private Animator animator;
 
     public void OnAction(InputAction.CallbackContext value)
     {
         if (value.started)
         {
             if (interactiveInReach == null) { return; }
+
+            animator.SetTrigger("Grab");
 
             if (interactiveInReach is Ingredient ingredient)
             {
