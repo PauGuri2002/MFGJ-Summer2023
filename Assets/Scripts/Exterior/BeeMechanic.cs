@@ -16,6 +16,8 @@ public class BeeMechanic : MonoBehaviour
     private float originalMaxSpeed;
     private static List<Coroutine> coroutines = new();
 
+    private static bool tutorialShown = false;
+
     private void Start()
     {
         originalMaxSpeed = player.horizontalMaxSpeed;
@@ -24,6 +26,13 @@ public class BeeMechanic : MonoBehaviour
 
     public void StartBees(Transform beeParticles)
     {
+        // TUTORIAL PROVISIONAL
+        if (!tutorialShown)
+        {
+            tutorialShown = true;
+            DialogueDisplayer.Instance.ShowNotice("Oh no! These annoying bees will take anything I'm carrying.");
+        }
+
         multicamManager.Shake(Season.Spring, 0.1f, 10f);
         coroutines.Add(StartCoroutine(BeesCoroutine(beeParticles.parent, beeParticles)));
     }

@@ -16,6 +16,8 @@ public class FreezeMechanic : MonoBehaviour
 
     private float originalAccel, originalDecel;
 
+    private static bool tutorialShown = false;
+
     private void Start()
     {
         originalAccel = player.horizontalAccelTime;
@@ -25,6 +27,13 @@ public class FreezeMechanic : MonoBehaviour
 
     public void StartFreeze()
     {
+        // TUTORIAL PROVISIONAL
+        if (!tutorialShown)
+        {
+            tutorialShown = true;
+            DialogueDisplayer.Instance.ShowNotice("I'm frozen! Ice makes me real slippery.");
+        }
+
         multicamManager.Shake(Season.Winter, 0.1f, 10f);
 
         if (!audioSource.isPlaying)

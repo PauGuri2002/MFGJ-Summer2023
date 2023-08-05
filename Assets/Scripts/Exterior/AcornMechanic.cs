@@ -12,6 +12,8 @@ public class AcornMechanic : MonoBehaviour
     [SerializeField] private Image overlay;
     [SerializeField] private HeatMechanic heatMechanic;
 
+    private static bool tutorialShown = false;
+
     private void Start()
     {
         overlay.CrossFadeAlpha(0, 0, true);
@@ -20,6 +22,13 @@ public class AcornMechanic : MonoBehaviour
     public void RegisterPineconeHit()
     {
         if (heatMechanic.currentStatus == HeatMechanic.Status.Burned) { return; }
+
+        // TUTORIAL PROVISIONAL
+        if (!tutorialShown)
+        {
+            tutorialShown = true;
+            DialogueDisplayer.Instance.ShowNotice("Ouch! If I get hit on the head I get really disorientated.");
+        }
 
         multicamManager.ShakeAll(0.1f, 10f);
         overlay.CrossFadeAlpha(1, 0.1f, false);

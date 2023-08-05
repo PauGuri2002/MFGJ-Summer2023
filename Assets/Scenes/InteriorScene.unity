@@ -9651,7 +9651,7 @@ MonoBehaviour:
   audioSource: {fileID: 538147448}
   noticeParent: {fileID: 1327874831}
   noticeText: {fileID: 1082820109}
-  noticeTimer: 3
+  noticeTimer: 4
 --- !u!114 &538147447
 MonoBehaviour:
   m_ObjectHideFlags: 0

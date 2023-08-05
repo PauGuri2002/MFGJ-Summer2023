@@ -21,6 +21,7 @@ public class HeatMechanic : MonoBehaviour
     [SerializeField] private Vector2 maxSpeed = new Vector2(0.3f, 0.3f);
     [SerializeField] private float startAmount = 0.005f;
     [SerializeField] private float maxAmount = 0.1f;
+    int amountProperty, speedProperty, sizeProperty;
 
     [Header("Sound")]
     [SerializeField] private AudioSource audioSource;
@@ -32,8 +33,7 @@ public class HeatMechanic : MonoBehaviour
     [NonSerialized] public Status currentStatus = Status.Idle;
     private float heatPercent = 0;
 
-    //private Coroutine coroutine;
-    int amountProperty, speedProperty, sizeProperty;
+    private static bool tutorialShown = false;
 
     void Start()
     {
@@ -118,6 +118,13 @@ public class HeatMechanic : MonoBehaviour
 
     void Burn()
     {
+        // TUTORIAL PROVISIONAL
+        if (!tutorialShown)
+        {
+            tutorialShown = true;
+            DialogueDisplayer.Instance.ShowNotice("The sun burns! I must find a shadow or something chilly to cool me down.");
+        }
+
         audioSource.Stop();
         audioSource.clip = startClip;
         audioSource.loop = false;
