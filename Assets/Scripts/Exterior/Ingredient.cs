@@ -60,6 +60,11 @@ public class Ingredient : MonoBehaviour, IInteractive
         ExteriorManager.OnIngredientListUpdate -= CheckIfCanPickup;
     }
 
+    private void OnDestroy()
+    {
+        ExteriorManager.OnIngredientListUpdate -= CheckIfCanPickup;
+    }
+
     public void ToggleCollision(bool value)
     {
         Collider[] colliders = GetComponents<Collider>();

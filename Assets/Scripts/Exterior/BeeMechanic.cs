@@ -61,9 +61,9 @@ public class BeeMechanic : MonoBehaviour
         {
             ingredientInstance = Instantiate(removedIngredient.prefab, beeParticles, false);
 
-            foreach (Transform child in ingredientInstance.transform)
+            foreach (Transform trans in ingredientInstance.GetComponentsInChildren<Transform>())
             {
-                child.gameObject.layer = LayerMask.NameToLayer("Spring");
+                trans.gameObject.layer = LayerMask.NameToLayer("Spring");
             }
 
             if (ingredientInstance.TryGetComponent<Ingredient>(out var ingredientScript))
