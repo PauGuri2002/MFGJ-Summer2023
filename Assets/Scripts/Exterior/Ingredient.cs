@@ -6,13 +6,20 @@ using Random = UnityEngine.Random;
 public class Ingredient : MonoBehaviour, IInteractive
 {
     public string ingredientName;
-    private float animationDelay;
-    private float animationTime = 1f;
-    private bool animationEnabled;
+    private float specialAnimationDelay;
+    private readonly float specialAnimationTime = 1f;
+    private bool specialAnimationEnabled;
+
+    private readonly float rotationTime = 3f;
 
     private void Awake()
     {
         ExteriorManager.OnIngredientListUpdate += CheckIfCanPickup;
+    }
+
+    private void Start()
+    {
+        gameObject.LeanRotateY(360, rotationTime).setFrom(0).setRepeat(-1);
     }
 
     void CheckIfCanPickup(Dictionary<IngredientInfo, int> ingredientsToCollect)
@@ -21,43 +28,49 @@ public class Ingredient : MonoBehaviour, IInteractive
         {
             if (ingredient.name == ingredientName)
             {
-                StartAnimation();
+                StartSpecialAnimation();
                 return;
             }
         }
-        StopAnimation();
+        StopSpecialAnimation();
     }
 
-    void StartAnimation()
+    void StartSpecialAnimation()
     {
-        if (animationEnabled) { return; }
-        animationEnabled = true;
-        animationDelay = Random.Range(2.0f, 3.0f);
+        if (specialAnimationEnabled) { return; }
+        specialAnimationEnabled = true;
+        specialAnimationDelay = Random.Range(2.0f, 3.0f);
         StartCoroutine(AnimateScale());
     }
 
-    void StopAnimation()
+    void StopSpecialAnimation()
     {
-        if (!animationEnabled) { return; }
-        animationEnabled = false;
+        if (!specialAnimationEnabled) { return; }
+        specialAnimationEnabled = false;
     }
 
     IEnumerator AnimateScale()
     {
-        while (animationEnabled)
+        while (specialAnimationEnabled)
         {
-            gameObject.LeanScale(Vector3.one * 1.5f, animationTime / 3).setEaseOutCubic();
-            gameObject.LeanScale(Vector3.one, animationTime / 3 * 2).setEaseOutBounce().setDelay(animationTime / 3);
+            gameObject.LeanScale(Vector3.one * 1.5f, specialAnimationTime / 3).setEaseOutCubic();
+            gameObject.LeanScale(Vector3.one, specialAnimationTime / 3 * 2).setEaseOutBounce().setDelay(specialAnimationTime / 3);
 
-            yield return new WaitForSeconds(animationDelay + animationTime);
+            yield return new WaitForSeconds(specialAnimationDelay + specialAnimationTime);
         }
     }
 
     public void Interact()
     {
-        StopAnimation();
-        gameObject.SetActive(false);
-        ExteriorManager.OnIngredientListUpdate -= CheckIfCanPickup;
+        StopSpecialAnimation();
+        LeanTween.cancel(gameObject);
+
+        gameObject.LeanRotateY(360, rotationTime / 3).setLoopClamp();
+        gameObject.LeanScale(Vector3.zero, 1).setEaseInBack().setOnComplete(() =>
+        {
+            gameObject.SetActive(false);
+            ExteriorManager.OnIngredientListUpdate -= CheckIfCanPickup;
+        });
     }
 
     private void OnDestroy()
