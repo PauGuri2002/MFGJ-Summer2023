@@ -36,16 +36,19 @@ public class RecipeNameGenerator : MonoBehaviour
             if (!variationCodesDict.ContainsKey(splitStructure[i])) { continue; }
             if (codeCount >= ingredients.Length) { Debug.LogWarning("There are more codes than ingredients"); return recipeName; }
 
+            Color color = Array.Find(GameManager.seasons, s => s.seasonName == ingredients[codeCount].season).color;
+            string hexColor = ColorUtility.ToHtmlStringRGB(color);
+
             IngredientNameVariation[] ingredientNameVariations = ingredients[codeCount].nameVariations;
             IngredientNameVariation nameVariation = Array.Find(ingredientNameVariations, n => n.variationType == variationCodesDict[splitStructure[i]]);
             if (nameVariation != null)
             {
-                splitStructure[i] = nameVariation.name;
+                splitStructure[i] = "<color=#" + hexColor + ">" + nameVariation.name + "</color>";
             }
             else
             {
                 Debug.LogWarning("Variation " + splitStructure[i] + " could not be found. Using default: " + ingredients[codeCount].name);
-                splitStructure[i] = ingredients[codeCount].name;
+                splitStructure[i] = "<color=#" + hexColor + ">" + ingredients[codeCount].name + "</color>";
             }
 
             codeCount++;

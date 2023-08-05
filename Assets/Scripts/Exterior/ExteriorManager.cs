@@ -25,11 +25,11 @@ public class ExteriorManager : MonoBehaviour
 
     private Dictionary<IngredientInfo, int> ingredientsToCollect;
     private List<IngredientInfo> collectedIngredients = new();
-
     private Dictionary<IngredientInfo, IngredientItem> ingredientItems = new();
+    public static event Action<Dictionary<IngredientInfo, int>> OnIngredientListUpdate;
 
     public static GamePhase currentPhase;
-    public static event Action<GamePhase> onPhaseChange;
+    public static event Action<GamePhase> OnPhaseChange;
     public enum GamePhase
     {
         Search,
@@ -81,7 +81,7 @@ public class ExteriorManager : MonoBehaviour
             // Spawn required ingredients in world
             for (int i = 0; i < ingredientsToCollect[item]; i++)
             {
-                SpawnIngredient(item, true);
+                SpawnIngredient(item);
             }
         }
 
@@ -93,7 +93,7 @@ public class ExteriorManager : MonoBehaviour
         }
 
         MusicPlayer.Instance.Play("EXTERIOR");
-
+        OnIngredientListUpdate?.Invoke(ingredientsToCollect);
         Invoke(nameof(StartSearch), 5);
     }
 
@@ -104,20 +104,15 @@ public class ExteriorManager : MonoBehaviour
         LeanTween.rotateZ(ingredientListObject, 0, 1f).setEaseInOutCubic();
 
         currentPhase = GamePhase.Search;
-        onPhaseChange?.Invoke(currentPhase);
+        OnPhaseChange?.Invoke(currentPhase);
     }
 
-    void SpawnIngredient(IngredientInfo ingredient = null, bool enableAnimation = false)
+    void SpawnIngredient(IngredientInfo ingredient = null)
     {
         ingredient ??= GameManager.ingredients[Random.Range(0, GameManager.ingredients.Length)];
 
         GameObject instance = SpawnObject(ingredient.prefab);
         instance.layer = (int)ingredient.season;
-
-        if (enableAnimation && instance.TryGetComponent<Ingredient>(out var ingredientScript))
-        {
-            ingredientScript.EnableAnimation();
-        }
     }
 
     GameObject SpawnObject(GameObject prefab)
@@ -202,7 +197,7 @@ public class ExteriorManager : MonoBehaviour
         UpdateIngredientList();
 
         // spawn the ingredient back again
-        SpawnIngredient(ingredient, true);
+        SpawnIngredient(ingredient);
 
         return ingredient;
     }
@@ -214,13 +209,13 @@ public class ExteriorManager : MonoBehaviour
             if (currentPhase != GamePhase.ReturnHome)
             {
                 currentPhase = GamePhase.ReturnHome;
-                onPhaseChange?.Invoke(currentPhase);
+                OnPhaseChange?.Invoke(currentPhase);
             }
         }
         else if (currentPhase != GamePhase.Search)
         {
             currentPhase = GamePhase.Search;
-            onPhaseChange?.Invoke(currentPhase);
+            OnPhaseChange?.Invoke(currentPhase);
         }
     }
 
@@ -239,5 +234,7 @@ public class ExteriorManager : MonoBehaviour
                 ingredientItems[item.Key].ChangeAmount(0);
             }
         }
+
+        OnIngredientListUpdate?.Invoke(ingredientsToCollect);
     }
 }

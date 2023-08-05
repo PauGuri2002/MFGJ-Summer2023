@@ -42,7 +42,7 @@ public class HeatMechanic : MonoBehaviour
         sizeProperty = Shader.PropertyToID("_Distortion_Scale");
         overlay.fillAmount = 0;
 
-        ExteriorManager.onPhaseChange += TryEnable;
+        ExteriorManager.OnPhaseChange += TryEnable;
     }
 
     void TryEnable(ExteriorManager.GamePhase phase)
@@ -50,7 +50,7 @@ public class HeatMechanic : MonoBehaviour
         if (currentStatus == Status.Idle && phase == ExteriorManager.GamePhase.Search)
         {
             Invoke(nameof(HeatUp), startDelay);
-            ExteriorManager.onPhaseChange -= TryEnable;
+            ExteriorManager.OnPhaseChange -= TryEnable;
         }
     }
 

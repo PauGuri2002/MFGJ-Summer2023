@@ -3,7 +3,7 @@ using UnityEngine;
 public class InteriorManager : MonoBehaviour
 {
     [SerializeField] private Dialogue[] lobbyDialogues;
-    [SerializeField] private LobbyMenuDisplayer lobbyMenu;
+    [SerializeField] private LowerMenuDisplayer lobbyMenu;
     [SerializeField] private Camera cam;
     [SerializeField] private Animator doorAnimator;
     [SerializeField] private float startMissionDelay = 1f;
@@ -58,6 +58,10 @@ public class InteriorManager : MonoBehaviour
                 // Show dialogue
                 lobbyMenu.Hide(0);
                 DialogueDisplayer.Instance.ShowDialogue(lobbyDialogues[timesLoaded], () => lobbyMenu.Show(0.5f));
+            }
+            else
+            {
+                lobbyMenu.Show(0.5f);
             }
         }
 

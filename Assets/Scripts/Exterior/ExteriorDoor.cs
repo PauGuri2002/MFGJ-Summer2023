@@ -10,7 +10,7 @@ public class ExteriorDoor : MonoBehaviour, IInteractive
     void Start()
     {
         ToggleDoor(ExteriorManager.GamePhase.Search);
-        ExteriorManager.onPhaseChange += ToggleDoor;
+        ExteriorManager.OnPhaseChange += ToggleDoor;
     }
 
     void ToggleDoor(ExteriorManager.GamePhase gamePhase)

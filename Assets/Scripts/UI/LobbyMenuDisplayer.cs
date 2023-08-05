@@ -1,23 +1,9 @@
 using UnityEngine;
 
-public class LobbyMenuDisplayer : MonoBehaviour
+public class LobbyMenuDisplayer : LowerMenuDisplayer
 {
-    [SerializeField] private RectTransform menuParent;
-    [SerializeField] private AudioSource audioSource;
     [SerializeField] private InteriorManager interiorManager;
-
-    public void Show(float time)
-    {
-        menuParent.gameObject.SetActive(true);
-        LeanTween.cancel(menuParent);
-        menuParent.LeanMove(Vector3.zero, time).setEaseInOutCubic();
-    }
-
-    public void Hide(float time)
-    {
-        LeanTween.cancel(menuParent);
-        menuParent.LeanMove(Vector3.down * 275, time).setEaseInOutCubic().setOnComplete(() => menuParent.gameObject.SetActive(false));
-    }
+    [SerializeField] private HighScoreDisplayer highScoreDisplayer;
 
     public void QuitGame()
     {
@@ -34,10 +20,9 @@ public class LobbyMenuDisplayer : MonoBehaviour
         }
     }
 
-    void PlayClickSound()
+    public void ShowHighScores()
     {
-        audioSource.Stop();
-        audioSource.pitch = Random.Range(0.8f, 1.2f);
-        audioSource.Play();
+        highScoreDisplayer.Focus();
+        Hide(0.5f);
     }
 }

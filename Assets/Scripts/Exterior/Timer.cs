@@ -17,7 +17,7 @@ public class Timer : MonoBehaviour
         }
         label.text = "00:00";
 
-        ExteriorManager.onPhaseChange += AnimateIn;
+        ExteriorManager.OnPhaseChange += AnimateIn;
     }
 
     // Update is called once per frame
@@ -36,7 +36,7 @@ public class Timer : MonoBehaviour
         {
             LeanTween.move(timerRect, Vector3.zero, 1f).setEaseInOutCubic();
             StartTimer();
-            ExteriorManager.onPhaseChange -= AnimateIn;
+            ExteriorManager.OnPhaseChange -= AnimateIn;
         }
     }
 
