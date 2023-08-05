@@ -18228,7 +18228,7 @@ MonoBehaviour:
     - '%IZED% %NORM% with %NORM%'
     - '%SING%-flavored %NORM% with %NORM%'
     - '%SING% covered in %NORM% and %NORM%'
-    - '%NORM% and %NORM in %SING% juice'
+    - '%NORM% and %NORM% in %SING% juice'
     - '%NORM% filled with %NORM% and %NORM%'
     - '%SING% and %SING% ice cream sprinkled with %NORM%'
   - nameStructures:
