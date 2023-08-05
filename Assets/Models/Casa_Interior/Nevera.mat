@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-4004453376515450001
+--- !u!114 &-4935532606159671430
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: sostre
+  m_Name: Nevera
   m_Shader: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
   m_ValidKeywords:
   - _ENVIRONMENTREFLECTIONS_OFF
@@ -37,9 +37,9 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _BaseMap:
-        m_Texture: {fileID: 2800000, guid: 9346b96c908944047924910bd463c404, type: 3}
-        m_Scale: {x: 12, y: 12}
-        m_Offset: {x: 0.22, y: -0.3}
+        m_Texture: {fileID: 2800000, guid: daa1683e717ff5b43900a8b619454aaa, type: 3}
+        m_Scale: {x: 10, y: 10}
+        m_Offset: {x: -0.1, y: 0}
     - _BumpMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -61,9 +61,9 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 9346b96c908944047924910bd463c404, type: 3}
-        m_Scale: {x: 12, y: 12}
-        m_Offset: {x: 0.22, y: -0.3}
+        m_Texture: {fileID: 2800000, guid: daa1683e717ff5b43900a8b619454aaa, type: 3}
+        m_Scale: {x: 10, y: 10}
+        m_Offset: {x: -0.1, y: 0}
     - _MetallicGlossMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -121,8 +121,8 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _BaseColor: {r: 0.8584906, g: 0.8584906, b: 0.8584906, a: 1}
+    - _Color: {r: 0.8584906, g: 0.8584906, b: 0.8584906, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []
