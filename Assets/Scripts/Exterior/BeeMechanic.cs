@@ -30,7 +30,7 @@ public class BeeMechanic : MonoBehaviour
         if (!tutorialShown)
         {
             tutorialShown = true;
-            DialogueDisplayer.Instance.ShowNotice("Oh no! These annoying bees will take anything I'm carrying.");
+            NoticeDisplayer.Instance.ShowNotice("Oh no! These annoying bees will take anything I'm carrying.");
         }
 
         multicamManager.Shake(Season.Spring, 0.1f, 10f);

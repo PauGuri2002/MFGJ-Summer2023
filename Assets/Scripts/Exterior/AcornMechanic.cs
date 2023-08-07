@@ -27,7 +27,7 @@ public class AcornMechanic : MonoBehaviour
         if (!tutorialShown)
         {
             tutorialShown = true;
-            DialogueDisplayer.Instance.ShowNotice("Ouch! If I get hit on the head I get really disorientated.");
+            NoticeDisplayer.Instance.ShowNotice("Ouch! If I get hit on the head I get really disorientated.");
         }
 
         multicamManager.ShakeAll(0.1f, 10f);

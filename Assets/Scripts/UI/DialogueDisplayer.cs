@@ -7,18 +7,11 @@ using Random = UnityEngine.Random;
 
 public class DialogueDisplayer : MonoBehaviour
 {
-    [Header("Dialogue")]
     [SerializeField] private GameObject dialogueParent;
     [SerializeField] private TextMeshProUGUI dialogueText;
     [SerializeField] private float typeDelay = 0.1f;
     [SerializeField] private PlayerInput playerInput;
     [SerializeField] private AudioSource audioSource;
-
-    [Header("Notice")]
-    [SerializeField] private GameObject noticeParent;
-    [SerializeField] private TextMeshProUGUI noticeText;
-    [SerializeField] private float noticeTimer = 3f;
-    //[SerializeField] private UISizeMatcher backgroundSizeMatcher;
 
     private int partIndex = 0;
     private bool dialogueShown = false;
@@ -40,7 +33,6 @@ public class DialogueDisplayer : MonoBehaviour
         Instance = this;
 
         dialogueParent.LeanScale(Vector3.zero, 0);
-        noticeParent.LeanScale(Vector3.zero, 0);
     }
 
     public void ShowDialogue(Dialogue dialogue, Action _callback = null)
@@ -61,24 +53,7 @@ public class DialogueDisplayer : MonoBehaviour
         writingCoroutine = StartCoroutine(WriteText());
     }
 
-    public void ShowNotice(string text, Action _callback = null)
-    {
-        if (dialogueShown) { return; }
-        dialogueShown = true;
 
-        partIndex = 0;
-        noticeText.text = text;
-
-        noticeParent.SetActive(true);
-        noticeParent.LeanScale(Vector3.one, 0.5f).setEaseInOutCubic();
-        noticeParent.LeanScale(Vector3.zero, 0.5f).setDelay(noticeTimer).setEaseInOutCubic().setOnComplete(() =>
-        {
-            noticeParent.SetActive(false);
-            dialogueShown = false;
-        });
-
-        //backgroundSizeMatcher.Match();
-    }
 
     IEnumerator WriteText()
     {

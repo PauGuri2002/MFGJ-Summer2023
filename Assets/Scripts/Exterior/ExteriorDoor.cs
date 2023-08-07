@@ -43,7 +43,7 @@ public class ExteriorDoor : MonoBehaviour, IInteractive
         else
         {
             doorAnimator.SetTrigger("TryOpen");
-            DialogueDisplayer.Instance.ShowNotice("I haven't gathered all the ingredients I need yet.");
+            NoticeDisplayer.Instance.ShowNotice("I haven't gathered all the ingredients I need yet.");
         }
     }
 }

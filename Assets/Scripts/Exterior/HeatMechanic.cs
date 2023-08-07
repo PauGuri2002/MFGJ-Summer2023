@@ -130,7 +130,7 @@ public class HeatMechanic : MonoBehaviour
         if (!tutorialShown)
         {
             tutorialShown = true;
-            DialogueDisplayer.Instance.ShowNotice("The sun burns! I must find a shadow or something chilly to cool me down.");
+            NoticeDisplayer.Instance.ShowNotice("The sun burns! I must find a shadow or something chilly to cool me down.");
         }
 
         audioSource.Stop();

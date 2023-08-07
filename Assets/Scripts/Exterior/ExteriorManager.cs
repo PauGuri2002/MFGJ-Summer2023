@@ -236,7 +236,7 @@ public class ExteriorManager : MonoBehaviour
         {
             if (currentPhase != GamePhase.ReturnHome)
             {
-                DialogueDisplayer.Instance.ShowNotice("Got everything I needed! Let's head back home.");
+                NoticeDisplayer.Instance.ShowNotice("Got everything I needed! Let's head back home.");
                 currentPhase = GamePhase.ReturnHome;
                 OnPhaseChange?.Invoke(currentPhase);
             }

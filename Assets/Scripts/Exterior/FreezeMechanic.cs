@@ -31,7 +31,7 @@ public class FreezeMechanic : MonoBehaviour
         if (!tutorialShown)
         {
             tutorialShown = true;
-            DialogueDisplayer.Instance.ShowNotice("I'm frozen! Ice makes me real slippery.");
+            NoticeDisplayer.Instance.ShowNotice("I'm frozen! Ice makes me real slippery.");
         }
 
         multicamManager.Shake(Season.Winter, 0.1f, 10f);
