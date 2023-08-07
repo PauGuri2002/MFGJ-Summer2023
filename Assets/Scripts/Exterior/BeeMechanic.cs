@@ -56,6 +56,11 @@ public class BeeMechanic : MonoBehaviour
             yield return 0;
         }
 
+        //bool travellingIn = true;
+        //LeanTween.value(audio.gameObject, (value) => audio.spatialBlend = value, 1, 0, beeTravelTime);
+        //beeParticles.LeanMove(player.transform.position, beeTravelTime).setEaseInOutSine().setOnComplete(() => travellingIn = false);
+        //yield return new WaitUntil(() => !travellingIn);
+
         progress = 0f;
         while (progress < beeFollowTime)
         {
