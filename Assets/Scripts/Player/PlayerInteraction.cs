@@ -6,6 +6,7 @@ public class PlayerInteraction : MonoBehaviour
     private IInteractive interactiveInReach;
     [SerializeField] private ExteriorManager exteriorManager;
     [SerializeField] private Animator animator;
+    [SerializeField] private AudioSource audioSource;
 
     public void OnAction(InputAction.CallbackContext value)
     {
@@ -14,6 +15,9 @@ public class PlayerInteraction : MonoBehaviour
             if (interactiveInReach == null) { return; }
 
             animator.SetTrigger("Grab");
+            audioSource.Stop();
+            audioSource.pitch = Random.Range(0.8f, 1.2f);
+            audioSource.Play();
 
             if (interactiveInReach is Ingredient ingredient)
             {

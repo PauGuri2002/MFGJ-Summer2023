@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -5,6 +6,8 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     private CharacterController characterController;
+
+    [Header("Movement")]
     public float horizontalMaxSpeed = 5f;
     public float horizontalAccelTime = 0.1f;
     public float horizontalDecelTime = 0.1f;
@@ -12,6 +15,12 @@ public class PlayerController : MonoBehaviour
     public float sprintMultiplier = 1.5f;
     [SerializeField] private Transform playerRotator;
     [SerializeField] private Animator animator;
+
+    [Header("Audio")]
+    [SerializeField] private AudioClip[] walkClips;
+    [SerializeField] private AudioSource walkAudioSource;
+    [SerializeField] private float walkStepDuration = 0.2f;
+    private Coroutine walkSoundCoroutine;
 
     private bool isSprinting = false;
 
@@ -55,6 +64,8 @@ public class PlayerController : MonoBehaviour
     {
         if (horizontalInputValue.magnitude > 0f)
         {
+            walkSoundCoroutine ??= StartCoroutine(PlayWalkSound());
+
             animator.SetBool("Moving", true);
             horizontalDirection = horizontalInputValue;
             float modifiedMaxSpeed = horizontalMaxSpeed * (isSprinting ? sprintMultiplier : 1);
@@ -85,5 +96,20 @@ public class PlayerController : MonoBehaviour
             Quaternion facingAngle = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.y));
             playerRotator.localRotation = Quaternion.Lerp(playerRotator.localRotation, facingAngle, rotationSpeed * Time.deltaTime);
         }
+    }
+
+    IEnumerator PlayWalkSound()
+    {
+        while (horizontalInputValue.magnitude > 0)
+        {
+            walkAudioSource.Stop();
+            walkAudioSource.clip = walkClips[Random.Range(0, walkClips.Length)];
+            walkAudioSource.pitch = Random.Range(0.9f, 1.1f);
+            walkAudioSource.Play();
+
+            yield return new WaitForSeconds(isSprinting ? walkStepDuration / 2 : walkStepDuration);
+        }
+
+        walkSoundCoroutine = null;
     }
 }
