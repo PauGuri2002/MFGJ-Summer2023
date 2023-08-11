@@ -43,25 +43,12 @@ public class BeeMechanic : MonoBehaviour
         overlay.CrossFadeAlpha(1, 0.1f, false);
         AudioSource audio = beeParticles.GetComponent<AudioSource>();
 
+        bool travellingIn = true;
+        LeanTween.value(audio.gameObject, (value) => audio.spatialBlend = value, 1, 0, beeTravelTime);
+        beeParticles.LeanMove(player.transform.position, beeTravelTime).setEaseInOutSine().setOnComplete(() => travellingIn = false);
+        yield return new WaitUntil(() => !travellingIn);
+
         float progress = 0f;
-        while (progress < 1)
-        {
-            if (audio != null)
-            {
-                audio.spatialBlend = Mathf.Clamp(1 - progress, 0, 1);
-            }
-
-            beeParticles.position = Vector3.Lerp(originalParent.position, player.transform.position, progress);
-            progress += 1 / beeTravelTime * Time.deltaTime;
-            yield return 0;
-        }
-
-        //bool travellingIn = true;
-        //LeanTween.value(audio.gameObject, (value) => audio.spatialBlend = value, 1, 0, beeTravelTime);
-        //beeParticles.LeanMove(player.transform.position, beeTravelTime).setEaseInOutSine().setOnComplete(() => travellingIn = false);
-        //yield return new WaitUntil(() => !travellingIn);
-
-        progress = 0f;
         while (progress < beeFollowTime)
         {
             beeParticles.position = player.transform.position;
@@ -93,27 +80,13 @@ public class BeeMechanic : MonoBehaviour
         }
         coroutines.RemoveAt(coroutines.Count - 1);
 
-        progress = 0f;
-        while (progress < 1)
+        LeanTween.value(audio.gameObject, (value) => audio.spatialBlend = value, 0, 1, beeTravelTime);
+        beeParticles.LeanMove(originalParent.position, beeTravelTime).setEaseInOutSine().setOnComplete(() =>
         {
-            if (audio != null)
+            if (ingredientInstance != null)
             {
-                audio.spatialBlend = Mathf.Clamp(progress, 0, 1);
+                Destroy(ingredientInstance);
             }
-
-            beeParticles.position = Vector3.Lerp(player.transform.position, originalParent.position, progress);
-            progress += 1 / beeTravelTime * Time.deltaTime;
-            yield return 0;
-        }
-
-        if (audio != null)
-        {
-            audio.spatialBlend = 1;
-        }
-
-        if (ingredientInstance != null)
-        {
-            Destroy(ingredientInstance);
-        }
+        });
     }
 }
