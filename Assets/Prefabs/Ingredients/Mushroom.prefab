@@ -145,6 +145,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ingredientName: Mushroom
+  particlesPrefab: {fileID: 3861459322718403958, guid: c06c622aa3e36c547b41059b32ecbe62,
+    type: 3}
 --- !u!136 &4577134354260631995
 CapsuleCollider:
   m_ObjectHideFlags: 0

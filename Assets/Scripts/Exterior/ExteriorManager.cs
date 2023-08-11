@@ -141,6 +141,11 @@ public class ExteriorManager : MonoBehaviour
 
         GameObject instance = SpawnObject(ingredient.prefab);
         instance.layer = (int)ingredient.season;
+        if (TryGetComponent<Ingredient>(out var ingredientScript))
+        {
+            SeasonInfo seasonInfo = Array.Find(GameManager.seasons, s => s.seasonName.Equals(ingredient.season));
+            ingredientScript.SetSeasonInfo(seasonInfo);
+        }
     }
 
     GameObject SpawnObject(GameObject prefab)

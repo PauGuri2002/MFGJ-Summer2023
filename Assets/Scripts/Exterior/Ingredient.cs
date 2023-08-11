@@ -9,6 +9,8 @@ public class Ingredient : MonoBehaviour, IInteractive
     private float specialAnimationDelay;
     private readonly float specialAnimationTime = 1f;
     private bool specialAnimationEnabled;
+    [SerializeField] private GameObject particlesPrefab;
+    private SeasonInfo seasonInfo;
 
     private readonly float rotationTime = 6f;
 
@@ -65,6 +67,13 @@ public class Ingredient : MonoBehaviour, IInteractive
         StopSpecialAnimation();
         LeanTween.cancel(gameObject);
 
+        GameObject particles = Instantiate(particlesPrefab, transform.position, Quaternion.Euler(-90, 0, 0));
+        if (seasonInfo != null && TryGetComponent<ParticleSystem>(out var ps))
+        {
+            ParticleSystem.MainModule main = ps.main;
+            main.startColor = seasonInfo.color;
+        }
+
         gameObject.LeanRotateAround(Vector3.up, 360f, 0.5f).setRepeat(-1);
         gameObject.LeanScale(Vector3.zero, 0.5f).setEaseInBack().setOnComplete(() =>
         {
@@ -85,5 +94,10 @@ public class Ingredient : MonoBehaviour, IInteractive
         {
             collider.enabled = value;
         }
+    }
+
+    public void SetSeasonInfo(SeasonInfo info)
+    {
+        seasonInfo = info;
     }
 }
