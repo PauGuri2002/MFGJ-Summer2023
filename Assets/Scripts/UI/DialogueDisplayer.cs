@@ -57,16 +57,22 @@ public class DialogueDisplayer : MonoBehaviour
 
     IEnumerator WriteText()
     {
-        // TODO: Bring back color!!!
-        //parsedDialoguePart = (GameManager.Instance != null) ? currentDialogue[partIndex].Replace("%SEASON%", "<color=#" + ColorUtility.ToHtmlStringRGB(GameManager.Instance.gameSeason.color) + ">" + GameManager.Instance.gameSeason.displayName + "</color>") : currentDialogue[partIndex];
-        parsedDialoguePart = (GameManager.Instance != null) ? currentDialogue[partIndex].Replace("%SEASON%", GameManager.Instance.gameSeason.displayName) : currentDialogue[partIndex];
+        parsedDialoguePart = (GameManager.Instance != null) ? currentDialogue[partIndex].Replace("%SEASON%", "<color=#" + ColorUtility.ToHtmlStringRGB(GameManager.Instance.gameSeason.color) + ">" + GameManager.Instance.gameSeason.displayName + "</color>") : currentDialogue[partIndex];
+        //parsedDialoguePart = (GameManager.Instance != null) ? currentDialogue[partIndex].Replace("%SEASON%", GameManager.Instance.gameSeason.displayName) : currentDialogue[partIndex];
         char[] textArray = parsedDialoguePart.ToCharArray();
         dialogueText.text = "";
 
         while (dialogueText.text.Length < parsedDialoguePart.Length)
         {
-            dialogueText.text += textArray[dialogueText.text.Length];
-            yield return new WaitForSeconds(typeDelay);
+            if (textArray[dialogueText.text.Length] == '<')
+            {
+                dialogueText.text += GetHTMLTag(parsedDialoguePart, dialogueText.text.Length);
+            }
+            else
+            {
+                dialogueText.text += textArray[dialogueText.text.Length];
+                yield return new WaitForSeconds(typeDelay);
+            }
         }
 
         partIndex++;
@@ -108,5 +114,21 @@ public class DialogueDisplayer : MonoBehaviour
                 callback?.Invoke();
             }
         }
+    }
+
+    string GetHTMLTag(string textArray, int startChar)
+    {
+        int tagLength = 1;
+        for (int i = startChar; i < textArray.Length; i++)
+        {
+            if (textArray[i] == '>')
+            {
+                tagLength = i - startChar + 1;
+                break;
+            }
+        }
+
+        print("found html tag: " + textArray.Substring(startChar, tagLength));
+        return textArray.Substring(startChar, tagLength <= 0 ? 1 : tagLength);
     }
 }
